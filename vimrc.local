@@ -1,0 +1,73 @@
+set autoindent             " automatic indent new lines
+set smartindent            " be smart about it
+set wrap                   " do wrap lines
+set softtabstop=2          " yep, two
+set formatoptions+=n       " support for numbered/bullet lists
+
+"custom leader commands
+map <leader>t :CtrlP<CR>
+map <Leader>vi :tabe ~/.vimrc<CR>
+map <Leader>bb :!bundle install<cr>
+nmap <Leader>bi :source ~/.vimrc<cr>:BundleInstall<cr>
+nmap <Leader>wi :EraseBadWhitespace<CR>
+map <Leader>te :!bw:conf q
+
+let g:rspec_runner = "os_x_iterm"
+
+" exit to normal mode with 'jj'
+inoremap jj <ESC>
+
+" Notes locations
+let g:notes_directories = ['~/Dropbox (Personal)/@Notes']
+let g:notes_suffix = '.md'
+let g:notes_title_sync = 'rename_file'
+nmap <leader>nn :Note<CR>
+nmap <leader>dn :DeleteNote<CR>
+
+" nerd tree
+map <C-n> :NERDTreeToggle<cr>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+let g:gist_clip_command = 'pbcopy'
+
+" ui
+colorscheme Tomorrow-Night
+
+set guifont=SourceCodePro-Regular:h15
+set background=dark
+set anti
+set lines=999 columns=84
+set linespace=5
+set guioptions=egmrt
+
+set noshowcmd              " don't display incomplete commands
+set nolazyredraw           " turn off lazy redraw
+set wildmenu               " turn on wild menu
+set wildmode=list:longest,full
+set ch=2                   " command line height
+set backspace=2            " allow backspacing over everything in insert mode
+set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
+set shortmess=filtIoOA     " shorten messages
+set report=0               " tell us about changes
+set relativenumber
+set numberwidth=4
+
+set showmatch              " brackets/braces that is
+set mat=5                  " duration to show matching brace (1/10 sec)
+set laststatus=2           " always show the status line
+set ignorecase             " ignore case when searching
+set nohlsearch             " don't highlight searches
+set visualbell             " shut the fuck up
+
+
+"handle whitespace like a boss
+function! StripWhitespace ()
+    exec ':%s/ \+$//gc'
+endfunction
+
+if &term =~ '256color'
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+    set t_ut=
+endif
