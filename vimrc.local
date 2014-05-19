@@ -4,6 +4,10 @@ set wrap                   " do wrap lines
 set softtabstop=2          " yep, two
 set formatoptions+=n       " support for numbered/bullet lists
 
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
 "custom leader commands
 map <leader>t :CtrlP<CR>
 map <Leader>vi :tabe ~/.vimrc<CR>
