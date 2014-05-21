@@ -37,7 +37,7 @@ let g:gist_clip_command = 'pbcopy'
 " ui
 colorscheme Tomorrow-Night
 
-set guifont=SourceCodePro-Regular:h15
+set guifont=Source\ Code\ Pro\ for\ Powerline:h15
 set background=dark
 set anti
 set lines=999 columns=84
