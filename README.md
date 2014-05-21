@@ -7,6 +7,8 @@ These are my local additions to the
 Installation
 ------------
 
+**In this order...**
+
 - XCode/Command Line Tools
 - [Oh-My-ZSH](http://ohmyz.sh/)
 - [Homebrew](http://brew.sh)
@@ -34,7 +36,7 @@ Folders in your local dotfiles will get symlinked to your home directory while
 directories that exist in both repos will get merged. You can overwrite files in
 the thoughtbot/dotfiles repo by not including the `.local` extension to the
 files in your local dotfiles repo. `rcm` will always look at the local files in
-this case. 
+this case.
 
 Reposting usage instructions here:
 
