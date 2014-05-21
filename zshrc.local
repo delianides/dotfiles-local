@@ -4,15 +4,6 @@ DOTFILES=$HOME/.dotfiles-local
 ZSH_CUSTOM=$DOTFILES/zsh/custom
 ZSH_THEME="delianides"
 
-# Example aliases
-alias zshconfig="mvim ~/.zshrc"
-alias ohmyzsh="mvim ~/.oh-my-zsh"
-alias reload="source $ZSH/oh-my-zsh.sh"
-
-alias vup="vagrant up"
-alias vmup="vagrant up --provider vmware_fusion"
-alias vpr="vagrant provision"
-
 # Search backwards and forwards with a pattern
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
 bindkey -M vicmd '?' history-incremental-pattern-search-forward
@@ -40,14 +31,6 @@ export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 #sets the RAKE_ENV to dev so minification doesn't occur
 export RAKE_ENV=development
 
-#specific alias for the NewSpring Repo
-alias zshconfig="$EDITOR ~/.zshrc"
-alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
-alias zshreload="source $ZSH/oh-my-zsh.sh"
-alias hostfile="$EDITOR /private/etc/hosts"
-alias newspring="cd /Users/drew.delianides/Sites/newspring"
-alias newspring:work="cd /Users/drew.delianides/Sites/newspring; $EDITOR"
-
 source $ZSH/oh-my-zsh.sh
 
 # use .localrc for SUPER SECRET CRAP that you don't
@@ -56,35 +39,3 @@ if [[ -a ~/.localrc ]]
 then
   source ~/.localrc
 fi
-
-# all of our zsh files
-typeset -U config_files
-config_files=( $DOTFILES/**/*.zsh)
-
-# load the path files
-for file in ${(M)config_files:#*/path.zsh}
-do
-  source $file
-done
-
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
-do
-  source $file
-done
-
-# initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit
-compinit
-unsetopt correct_all
-
-
-# load every completion after autocomplete loads
-for file in ${(M)config_files:#*/completion.zsh}
-do
-  source $file
-done
-
-unset config_files
-
-export EDITOR=vim
