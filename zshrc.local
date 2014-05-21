@@ -29,3 +29,8 @@ if [[ -a ~/.localrc ]]
 then
   source ~/.localrc
 fi
+
+if [[ -a ~/.path ]]
+then
+  source ~/.path
+fi
