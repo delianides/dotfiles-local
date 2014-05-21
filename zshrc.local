@@ -15,21 +15,11 @@ bindkey -M viins '^F' history-incremental-pattern-search-forward
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby rails rake gem heroku guard github brew cloudapp npm osx pow tmux tmuxinator marked terminalapp rvm history-substring-search history prompt_wunjo_setup zgitinit sublime)
-
-# Customize to your needs...
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH="$(brew --prefix josegonzalez/php/php54)/bin:$PATH"
-export PATH=/usr/local:/usr/local/bin:$PATH:./bin:/usr/local/sbin:/Users/drew.delianides/.sfs:/Users/drew.delianides/.dotfiles/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/gcc_arm/gcc-arm-none-eabi-4_8-2013q4/bin:/Users/drew.delianides/Library/Python/2.7/bin
-export CC=/usr/bin/gcc-4.2
-export NODE_PATH=/usr/local/lib/node:/usr/local/lib/node_modules
+plugins=(git ruby rails rake gem heroku guard github brew cloudapp npm osx tmux tmuxinator marked history-substring-search history prompt_wunjo_setup zgitinit)
 
 #for RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-#sets the RAKE_ENV to dev so minification doesn't occur
-export RAKE_ENV=development
 
 source $ZSH/oh-my-zsh.sh
 
