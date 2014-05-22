@@ -34,3 +34,6 @@ if [[ -a ~/.path ]]
 then
   source ~/.path
 fi
+
+setopt auto_cd
+cdpath=($HOME/Projects $HOME/Code $HOME/Sites)
