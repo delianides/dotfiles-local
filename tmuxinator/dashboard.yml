@@ -20,10 +20,10 @@ root: ~/Projects/dashboard
 
 windows:
   - vim:
-      layout: 1c16,283x56,0,0[283x39,0,0,0,283x16,0,40{93x16,0,40,1,93x16,94,40,2,95x16,188,40,3}] 
+      layout: fe17,283x56,0,0[283x39,0,0,0,283x16,0,40{123x16,0,40,1,63x16,124,40,2,95x16,188,40[95x8,188,40,3,95x7,188,49,4]}]
       panes:
         - vim
-        - guard
-        - foreman:
-          - foreman start
         -
+        - guard
+        - rake resque:scheduler
+        - redis-server
