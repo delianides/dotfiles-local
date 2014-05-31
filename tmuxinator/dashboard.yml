@@ -19,11 +19,14 @@ root: ~/Projects/dashboard
 # tmux_command: byobu
 
 windows:
-  - vim:
-      layout: fe17,283x56,0,0[283x39,0,0,0,283x16,0,40{123x16,0,40,1,63x16,124,40,2,95x16,188,40[95x8,188,40,3,95x7,188,49,4]}]
+  - editor:
+      layout: 85c7,283x56,0,0[283x39,0,0,0,283x16,0,40{141x16,0,40,2,141x16,142,40,3}]
       panes:
         - vim
         -
         - guard
-        - rake resque:scheduler
-        - redis-server
+  - server:
+      layout: even-horizontal
+      panes:
+        - foreman start -c worker=3,web=1,clock=1
+        - tail -f log/development.log
