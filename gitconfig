@@ -1,0 +1,49 @@
+[hub]
+  protocol = https
+[user]
+  name = delianides
+	email = drew@delianides.com
+[alias]
+  co = checkout
+  promote = !$ZSH/bin/git-promote
+  wtf     = !$ZSH/bin/git-wtf
+  rank-contributers = !$ZSH/bin/git-rank-contributers
+  count   = !git shortlog -sn
+  ksreview = "!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f"
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	logg = log --graph --oneline --decorate --all
+	nuke = !git checkout master && git fetch --prune origin && git branch | xargs git branch -d $1
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+[core]
+  excludesfile = ~/.gitignore
+  editor = vim
+  excludesfiles = ~/.cvsignore
+[apply]
+  whitespace = nowarn
+[github]
+  user = delianides
+[mergetool]
+  keepBackup = false
+	prompt = false
+
+# REMOVE THE FOLLOWING IF YOU DON'T USE KALEIDOSCOPE
+
+[credential]
+	helper = osxkeychain
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[merge]
+	tool = Kaleidoscope
+
