@@ -28,5 +28,5 @@ windows:
   - server:
       layout: even-horizontal
       panes:
-        - foreman start -c worker=3,web=1,clock=1
+        - foreman start -p 5000 -c worker=3,web=1,clock=1
         - tail -f log/development.log

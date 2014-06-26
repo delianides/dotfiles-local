@@ -1,18 +1,15 @@
 alias reload!='. ~/.zshrc'
 
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
-alias zshconfig="mvim ~/.zshrc"
-alias ohmyzsh="mvim ~/.oh-my-zsh"
-alias reload="source ~/.oh-my-zsh/oh-my-zsh.sh"
+alias zshrc="mvim ~/.zshrc.local"
 
 alias vup="vagrant up"
 alias vmup="vagrant up --provider vmware_fusion"
 alias vpr="vagrant provision"
+alias vpd="vagrant destroy"
 
 #specific alias for the NewSpring Repo
 alias zshconfig="$EDITOR ~/.zshrc"
-alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
-alias zshreload="source $ZSH/oh-my-zsh.sh"
 alias hostfile="$EDITOR /private/etc/hosts"
 alias newspring="cd /Users/drew.delianides/Sites/newspring"
 alias newspring:work="cd /Users/drew.delianides/Sites/newspring; $EDITOR"
