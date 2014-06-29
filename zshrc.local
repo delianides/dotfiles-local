@@ -26,3 +26,5 @@ setopt auto_cd
 cdpath=($HOME/Projects $HOME/Code $HOME/Sites)
 
 eval "$(rbenv init -)"
+
+source ~/.zsh/prompt.zsh
