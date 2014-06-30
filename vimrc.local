@@ -10,7 +10,7 @@ python del powerline_setup
 
 "custom leader commands
 map <leader>t :CtrlP<CR>
-map <Leader>vi :tabe ~/.vimrc<CR>
+map <Leader>vi :tabe ~/.vimrc.local<CR>
 map <Leader>bb :!bundle install<cr>
 nmap <Leader>bi :source ~/.vimrc<cr>:BundleInstall<cr>
 nmap <Leader>wi :EraseBadWhitespace<CR>
@@ -39,7 +39,7 @@ let g:gist_clip_command = 'pbcopy'
 " ui
 colorscheme Tomorrow-Night
 
-set guifont=Source\ Code\ Pro\ for\ Powerline:h15
+set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 set background=dark
 set anti
 set lines=999 columns=84
