@@ -15,6 +15,8 @@ map <Leader>bb :!bundle install<cr>
 nmap <Leader>bi :source ~/.vimrc<cr>:BundleInstall<cr>
 nmap <Leader>wi :EraseBadWhitespace<CR>
 map <Leader>te :!bw:conf q
+map <leader>i mmgg=G`m<CR>
+map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 
 let g:rspec_runner = "os_x_iterm"
 
