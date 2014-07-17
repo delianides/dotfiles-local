@@ -9,14 +9,16 @@ python powerline_setup()
 python del powerline_setup
 
 "custom leader commands
-map <leader>t :CtrlP<CR>
-map <Leader>vi :tabe ~/.vimrc.local<CR>
+
 map <Leader>bb :!bundle install<cr>
 nmap <Leader>bi :source ~/.vimrc<cr>:BundleInstall<cr>
-nmap <Leader>wi :EraseBadWhitespace<CR>
-map <Leader>te :!bw:conf q
 map <leader>i mmgg=G`m<CR>
+map <leader>n :vsp note:<cr>:1<cr>dGG
 map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+map <leader>t :CtrlP<CR>
+map <Leader>te :!bw:conf q
+map <Leader>vi :tabe ~/.vimrc.local<CR>
+nmap <Leader>wi :EraseBadWhitespace<CR>
 
 let g:rspec_runner = "os_x_iterm"
 
