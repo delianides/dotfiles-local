@@ -12,7 +12,9 @@ python del powerline_setup
 
 map <Leader>bb :!bundle install<cr>
 nmap <Leader>bi :source ~/.vimrc<cr>:BundleInstall<cr>
+map <leader>f ggVG==<CR>
 map <leader>i mmgg=G`m<CR>
+map <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
 map <leader>n :vsp note:<cr>:1<cr>dGG
 map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 map <leader>t :CtrlP<CR>
@@ -21,6 +23,8 @@ map <Leader>vi :tabe ~/.vimrc.local<CR>
 nmap <Leader>wi :EraseBadWhitespace<CR>
 
 let g:rspec_runner = "os_x_iterm"
+
+let g:snips_author = "Drew Delianides"
 
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
