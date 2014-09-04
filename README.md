@@ -1,8 +1,7 @@
 dotfiles
 ========
 
-These are my local additions to the
-[thoughtbot](https://github.com/thoughtbot/dotfiles) system.
+I've merged some of the settings from [thoughtbot](https://github.com/thoughtbot/dotfiles) system into this repo.
 
 Installation
 ------------
@@ -10,7 +9,6 @@ Installation
 **In this order...**
 
 - XCode/Command Line Tools
-- [Oh-My-ZSH](http://ohmyz.sh/)
 - [Homebrew](http://brew.sh)
     - Git
     - Python
@@ -21,22 +19,15 @@ Installation
 Clone
 
 ```
-$ git clone https://github.com/thoughtbot/dotfiles
-$ git clone https://github.com/delianides/dotfiles-local
+$ git clone https://github.com/delianides/dotfiles
 
 $ brew bundle dotfiles/Brewfile
 
-$ rcup -d dotfiles -d dotfiles-local -x README.md -x LICENSE -x Brewfile
+$ rcup -d dotfiles -d -x README.md -x LICENSE -x Brewfile
 ```
 
 Usage
 -----
-
-Folders in your local dotfiles will get symlinked to your home directory while
-directories that exist in both repos will get merged. You can overwrite files in
-the thoughtbot/dotfiles repo by not including the `.local` extension to the
-files in your local dotfiles repo. `rcm` will always look at the local files in
-this case.
 
 Reposting usage instructions here:
 
