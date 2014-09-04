@@ -18,6 +18,7 @@
   status = auto
   branch = auto
   interactive = auto
+  ui = auto
 [core]
   excludesfile = ~/.gitignore
   editor = vim
@@ -29,6 +30,16 @@
 [mergetool]
   keepBackup = false
 	prompt = false
+[push]
+  default = current
+[merge]
+  ff = only
+[include]
+  path = .gitconfig.local
+[commit]
+  template = ~/.gitmessage
+[fetch]
+  prune = true
 
 # REMOVE THE FOLLOWING IF YOU DON'T USE KALEIDOSCOPE
 
