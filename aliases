@@ -9,6 +9,7 @@ alias vaws="vagrant up --provider aws"
 alias vdo="vagrant up --provider digital_ocean"
 alias vpr="vagrant provision"
 alias vpd="vagrant destroy"
+alias ls='ls -la'
 
 #specific alias for the NewSpring Repo
 alias zshconfig="$EDITOR ~/.zshrc"
