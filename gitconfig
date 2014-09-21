@@ -32,8 +32,6 @@
 	prompt = false
 [push]
   default = current
-[merge]
-  ff = only
 [include]
   path = .gitconfig.local
 [commit]

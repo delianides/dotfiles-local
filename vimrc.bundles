@@ -51,6 +51,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'rodjek/vim-puppet'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'docker/docker', {'rtp': 'contrib/syntax/vim/'}
 
 Plugin 'vim-scripts/ctags.vim'
 Plugin 'vim-scripts/matchit.zip'

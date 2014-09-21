@@ -1,1 +1,1 @@
-export PATH="$(brew --prefix homebrew/php/php53)/bin:$PATH"
+export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$(brew --prefix homebrew/php/php53)/bin:$PATH"
