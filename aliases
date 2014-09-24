@@ -11,6 +11,9 @@ alias vpr="vagrant provision"
 alias vpd="vagrant destroy"
 alias ls='ls -la'
 
+#remap ssh
+alias ssh="sshrc $1"
+
 #specific alias for the NewSpring Repo
 alias zshconfig="$EDITOR ~/.zshrc"
 alias hostfile="$EDITOR /private/etc/hosts"
