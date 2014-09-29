@@ -1,1 +1,1 @@
-export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$(brew --prefix homebrew/php/php53)/bin:$PATH"
+export PATH="/Users/drew.delianides/.chefdk/gem/ruby/2.1.0/bin:/usr/local/opt/gnu-tar/libexec/gnubin:$(brew --prefix homebrew/php/php53)/bin:$PATH"
