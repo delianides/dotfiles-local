@@ -1,13 +1,15 @@
 " Use Vim settings, rather then Vi settings. This setting must be as early as
 " possible, as it has side effects.
+" technically this is unnessesary, having a .vimrc file sets this
+" automatically.
 set nocompatible
 
-" Leader
+" Leader key
 let mapleader = " "
 
 set backspace=2   " Backspace deletes like most programs in insert mode
-set nobackup
-set nowritebackup
+set nobackup      " disable automatic creation of backup files
+set nowritebackup " changes default behavior of saving files to 'write,delete,rename'
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set history=50
 set ruler         " show the cursor position all the time
@@ -22,10 +24,12 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
+" I use vundle for plugins but those are loaded in a separate file
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
+" Auto commands that run when vim starts, some are specific to a file type.
 augroup vimrcEx
   autocmd!
 
@@ -46,7 +50,6 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
   autocmd FileType markdown setlocal spell
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
@@ -64,12 +67,13 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
-" Display extra whitespace
+" Display extra whitespace, useful but kinda annoying in a team that uses
+" sublime/atom. these characters lightup your doc light a christmas tree.
 " set list listchars=tab:»·,trail:·
 
 " Numbers
-set number
-set numberwidth=5
+set number "show line numbers
+set numberwidth=5 "width of the column
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -114,8 +118,8 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 
-"custom leader commands
-
+"custom leader commands, for my amusment, the may or may not be helpful for
+"you
 map <Leader>bb :!bundle install<cr>
 nmap <Leader>bi :source ~/.vimrc<cr>:BundleInstall<cr>
 map <leader>f ggVG==<CR>
@@ -129,12 +133,10 @@ map <Leader>vi :tabe ~/.vimrc.local<CR>
 nmap <Leader>wi :EraseBadWhitespace<CR>
 
 let g:marked_app = "Marked 2"
-
 let g:rspec_runner = "os_x_iterm"
-
 let g:snips_author = "Drew Delianides"
 
-" exit to normal mode with 'jj'
+" exit to normal mode with 'jj', so i don't always have to hit the escape key
 inoremap jj <ESC>
 
 " Notes locations
@@ -155,10 +157,10 @@ colorscheme Tomorrow-Night
 
 set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 set background=dark
-set anti
+set anti " for antialias
 set lines=999 columns=84
 set linespace=5
-set guioptions=egmrt
+set guioptions=egmrt "http://vimdoc.sourceforge.net/htmldoc/options.html#'guioptions
 set linebreak
 set nolist
 
@@ -171,7 +173,7 @@ set backspace=2            " allow backspacing over everything in insert mode
 set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
 set shortmess=filtIoOA     " shorten messages
 set report=0               " tell us about changes
-set relativenumber
+set relativenumber         " line numbers display differently
 set numberwidth=4
 
 set showmatch              " brackets/braces that is
@@ -185,11 +187,17 @@ set visualbell             " shut the fuck up
 set splitbelow
 set splitright
 
-" Quicker window movement
+" Quicker window movement, mapped to tmux too
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+" Indentation
+nmap <D-[> <<
+nmap <D-]> >>
+vmap <D-[> <gv
+vmap <D-]> >gv
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
