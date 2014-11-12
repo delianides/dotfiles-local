@@ -32,9 +32,6 @@ set number
 set notimeout ttimeout ttimeoutlen=200
 set pastetoggle=<F11>
 
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
-
 set shiftwidth=2
 set softtabstop=2
 set expandtab

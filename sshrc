@@ -71,7 +71,13 @@ On_IPurple='\e[0;105m'  # Purple
 On_ICyan='\e[0;106m'    # Cyan
 On_IWhite='\e[0;107m'   # White
 
-echo -e "${BYellow}Hello Drew!${Color_Off}"
+echo -e "${BGreen}Hello Drew!${Color_Off}"
+
+if [ -d "/usr/share/vim/vim74" ]; then
+  export VIMRUNTIME=/usr/share/vim/vim74
+else
+  export VIMRUNTIME=/usr/share/vim/vim73
+fi
+
 export VIM=$SSHHOME/.sshrc.d
-export VIMRUNTIME=/usr/share/vim/vim73
 

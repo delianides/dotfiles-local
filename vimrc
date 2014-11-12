@@ -45,10 +45,7 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-  " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
-
-  " Automatically wrap at 80 characters for Markdown
   autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
   " Allow stylesheets to autocomplete hyphenated words
@@ -68,11 +65,7 @@ set shiftround
 set expandtab
 
 " Display extra whitespace
-set list listchars=tab:»·,trail:·
-
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
+" set list listchars=tab:»·,trail:·
 
 " Numbers
 set number
@@ -89,10 +82,6 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
 
 " Tab completion
 " will insert tab at beginning of line,
@@ -139,6 +128,8 @@ map <Leader>te :!bw:conf q
 map <Leader>vi :tabe ~/.vimrc.local<CR>
 nmap <Leader>wi :EraseBadWhitespace<CR>
 
+let g:marked_app = "Marked 2"
+
 let g:rspec_runner = "os_x_iterm"
 
 let g:snips_author = "Drew Delianides"
@@ -168,6 +159,8 @@ set anti
 set lines=999 columns=84
 set linespace=5
 set guioptions=egmrt
+set linebreak
+set nolist
 
 set noshowcmd              " don't display incomplete commands
 set nolazyredraw           " turn off lazy redraw
@@ -222,5 +215,3 @@ if &term =~ '256color'
     " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
 endif
-
-

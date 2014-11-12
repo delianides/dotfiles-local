@@ -16,6 +16,7 @@ Plugin 'mattn/gist-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'chriskempson/tomorrow-theme', { 'rtp' : 'vim/' }
 Plugin 'airblade/vim-gitgutter'
+Plugin 'bling/vim-airline'
 Plugin 'bitc/vim-bad-whitespace'
 Plugin 'xolox/vim-notes'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -51,6 +52,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'rodjek/vim-puppet'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'tclem/vim-arduino'
 Plugin 'docker/docker', {'rtp': 'contrib/syntax/vim/'}
 
 Plugin 'vim-scripts/ctags.vim'
