@@ -60,6 +60,7 @@ set smartindent            " be smart about it
 set wrap                   " do wrap lines
 set softtabstop=2          " yep, two
 set formatoptions+=n       " support for numbered/bullet lists
+set formatoptions+=1
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -121,7 +122,7 @@ nnoremap <Down> :echoe "Use j"<CR>
 "custom leader commands, for my amusment, the may or may not be helpful for
 "you
 map <Leader>bb :!bundle install<cr>
-nmap <Leader>bi :source ~/.vimrc<cr>:BundleInstall<cr>
+nmap <Leader>bi :source ~/.vimrc.bundles<cr>:BundleInstall<cr>
 map <leader>f ggVG==<CR>
 map <leader>i mmgg=G`m<CR>
 map <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
@@ -129,10 +130,9 @@ map <leader>n :vsp note:<cr>:1<cr>dGG
 map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 map <leader>t :CtrlP<CR>
 map <Leader>te :!bw:conf q
-map <Leader>vi :tabe ~/.vimrc.local<CR>
+map <Leader>vi :tabe ~/.vimrc<CR>
 nmap <Leader>wi :EraseBadWhitespace<CR>
 
-let g:marked_app = "Marked 2"
 let g:rspec_runner = "os_x_iterm"
 let g:snips_author = "Drew Delianides"
 
@@ -163,6 +163,8 @@ set linespace=5
 set guioptions=egmrt "http://vimdoc.sourceforge.net/htmldoc/options.html#'guioptions
 set linebreak
 set nolist
+set textwidth=0
+set wrapmargin=0
 
 set noshowcmd              " don't display incomplete commands
 set nolazyredraw           " turn off lazy redraw
@@ -192,12 +194,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-
-" Indentation
-nmap <D-[> <<
-nmap <D-]> >>
-vmap <D-[> <gv
-vmap <D-]> >gv
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
