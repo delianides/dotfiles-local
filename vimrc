@@ -49,7 +49,13 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-  autocmd FileType markdown setlocal spell
+  autocmd FileType markdown setlocal formatoptions=1
+  autocmd FileType markdown setlocal noexpandtab
+  autocmd FileType markdown setlocal spell spelllang=en_us
+  autocmd FileType markdown set complete+=s
+  autocmd FileType markdown set formatprg=par
+  autocmd FileType markdown setlocal wrap
+  autocmd FileType markdown setlocal linebreak
 
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
@@ -132,6 +138,13 @@ map <leader>t :CtrlP<CR>
 map <Leader>te :!bw:conf q
 map <Leader>vi :tabe ~/.vimrc<CR>
 nmap <Leader>wi :EraseBadWhitespace<CR>
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" " Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
 
 let g:rspec_runner = "os_x_iterm"
 let g:snips_author = "Drew Delianides"
