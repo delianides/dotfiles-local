@@ -51,7 +51,9 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tclem/vim-arduino'
+Plugin 'bkad/vim-terraform'
 Plugin 'docker/docker', {'rtp': 'contrib/syntax/vim/'}
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
 
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'

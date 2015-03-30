@@ -12,11 +12,12 @@ set nobackup      " disable automatic creation of backup files
 set nowritebackup " changes default behavior of saving files to 'write,delete,rename'
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set history=50
-set ruler         " show the cursor position all the time
+set noruler         "dont show the cursor position all the time
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
+set clipboard=unnamed
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -171,9 +172,8 @@ colorscheme Tomorrow-Night
 set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 set background=dark
 set anti " for antialias
-set lines=999 columns=84
 set linespace=5
-set guioptions=egmrt "http://vimdoc.sourceforge.net/htmldoc/options.html#'guioptions
+"set guioptions=egmrt "http://vimdoc.sourceforge.net/htmldoc/options.html#'guioptions
 set linebreak
 set nolist
 set textwidth=0

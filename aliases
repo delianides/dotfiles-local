@@ -9,6 +9,7 @@ alias vaws="vagrant up --provider aws"
 alias vdo="vagrant up --provider digital_ocean"
 alias vpr="vagrant provision"
 alias vpd="vagrant destroy"
+alias vs="vagrant status"
 alias ls='ls -la'
 
 #remap ssh
@@ -27,7 +28,6 @@ alias zshconfig="$EDITOR ~/.zshrc"
 alias hostfile="$EDITOR /private/etc/hosts"
 alias newspring="cd /Users/drew.delianides/Sites/newspring"
 alias newspring:work="cd /Users/drew.delianides/Sites/newspring; $EDITOR"
-
 
 alias mark="open -a Marked\ 2 $1"
 
@@ -58,53 +58,63 @@ b2d (){
   $(boot2docker shellinit)
 }
 
-cd () {
-  if   [[ "x$*" == "x..." ]]; then
-    cd ../..
-  elif [[ "x$*" == "x...." ]]; then
-    cd ../../..
-  elif [[ "x$*" == "x....." ]]; then
-    cd ../../../..
-  elif [[ "x$*" == "x......" ]]; then
-    cd ../../../../..
-  elif [ -d ~/.autoenv ]; then
-    source ~/.autoenv/activate.sh
-    autoenv_cd "$@"
-  else
-    builtin cd "$@"
-  fi
+kblocal (){
+  export KUBERNETES_PROVIDER=vagrant && export VAGRANT_DEFAULT_PROVIDER=virutalbox
 }
 
-alias md='mkdir -p'
-alias rd=rmdir
-alias d='dirs -v | head -10'
+fleet_tunnel (){
+  export FLEETCTL_TUNNEL="$(vagrant ssh-config core-01 | sed -n "s/[ ]*HostName[ ]*//gp"):$(vagrant ssh-config core-01| sed -n "s/[ ]*Port[ ]*//gp")"
+}
+
+    cd () {
+      if   [[ "x$*" == "x..." ]]; then
+        cd ../..
+          elif [[ "x$*" == "x...." ]]; then
+          cd ../../..
+          elif [[ "x$*" == "x....." ]]; then
+          cd ../../../..
+          elif [[ "x$*" == "x......" ]]; then
+          cd ../../../../..
+          elif [ -d ~/.autoenv ]; then
+          source ~/.autoenv/activate.sh
+          autoenv_cd "$@"
+      else
+        builtin cd "$@"
+          fi
+    }
+
+  alias md='mkdir -p'
+    alias rd=rmdir
+    alias d='dirs -v | head -10'
 
 # Unix
-alias tlf="tail -f"
-alias ln='ln -v'
-alias mkdir='mkdir -p'
-alias ...='../..'
-alias l='ls'
-alias ll='ls -al'
-alias lh='ls -Alh'
-alias -g G='| grep'
-alias -g M='| less'
-alias -g L='| wc -l'
-alias -g ONE="| awk '{ print \$1}'"
-alias e="$EDITOR"
-alias v="$VISUAL"
+    alias tlf="tail -f"
+    alias ln='ln -v'
+    alias mkdir='mkdir -p'
+    alias ...='../..'
+    alias l='ls'
+    alias ll='ls -al'
+    alias lh='ls -Alh'
+    alias -g G='| grep'
+    alias -g M='| less'
+    alias -g L='| wc -l'
+    alias -g ONE="| awk '{ print \$1}'"
+    alias e="$EDITOR"
+    alias v="$VISUAL"
 
 # git
-alias gci="git pull --rebase && rake && git push"
+    alias gci="git pull --rebase && rake && git push"
 
 # Bundler
-alias b="bundle"
+    alias b="bundle"
 
 # Rails
-alias migrate="rake db:migrate db:rollback && rake db:migrate"
-alias m="migrate"
-alias rk="rake"
-alias s="rspec"
+    alias migrate="rake db:migrate db:rollback && rake db:migrate"
+    alias m="migrate"
+    alias rk="rake"
+    alias s="rspec"
+
+export FLEETCTL_STRICT_HOST_KEY_CHECKING=false
 
 # Include custom aliases
-[[ -f ~/.aliases.local ]] && source ~/.aliases.local
+    [[ -f ~/.aliases.local ]] && source ~/.aliases.local
