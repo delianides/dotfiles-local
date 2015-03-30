@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-
-# lifted from @sjl https://github.com/sjl/dotfiles/blob/master/bin/rdio-current-track-tmux
-
 RDIO_TRACK=$(osascript <<EOF
 if appIsRunning("Rdio") then
     tell app "Rdio" to get the name of the current track
@@ -23,5 +20,5 @@ on appIsRunning(appName)
 end appIsRunning
 EOF)
 
-    echo '#[fg=colour4] ♫' $RDIO_TRACK '#[fg=default]'
+    echo '#[fg=red,bold] ♫' $RDIO_TRACK '#[nobold]-#[bold]' $RDIO_ARTIST '#[fg=red,nobold]'
 fi
