@@ -8,9 +8,12 @@ git_prompt_info() {
 setopt promptsubst
 
 # load our own completion functions
-#fpath=(~/.zsh/completion $fpath)
-
+fpath=(~/.zsh/completion $fpath)
 # completion
+autoload -U compinit
+compinit
+
+fpath=(/usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit
 compinit
 
@@ -104,8 +107,10 @@ setopt auto_cd
 cdpath=($HOME/Projects $HOME/Code $HOME/Sites)
 
 eval "$(rbenv init -)"
+eval "$(hub alias -s)"
 
 source ~/.zsh/prompt.zsh
+# source /usr/local/opt/autoenv/activate.sh
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

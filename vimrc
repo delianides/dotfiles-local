@@ -216,6 +216,20 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
 set spellfile=$HOME/.vim-spell-en.utf-8.add
 
+" Toggle spelling with the F7 key
+nn :setlocal spell! spelllang=en_us
+imap :setlocal spell! spelllang=en_us
+
+" Spelling
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
