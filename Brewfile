@@ -1,5 +1,8 @@
-tap thoughtbot/formulae
-install rcm
-install spark
-install ack
-install autoenv
+tap 'thoughtbot/formulae'
+tap 'caskroom/cask'
+brew 'vim'
+brew 'macvim'
+brew 'rcm'
+brew 'spark'
+brew 'ack'
+brew 'autoenv'

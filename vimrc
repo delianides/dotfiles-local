@@ -169,7 +169,7 @@ let g:gist_clip_command = 'pbcopy'
 " ui
 colorscheme Tomorrow-Night
 
-set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+set guifont=Source\ Code\ Pro:h13
 set background=dark
 set anti " for antialias
 set linespace=5
