@@ -79,6 +79,9 @@ set expandtab
 " sublime/atom. these characters lightup your doc light a christmas tree.
 " set list listchars=tab:»·,trail:·
 
+" toggle gundo
+nnoremap <leader>u :GundoToggle<CR>
+
 " Numbers
 set number "show line numbers
 set numberwidth=5 "width of the column
@@ -87,10 +90,11 @@ set numberwidth=5 "width of the column
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
-
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
+  let g:ctrlp_match_window = 'bottom,order:ttb'
+  let g:ctrlp_switch_buffer = 0
+  let g:ctrlp_working_path_mode = 0
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
@@ -179,8 +183,8 @@ set nolist
 set textwidth=0
 set wrapmargin=0
 
-set noshowcmd              " don't display incomplete commands
-set nolazyredraw           " turn off lazy redraw
+set showcmd              " don't display incomplete commands
+set lazyredraw           " turn off lazy redraw
 set wildmenu               " turn on wild menu
 set wildmode=list:longest,full
 set ch=2                   " command line height
@@ -190,17 +194,24 @@ set shortmess=filtIoOA     " shorten messages
 set report=0               " tell us about changes
 set relativenumber         " line numbers display differently
 set numberwidth=4
+set foldenable
+set foldlevelstart=10      " open most folds by default
+set foldnestmax=10         " 10 nested fold max
+set foldmethod=indent      " fold based on indent level
 
 set showmatch              " brackets/braces that is
 set mat=5                  " duration to show matching brace (1/10 sec)
 set laststatus=2           " always show the status line
 set ignorecase             " ignore case when searching
 set nohlsearch             " don't highlight searches
-set visualbell             " shut the fuck up
+set visualbell             " shut up
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
+
+" space open/closes folds
+nnoremap <leader> za
 
 " Quicker window movement, mapped to tmux too
 nnoremap <C-j> <C-w>j
