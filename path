@@ -1,1 +1,4 @@
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export GOPATH="$HOME/Projects/go"
+export GOBIN="$HOME/Projects/go/bin"
+export PATH="$PATH:$HOME/.rvm/bin:$GOBIN" # Add RVM to PATH for scripting
+
