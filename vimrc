@@ -58,9 +58,18 @@ augroup vimrcEx
   autocmd FileType markdown setlocal wrap
   autocmd FileType markdown setlocal linebreak
 
+  au FileType go nmap <Leader>gd <Plug>(go-doc)
+  au FileType go nmap <leader>r <Plug>(go-run)
+  au FileType go nmap <leader>b <Plug>(go-build)
+  au FileType go nmap <leader>t <Plug>(go-test)
+  au FileType go nmap <leader>c <Plug>(go-coverage)
+
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
+
+" format with goimports instead of gofmt
+let g:go_fmt_command = "goimports"
 
 set autoindent             " automatic indent new lines
 set smartindent            " be smart about it
