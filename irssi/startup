@@ -1,0 +1,9 @@
+script load awl
+script load tmux-nicklist-portable
+script load trackbar22
+script load nickcolor_expando
+script load usercount
+alias usercount /sbar awl_0 add -before awl_0 -alignment left
+/usercount
+set trackbar_string _
+set trackbar_style %r
