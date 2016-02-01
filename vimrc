@@ -179,8 +179,13 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 let g:gist_clip_command = 'pbcopy'
 
+let g:javascript_enable_domhtmlcss = '1'
+let g:syntastic_javascript_checkers = ['eslint']
+
 " ui
-colorscheme Tomorrow-Night
+set background=dark
+colorscheme PaperColor
+let g:airline_theme='PaperColor'
 
 set guifont=Source\ Code\ Pro:h13
 set background=dark
