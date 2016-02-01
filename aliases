@@ -109,10 +109,10 @@ fleet_tunnel (){
     alias b="bundle"
 
 # Rails
-    alias migrate="rake db:migrate db:rollback && rake db:migrate"
-    alias m="migrate"
-    alias rk="rake"
-    alias s="rspec"
+    #alias migrate="rake db:migrate db:rollback && rake db:migrate"
+    #alias m="migrate"
+    #alias rk="rake"
+    #alias s="rspec"
 
 export FLEETCTL_STRICT_HOST_KEY_CHECKING=false
 
