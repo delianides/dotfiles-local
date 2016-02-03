@@ -33,7 +33,6 @@ endif
 " Auto commands that run when vim starts, some are specific to a file type.
 augroup vimrcEx
   autocmd!
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -41,10 +40,6 @@ augroup vimrcEx
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
-  " Cucumber navigation commands
-  autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
-  autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
@@ -58,6 +53,7 @@ augroup vimrcEx
   autocmd FileType markdown setlocal wrap
   autocmd FileType markdown setlocal linebreak
 
+  " commands only available for go files
   au FileType go nmap <Leader>gd <Plug>(go-doc)
   au FileType go nmap <leader>r <Plug>(go-run)
   au FileType go nmap <leader>b <Plug>(go-build)
@@ -84,13 +80,6 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
-" Display extra whitespace, useful but kinda annoying in a team that uses
-" sublime/atom. these characters lightup your doc light a christmas tree.
-" set list listchars=tab:»·,trail:·
-
-" toggle gundo
-nnoremap <leader>u :GundoToggle<CR>
-
 " Numbers
 set number "show line numbers
 set numberwidth=5 "width of the column
@@ -112,16 +101,6 @@ endif
 " will insert tab at beginning of line,
 " will use completion if not at beginning
 set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
 
 " Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
@@ -139,8 +118,7 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 
-"custom leader commands, for my amusment, the may or may not be helpful for
-"you
+"custom leader commands, for my amusment, the may or may not be helpful for you
 map <Leader>bb :!bundle install<cr>
 nmap <Leader>bi :source ~/.vimrc.bundles<cr>:BundleInstall<cr>
 map <leader>f ggVG==<CR>
@@ -160,18 +138,8 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-let g:rspec_runner = "os_x_iterm"
-let g:snips_author = "Drew Delianides"
-
 " exit to normal mode with 'jj', so i don't always have to hit the escape key
 inoremap jj <ESC>
-
-" Notes locations
-let g:notes_directories = ['~/Dropbox (Personal)/@Notes']
-let g:notes_suffix = '.md'
-let g:notes_title_sync = 'rename_file'
-nmap <leader>nn :Note<CR>
-nmap <leader>dn :DeleteNote<CR>
 
 " nerd tree
 map <C-n> :NERDTreeToggle<cr>
@@ -183,7 +151,6 @@ let g:javascript_enable_domhtmlcss = '1'
 let g:syntastic_javascript_checkers = ['eslint']
 
 " ui
-set background=dark
 colorscheme PaperColor
 let g:airline_theme='PaperColor'
 
@@ -264,10 +231,3 @@ endif
 function! StripWhitespace ()
     exec ':%s/ \+$//gc'
 endfunction
-
-if &term =~ '256color'
-    " disable Background Color Erase (BCE) so that color schemes
-    " render properly when inside 256-color tmux and GNU screen.
-    " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-    set t_ut=
-endif
