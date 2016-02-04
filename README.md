@@ -40,9 +40,7 @@ Reposting usage instructions here:
 - `lsrc` shows you all your dotfiles and where they would be symlinked
   to. It is used by `rcup` but is provided for your own use, too.
 
-Issues
-------
 
-- There was an issue with running `pip`, the solution was found [here](https://github.com/Lokaltog/powerline/issues/552). This happened during the powerline install.
-
-
+Other Commands
+---------------
+`defaults write com.apple.screencapture location ~`
