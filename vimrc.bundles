@@ -28,7 +28,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-commentary'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'vim-scripts/Align'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'mattn/webapi-vim'
@@ -37,9 +36,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'vim-misc'
 
 " themes
-Plugin 'delianides/tomorrow-theme', { 'rtp': '/vim/' }
+Plugin 'delianides/vim-tomorrow-theme'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'NLKNguyen/papercolor-theme'
 
 " syntax
 Plugin 'tpope/vim-rails'
