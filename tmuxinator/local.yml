@@ -1,7 +1,7 @@
-# ~/.tmuxinator/dashboard.yml
+# ~/.tmuxinator/local.yml
 
-name: dashboard
-root: ~/Projects/dashboard
+name: local
+root: ~/
 
 # Optional tmux socket
 # socket_name: foo
@@ -18,15 +18,20 @@ root: ~/Projects/dashboard
 # Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
 # tmux_command: byobu
 
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t local
+
 windows:
   - editor:
-      layout: 85c7,283x56,0,0[283x39,0,0,0,283x16,0,40{141x16,0,40,2,141x16,142,40,3}]
+      layout: 3e6f,208x51,0,0{125x51,0,0,4,82x51,126,0[82x25,126,0,5,82x25,126,26,6]}
       panes:
-        - vim
         -
-        - guard
-  - server:
-      layout: even-horizontal
-      panes:
-        - foreman start -p 5000 -c worker=3,web=1,clock=1
-        - tail -f log/development.log
+        -
+        -
+  - irc: irssi
