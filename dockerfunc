@@ -61,15 +61,14 @@ aws(){
 
 irssi() {
 	del_stopped irssi
-	# relies_on notify_osd
 
 	docker run --rm -it \
-		-v /etc/localtime:/etc/localtime:ro \
+    --log-driver=none \
+    -u $(id -u):$(id -g) \
 		-v $HOME/.dotfiles/irssi:/home/user/.irssi \
     -e IRC_PASSWORD=$IRC_PASSWORD \
-    --read-only \
 		--name irssi \
-		jess/irssi
+		irssi
 }
 
 rainbowstream(){
