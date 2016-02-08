@@ -84,6 +84,11 @@ then
   source ~/.localrc
 fi
 
+if [[ -a ~/.dockerfunc ]]
+then
+  source ~/.dockerfunc
+fi
+
 if [[ -a ~/.aliases ]]
 then
   source ~/.aliases
