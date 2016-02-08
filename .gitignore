@@ -1,0 +1,10 @@
+.DS_Store
+irssi/away.log
+irssi/config*
+irssi/nicknames_whitelist
+irssi/otr
+irssi/saved_colors
+irssi/saved_nick_colors
+irssi/scripts/autorun/blocker.pl
+irssi/startup
+irssi/nicklist-**/
