@@ -6,23 +6,11 @@ I've merged some of the settings from [thoughtbot](https://github.com/thoughtbot
 Installation
 ------------
 
-**In this order...**
-
-- XCode/Command Line Tools
-- [Homebrew](http://brew.sh)
-    - Git
-    - Python
-    - Vim (7.4)
-- [RVM](http://rvm.io/)
-- [Powerline](https://github.com/Lokaltog/powerline)
-
-Clone
+Install Xcode or the command line tools so the required libraries are available during compilation.
 
 ```
 $ git clone https://github.com/delianides/dotfiles
-
 $ brew bundle dotfiles/Brewfile
-
 $ rcup -d dotfiles -d -x README.md -x LICENSE -x Brewfile
 ```
 
@@ -40,7 +28,3 @@ Reposting usage instructions here:
 - `lsrc` shows you all your dotfiles and where they would be symlinked
   to. It is used by `rcup` but is provided for your own use, too.
 
-
-Other Commands
----------------
-`defaults write com.apple.screencapture location ~`

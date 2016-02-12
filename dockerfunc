@@ -15,6 +15,11 @@ del_stopped(){
 	fi
 }
 
+docker_default(){
+  docker-machine restart default
+  eval $(docker-machine env default)
+}
+
 relies_on(){
 	local containers=$@
 
@@ -28,29 +33,6 @@ relies_on(){
 	done
 }
 
-notify_osd(){
-	del_stopped notify_osd
-
-	docker run -d \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		--net none \
-		-v /etc \
-		-v /home/user/.dbus \
-		-v /home/user/.cache/dconf \
-		-e DISPLAY=unix$DISPLAY \
-		--name notify_osd \
-		jess/notify-osd
-}
-
-alias notify-send=notify_send
-notify_send(){
-	relies_on notify_osd
-	local args=${@:2}
-
-	docker exec -i notify_osd notify-send "$1" "${args}"
-}
-
 aws(){
 	docker run -it --rm \
 		-v $HOME/.aws:/root/.aws \
@@ -59,9 +41,16 @@ aws(){
 		jess/awscli "$@"
 }
 
-irssi() {
-	del_stopped irssi
+jiracli(){
+	docker run -it --rm \
+		-v $HOME/.jiracli.ini:/root/.jiracli.ini \
+		--log-driver none \
+		--name jiracli \
+		delianides/jiracli "$@"
+}
 
+irssi() {
+  docker rm -f irssi
 	docker run --rm -it \
     --log-driver=none \
     -u $(id -u):$(id -g) \
@@ -72,6 +61,7 @@ irssi() {
 }
 
 rainbowstream(){
+  docker rm -f rainbowstream
 	docker run -it --rm \
 		-v /etc/localtime:/etc/localtime:ro \
 	  -v $HOME/.rainbow_oauth:/root/.rainbow_oauth \

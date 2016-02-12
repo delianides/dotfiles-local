@@ -179,6 +179,13 @@ nnoremap <C-l> <C-w>l
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
+" Notes locations
+let g:notes_directories = ['~/Dropbox (Personal)/@Notes']
+let g:notes_suffix = '.md'
+let g:notes_title_sync = 'rename_file'
+nmap <leader>nn :Note<CR>
+nmap <leader>dn :DeleteNote<CR>
+
 " Toggle spelling with the F7 key
 nn :setlocal spell! spelllang=en_us
 imap :setlocal spell! spelllang=en_us

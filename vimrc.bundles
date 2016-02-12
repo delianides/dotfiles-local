@@ -34,6 +34,7 @@ Plugin 'mattn/webapi-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-misc'
+Plugin 'xolox/vim-notes'
 
 " themes
 Plugin 'delianides/vim-tomorrow-theme'
