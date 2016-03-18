@@ -34,7 +34,6 @@ set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set clipboard=unnamed
-set anti " for antialias
 set linespace=5
 set linebreak
 set nolist        " show trailing whitespace
@@ -57,7 +56,7 @@ set expandtab
 
 " Numbers
 set number "show line numbers
-set numberwidth=5 "width of the column
+set numberwidth=6 "width of the column
 set lazyredraw           " turn off lazy redraw
 set wildmenu               " turn on wild menu
 set wildmode=longest,list,full
@@ -178,13 +177,6 @@ nnoremap <C-l> <C-w>l
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-
-" Notes locations
-let g:notes_directories = ['~/Dropbox (Personal)/@Notes']
-let g:notes_suffix = '.md'
-let g:notes_title_sync = 'rename_file'
-nmap <leader>nn :Note<CR>
-nmap <leader>dn :DeleteNote<CR>
 
 " Toggle spelling with the F7 key
 nn :setlocal spell! spelllang=en_us

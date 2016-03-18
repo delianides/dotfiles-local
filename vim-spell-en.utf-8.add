@@ -65,3 +65,5 @@ application
 expressionengine
 apache2
 m
+autoscaling
+init
