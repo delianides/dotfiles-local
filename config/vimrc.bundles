@@ -1,0 +1,69 @@
+if &compatible
+  set nocompatible
+end
+
+filetype off
+call plug#begin('~/.config/nvim/plugged')
+
+" tools
+Plug 'ap/vim-css-color'
+Plug 'mattn/gist-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
+Plug 'bitc/vim-bad-whitespace'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'benekastah/neomake'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-sleuth'
+Plug 'sickill/vim-pasta'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
+Plug 'vim-scripts/Align'
+Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
+Plug 'tomtom/tlib_vim'
+Plug 'mattn/webapi-vim'
+Plug 'vim-misc'
+
+" themes
+Plug 'vim-airline/vim-airline'
+Plug 'delianides/vim-tomorrow-theme'
+Plug 'vim-airline/vim-airline-themes'
+
+" syntax
+Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim - easily create markdup wth CSS-like syntax
+Plug 'tpope/vim-rails'
+Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-bundler'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
+Plug 'moll/vim-node', { 'for': 'javascript' } " node support
+Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
+Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
+Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>m
+Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
+Plug 'fatih/vim-go', { 'for': 'go' } " go support
+Plug 'tpope/vim-git'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'evidens/vim-twig'
+Plug 'nono/vim-handlebars'
+Plug 'fatih/vim-go'
+Plug 'vim-ruby/vim-ruby'
+Plug 'pld-linux/vim-syntax-vcl'
+Plug 'smerrill/vcl-vim-plugin'
+Plug 'tclem/vim-arduino' " arduino support - compile wihtout needing to open the arduino IDE
+Plug 'bkad/vim-terraform'
+Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'tobyS/vmustache'
+
+call plug#end()
+filetype on

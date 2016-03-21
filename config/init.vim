@@ -88,9 +88,9 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
-if exists('$TMUX') && !has('nvim')  " Support resizing in tmux
-  set ttymouse=xterm2
-endif
+" if exists('$TMUX') && !has('nvim')  " Support resizing in tmux
+"   set ttymouse=xterm2
+" endif
 
 " Auto commands that run when vim starts, some are specific to a file type.
 augroup vimrcEx
