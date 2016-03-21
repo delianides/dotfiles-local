@@ -1,27 +1,78 @@
-" Use Vim settings, rather then Vi settings. This setting must be as early as
-" possible, as it has side effects.
-" technically this is unnessesary, having a .vimrc file sets this
-" automatically.
-set nocompatible
+" nvim commands line up here
+
+call plug#begin('~/.config/nvim/plugged')
+
+" tools
+Plug 'ap/vim-css-color'
+Plug 'mattn/gist-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
+Plug 'bitc/vim-bad-whitespace'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'benekastah/neomake'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-sleuth'
+Plug 'sickill/vim-pasta'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
+Plug 'vim-scripts/Align'
+Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
+Plug 'tomtom/tlib_vim'
+Plug 'mattn/webapi-vim'
+Plug 'vim-misc'
+
+" themes
+Plug 'vim-airline/vim-airline'
+Plug 'delianides/vim-tomorrow-theme'
+Plug 'vim-airline/vim-airline-themes'
+
+" syntax
+Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim - easily create markdup wth CSS-like syntax
+Plug 'kchmck/vim-coffee-script' " coffeescript support
+Plug 'tpope/vim-ragtag' " for html
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
+Plug 'moll/vim-node', { 'for': 'javascript' } " node support
+Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
+Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
+Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>m
+Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
+Plug 'fatih/vim-go', { 'for': 'go' } " go support
+Plug 'tpope/vim-git' " git support
+Plug 'cakebaker/scss-syntax.vim' " sass support
+Plug 'evidens/vim-twig' " twig support
+Plug 'nono/vim-handlebars' " handlebars support
+Plug 'vim-ruby/vim-ruby' " ruby support
+Plug 'smerrill/vcl-vim-plugin' " varnish config language
+Plug 'tclem/vim-arduino' " arduino support - compile wihtout needing to open the arduino IDE
+Plug 'hashivim/vim-hashicorp-tools' " hashicorp tools support, mostly for hcl, hashicorp Configuration language
+Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd language
+Plug 'tobyS/vmustache' " mustache template system
+
+call plug#end()
+
+set nocompatible " not compatible with vi
+set autoread " detect when a file is changed
 
 " Leader key
 let mapleader = " "
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax enable
-endif
+syntax enable " syntax on
 
-" I use vundle for plugins but those are loaded in a separate file
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
-
+" Color Schemes
 colorscheme Tomorrow-Night
 let g:airline_theme='tomorrow'
 
-set guifont=Source\ Code\ Pro:h13
+" set guifont=Source\ Code\ Pro:h13
 set background=dark
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup      " disable automatic creation of backup files
