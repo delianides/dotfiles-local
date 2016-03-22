@@ -23,8 +23,8 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
-Plug 'vim-scripts/Align'
 Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
+Plug 'vim-scripts/Align'
 Plug 'tomtom/tlib_vim'
 Plug 'mattn/webapi-vim'
 Plug 'vim-misc'
@@ -73,7 +73,6 @@ colorscheme Tomorrow-Night
 let g:airline_theme='tomorrow'
 
 " set guifont=Source\ Code\ Pro:h13
-set background=dark
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup      " disable automatic creation of backup files
 set nowritebackup " changes default behavior of saving files to 'write,delete,rename'
@@ -88,20 +87,20 @@ set clipboard=unnamed
 set linespace=5
 set linebreak
 set nolist        " show trailing whitespace
-set textwidth=0
-set wrapmargin=0
+set textwidth=120
 set scrolloff=3
 
 set autoindent             " automatic indent new lines
 set smartindent            " be smart about it
 set wrap                   " do wrap lines
+set wrapmargin=8           " wrap lines when coming within n characters from side
 set formatoptions+=n       " support for numbered/bullet lists
 set formatoptions+=1
 
 " Softtabs, 2 spaces
 set tabstop=2
-set shiftwidth=2
-set softtabstop=2          " yep, two
+set shiftwidth=4
+set softtabstop=4          " yep, four
 set shiftround
 set expandtab
 
@@ -124,10 +123,11 @@ set foldnestmax=10         " 10 nested fold max
 set foldmethod=indent      " fold based on indent level
 
 set showmatch              " brackets/braces that is
-set mat=5                  " duration to show matching brace (1/10 sec)
+set mat=2                  " duration to show matching brace (1/10 sec)
 set ignorecase             " ignore case when searching
 set nohlsearch             " don't highlight searches
 set visualbell             " shut up
+set noerrorbells           " ditto
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -146,6 +146,7 @@ set mouse=a
 " Auto commands that run when vim starts, some are specific to a file type.
 augroup vimrcEx
   autocmd!
+
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -155,16 +156,29 @@ augroup vimrcEx
     \ endif
 
   " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
 
+  autocmd FileType apache setlocal commentstring=#\ %s
+  autocmd FileType terraform setlocal commentstring=#\ %s
+
+  autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+  autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
+
+  autocmd FileType markdown,textile setlocal textwidth=0 wrapmargin=0 wrap spell
   autocmd FileType markdown setlocal formatoptions=1
   autocmd FileType markdown setlocal noexpandtab
-  autocmd FileType markdown setlocal spell spelllang=en_us
   autocmd FileType markdown set complete+=s
   autocmd FileType markdown set formatprg=par
-  autocmd FileType markdown setlocal wrap
   autocmd FileType markdown setlocal linebreak
+
+  autocmd BufNewFile,BufRead *.ejs set filetype=html
+  autocmd BufNewFile,BufRead *.ino set filetype=c
+  autocmd BufNewFile,BufRead *.svg set filetype=xml
+  autocmd BufNewFile,BufRead .babelrc set filetype=json
+  autocmd BufNewFile,BufRead .jshintrc set filetype=json
+  autocmd BufNewFile,BufRead .eslintrc set filetype=json
 
   " commands only available for go files
   au FileType go nmap <Leader>gd <Plug>(go-doc)
@@ -214,7 +228,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 let g:gist_clip_command = 'pbcopy'
 let g:javascript_enable_domhtmlcss = '1'
-let g:syntastic_javascript_checkers = ['eslint']
 
 " space open/closes folds
 nnoremap <leader> za
@@ -225,13 +238,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-
 " Toggle spelling with the F7 key
 nn :setlocal spell! spelllang=en_us
 imap :setlocal spell! spelllang=en_us
+
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
 
@@ -248,23 +258,4 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
-
-" Fix Cursor in TMUX
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-" Spelling
-highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
-highlight clear SpellCap
-highlight SpellCap term=underline cterm=underline
-highlight clear SpellRare
-highlight SpellRare term=underline cterm=underline
-highlight clear SpellLocal
-highlight SpellLocal term=underline cterm=underline
 
