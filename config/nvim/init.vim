@@ -11,7 +11,11 @@
   Plug 'bitc/vim-bad-whitespace'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
+  Plug 'tmux-plugins/vim-tmux'
   Plug 'benekastah/neomake'
+  Plug 'AndrewRadev/switch.vim'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'Chiel92/vim-autoformat'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
@@ -19,31 +23,51 @@
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-sleuth'
   Plug 'rking/ag.vim'
+  Plug 'Yggdroot/indentLine'
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
   Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
-  Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
+  Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim
+  Plug 'rhysd/github-complete.vim'
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+" Plug 'jaxbot/github-issues.vim'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'carlitux/deoplete-ternjs'
+  Plug 'zchee/deoplete-go'
+  Plug 'Shougo/neoinclude.vim'
+" Plug 'Shougo/neocomplete.vim'
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
+  Plug 'honza/vim-snippets'
+  Plug 'ujihisa/neco-look'
   Plug 'vim-scripts/Align'
-  Plug 'tomtom/tlib_vim'
+  " Plug 'tomtom/tlib_vim'
   Plug 'mattn/webapi-vim'
   Plug 'vim-misc'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " themes
   Plug 'vim-airline/vim-airline'
   Plug 'mhartington/oceanic-next'
 
 " syntax
-  Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim - easily create markdup wth CSS-like syntax
+  Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim
   Plug 'kchmck/vim-coffee-script' " coffeescript support
   Plug 'tpope/vim-ragtag' " for html
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
+  Plug 'othree/jsdoc-syntax.vim', {'for':['javascript', 'typescript']}
+  Plug 'othree/es.next.syntax.vim', {'for': 'javascript'}
+  Plug 'Quramy/tsuquyomi', {'for': ['typescript','javascript']}
+  Plug 'Raimondi/delimitMate', {'for': ['javascript', 'typescript', 'css', 'scss']}
+  Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
   Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
   Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app
   Plug 'tpope/vim-markdown', {'for': 'markdown'}
+  Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
   Plug 'fatih/vim-go', { 'for': 'go' } " go support
   Plug 'tpope/vim-git' " git support
   Plug 'cakebaker/scss-syntax.vim' " sass support
@@ -67,6 +91,10 @@
   let mapleader = ' '
 " exit to normal mode with 'jj', so i don't always have to hit the escape key
   inoremap jj <ESC>
+  " No need for ex mode
+  nnoremap Q <nop>
+" recording macros is not my thing
+  map q <Nop>
 " ------------------------------
 
 " Color Schemes
@@ -76,6 +104,11 @@
   colorscheme OceanicNext
   set background=dark
   let g:airline_theme='oceanicnext'
+  let g:airline#extensions#tabline#enabled = 1
+  set hidden
+  let g:airline#extensions#tabline#fnamemod = ':t'
+  let g:airline#extensions#tabline#show_tab_nr = 1
+  let g:airline_powerline_fonts = 1
 
   set clipboard+=unnamedplus
   set pastetoggle=<f6> " for neovim
@@ -126,7 +159,7 @@
   map <leader>f ggVG==<CR>
   map <leader>i mmgg=G`m<CR>
   map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
-  map <leader>v :set paste!<CR>
+  map <slient> <leader>v :set paste!<CR>
   map <Leader>te :!bw:conf q
   map <Leader>vi :tabe ~/.config/nvim/init.vim<CR>
 
@@ -134,12 +167,19 @@
   let g:ctrlp_match_window = 'order:ttb,max:20'
   let g:gist_clip_command = 'pbcopy'
   let g:javascript_enable_domhtmlcss = '1'
-
-" gitgutter
+  let g:deoplete#sources#go = 'vim-go'
+  let g:table_mode_corner="|"
+  let g:indentLine_char='│'
+  let g:deoplete#enable_at_startup = 1
   let g:gitgutter_map_keys = 0
+  let g:multi_cursor_next_key='<C-n>'
+  let g:multi_cursor_prev_key='<C-p>'
+  let g:multi_cursor_skip_key='<C-x>'
+  let g:multi_cursor_quit_key='<Esc>'
 
 " nerdtree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  autocmd StdinReadPre * let s:std_in=1
   let g:NERDSpaceDelims=1
   let g:NERDTreeQuitOnOpen=0 " close NERDTree after a file is opened
   let NERDTreeShowHidden=1 " show hidden files in NERDTree
@@ -159,6 +199,12 @@
   tmap <C-l> <C-\><C-n>:TmuxNavigateRight<cr>
   tmap <C-h> <C-\><C-n>:TmuxNavigateLeft<CR>
   tmap <C-;> <C-\><C-n>:TmuxNavigatePrevious<cr>
+  noremap H ^
+  noremap L g_
+  noremap J 5j
+  noremap K 5k
+  " vmap < <gv " wonky
+  " vmap > >gv
 
 " Get off my lawn, aka don't use arrow keys in vim.
   nnoremap <Left> :echoe "Use h"<CR>
@@ -166,10 +212,8 @@
   nnoremap <Up> :echoe "Use k"<CR>
   nnoremap <Down> :echoe "Use j"<CR>
 
-
 " Switch between the last two files
   nnoremap <leader><leader> <c-^>
-
 
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
@@ -215,8 +259,23 @@
     au FileType go nmap <leader>t <Plug>(go-test)
     au FileType go nmap <leader>c <Plug>(go-coverage)
 
+" typescript command
+    autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+
+" github omni completion
+    autocmd FileType gitcommit setl omnifunc=github_complete#complete
+
 " Allow stylesheets to autocomplete hyphenated words
     autocmd FileType css,scss,sass setlocal iskeyword+=-
+
+    function! neomake#makers#ft#javascript#eslint()
+      return {
+        \ 'args': ['-f', 'compact'],
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \ '%W%f: line %l\, col %c\, Warning - %m'
+        \ }
+    endfunction
+    let g:neomake_javascript_enabled_makers = ['eslint']
     autocmd! BufWritePost * Neomake
   endif
 
@@ -232,6 +291,24 @@
     set grepprg=ag\ --nogroup\ --nocolor
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  endif
+
+" Plugin key-mappings.
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<TAB>"
+
+" For conceal markers.
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
   endif
 
 " functions
