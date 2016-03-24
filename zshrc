@@ -1,12 +1,3 @@
-# modify the prompt to contain git branch name if applicable
-git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null)
-  if [[ -n $ref ]]; then
-    echo " %{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}"
-  fi
-}
-setopt promptsubst
-
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
 # completion
@@ -78,26 +69,9 @@ bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^F' history-incremental-pattern-search-forward
 
 # use .localrc for SUPER SECRET CRAP that you don't
-# want in your public, versioned repo.
-if [[ -a ~/.localrc ]]
-then
-  source ~/.localrc
-fi
-
-if [[ -a ~/.dockerfunc ]]
-then
-  source ~/.dockerfunc
-fi
-
-if [[ -a ~/.aliases ]]
-then
-  source ~/.aliases
-fi
-
-if [[ -a ~/.path ]]
-then
-  source ~/.path
-fi
+for file in ~/.{aliases,dockfunc,localrc,path}; do
+  [ -r "$file" ] && source "$file"
+done
 
 for alias in ~/.zsh/aliases/*; do
   source $alias
@@ -113,8 +87,9 @@ source ~/.zsh/prompt.zsh
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export NVM_DIR="/Users/drew.delianides/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
