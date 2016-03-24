@@ -5,7 +5,6 @@
   call plug#begin('~/.config/nvim/plugged')
 " tools
   Plug 'ap/vim-css-color'
-  Plug 'mattn/gist-vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
   Plug 'bitc/vim-bad-whitespace'
@@ -22,7 +21,6 @@
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-sleuth'
-  Plug 'rking/ag.vim'
   Plug 'Yggdroot/indentLine'
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'editorconfig/editorconfig-vim'
@@ -31,6 +29,7 @@
   Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim
   Plug 'rhysd/github-complete.vim'
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+
 " Plug 'jaxbot/github-issues.vim'
   Plug 'Shougo/deoplete.nvim'
   Plug 'carlitux/deoplete-ternjs'
@@ -42,10 +41,14 @@
   Plug 'honza/vim-snippets'
   Plug 'ujihisa/neco-look'
   Plug 'vim-scripts/Align'
-  " Plug 'tomtom/tlib_vim'
+  Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
   Plug 'vim-misc'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'Shougo/unite.vim'
+  Plug 'Shougo/unite-outline'
+  Plug 'ujihisa/unite-colorscheme'
+  Plug 'junkblocker/unite-codesearch'
 
 " themes
   Plug 'vim-airline/vim-airline'
@@ -85,7 +88,7 @@
   filetype plugin indent on
   set autoread " detect when a file is changed
 
-" THE SUPPORT IMPORTANT STUFF "
+" THE IMPORTANT STUFF "
 " -----------------------------
 " Leader key
   let mapleader = ' '
@@ -151,7 +154,6 @@
   nnoremap <leader>d :NERDTreeToggle<CR>
   nnoremap <leader>f :NERDTreeFind<CR>
   nnoremap <leader>t :CtrlP<CR>
-  nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
   nnoremap <leader>wi :EraseBadWhitespace<CR>
   nnoremap <leader>g :GitGutterToggle<CR>
   noremap <silent> <leader>V :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -162,9 +164,9 @@
   map <slient> <leader>v :set paste!<CR>
   map <Leader>te :!bw:conf q
   map <Leader>vi :tabe ~/.config/nvim/init.vim<CR>
+  " map <c-p>call :FZF<CR>
 
 " plugin settings
-  let g:ctrlp_match_window = 'order:ttb,max:20'
   let g:gist_clip_command = 'pbcopy'
   let g:javascript_enable_domhtmlcss = '1'
   let g:deoplete#sources#go = 'vim-go'
@@ -285,26 +287,74 @@
   let g:neomake_verbose = 0
   let g:neomake_airline = 1
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-  if executable('ag')
-" Use Ag over Grep
-    set grepprg=ag\ --nogroup\ --nocolor
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  endif
-
-" Plugin key-mappings.
+" neosnippet plugin key-mappings.
   imap <C-k>     <Plug>(neosnippet_expand_or_jump)
   smap <C-k>     <Plug>(neosnippet_expand_or_jump)
   xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" SuperTab like snippets behavior.
+  let g:neosnippet#enable_snipmate_compatibility = 1 " SuperTab like snippets behavior.
   imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
   \ "\<Plug>(neosnippet_expand_or_jump)"
   \: pumvisible() ? "\<C-n>" : "\<TAB>"
   smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
   \ "\<Plug>(neosnippet_expand_or_jump)"
   \: "\<TAB>"
+
+" unite settings
+  let g:unite_data_directory='~/.nvim/.cache/unite'
+  let g:unite_source_history_yank_enable=1
+  let g:unite_prompt='» '
+  let g:unite_source_rec_async_command =['ag', '--follow', '--nocolor', '--nogroup','--hidden', '-g', '', '--ignore', '.git', '--ignore', '*.png', '--ignore', 'lib']
+
+  nnoremap <silent> <c-p> :Unite -auto-resize -start-insert -direction=botright file_rec/neovim<CR>
+  nnoremap <silent> <leader>c :Unite -auto-resize -start-insert -direction=botright colorscheme<CR>
+  nnoremap <silent> <leader>u :call dein#update()<CR>
+  nnoremap <silent> <leader>m :Unite -auto-resize -start-insert -direction=botright redismru<CR>
+
+" Custom mappings for the unite buffer
+  autocmd FileType unite call s:unite_settings()
+
+  function! s:unite_settings() "{{{
+" Enable navigation with control-j and control-k in insert mode
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  endfunction "}}}
+
+" Git from unite...ERMERGERD ------------------------------------------------{{{
+  let g:unite_source_menu_menus = {} " Useful when building interfaces at appropriate places
+  let g:unite_source_menu_menus.git = {
+    \ 'description' : 'Fugitive interface',
+    \}
+  let g:unite_source_menu_menus.git.command_candidates = [
+    \[' git status', 'Gstatus'],
+    \[' git diff', 'Gvdiff'],
+    \[' git commit', 'Gcommit'],
+    \[' git stage/add', 'Gwrite'],
+    \[' git checkout', 'Gread'],
+    \[' git rm', 'Gremove'],
+    \[' git cd', 'Gcd'],
+    \[' git push', 'exe "Git! push " input("remote/branch: ")'],
+    \[' git pull', 'exe "Git! pull " input("remote/branch: ")'],
+    \[' git pull rebase', 'exe "Git! pull --rebase " input("branch: ")'],
+    \[' git checkout branch', 'exe "Git! checkout " input("branch: ")'],
+    \[' git fetch', 'Gfetch'],
+    \[' git merge', 'Gmerge'],
+    \[' git browse', 'Gbrowse'],
+    \[' git head', 'Gedit HEAD^'],
+    \[' git parent', 'edit %:h'],
+    \[' git log commit buffers', 'Glog --'],
+    \[' git log current file', 'Glog -- %'],
+    \[' git log last n commits', 'exe "Glog -" input("num: ")'],
+    \[' git log first n commits', 'exe "Glog --reverse -" input("num: ")'],
+    \[' git log until date', 'exe "Glog --until=" input("day: ")'],
+    \[' git log grep commits',  'exe "Glog --grep= " input("string: ")'],
+    \[' git log pickaxe',  'exe "Glog -S" input("string: ")'],
+    \[' git index', 'exe "Gedit " input("branchname\:filename: ")'],
+    \[' git mv', 'exe "Gmove " input("destination: ")'],
+    \[' git grep',  'exe "Ggrep " input("string: ")'],
+    \[' git prompt', 'exe "Git! " input("command: ")'],
+    \] " Append ' --' after log to get commit info commit buffers
+  nnoremap <silent> <Leader>g :Unite -direction=botright -silent -buffer-name=git -start-insert menu:git<CR>
 
 " For conceal markers.
   if has('conceal')
