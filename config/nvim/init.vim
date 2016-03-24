@@ -3,6 +3,7 @@
     set nocompatible
   endif
   call plug#begin('~/.config/nvim/plugged')
+
 " tools
   Plug 'ap/vim-css-color'
   Plug 'airblade/vim-gitgutter'
@@ -22,6 +23,7 @@
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-sleuth'
   Plug 'Yggdroot/indentLine'
+  Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
@@ -29,7 +31,6 @@
   Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim
   Plug 'rhysd/github-complete.vim'
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
 " Plug 'jaxbot/github-issues.vim'
   Plug 'Shougo/deoplete.nvim'
   Plug 'carlitux/deoplete-ternjs'
@@ -113,6 +114,14 @@
   let g:airline#extensions#tabline#show_tab_nr = 1
   let g:airline_powerline_fonts = 1
 
+  cnoreabbrev <expr> x getcmdtype() == ":" && getcmdline() == 'x' ? 'Sayonara' : 'x'
+  tmap <leader>x <c-\><c-n>:bp! <BAR> bd! #<CR>
+  nmap <leader>t :term<cr>
+  nmap <leader>, :bnext<CR>
+  tmap <leader>, <C-\><C-n>:bnext<cr>
+  nmap <leader>. :bprevious<CR>
+  tmap <leader>. <C-\><C-n>:bprevious<CR>
+
   set clipboard+=unnamedplus
   set pastetoggle=<f6> " for neovim
   set nopaste
@@ -149,22 +158,17 @@
 
 " custom key mappings and function calls
   noremap <leader>l :Align
-  nnoremap <leader>a :Ag<space>
-  nnoremap <leader>b :CtrlPBuffer<CR>
-  nnoremap <leader>d :NERDTreeToggle<CR>
-  nnoremap <leader>f :NERDTreeFind<CR>
-  nnoremap <leader>t :CtrlP<CR>
+  nnoremap <leader>n :NERDTreeToggle<CR>
+  nnoremap <c-p> :fzf<CR>
   nnoremap <leader>wi :EraseBadWhitespace<CR>
-  nnoremap <leader>g :GitGutterToggle<CR>
   noremap <silent> <leader>V :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
   nmap <Leader>ni :source ~/.config/nvim/init.vim<cr>:PlugInstall<cr>
   map <leader>f ggVG==<CR>
   map <leader>i mmgg=G`m<CR>
   map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
-  map <slient> <leader>v :set paste!<CR>
+  map <silent> <leader>v :set paste!<CR>
   map <Leader>te :!bw:conf q
   map <Leader>vi :tabe ~/.config/nvim/init.vim<CR>
-  " map <c-p>call :FZF<CR>
 
 " plugin settings
   let g:gist_clip_command = 'pbcopy'
@@ -180,11 +184,10 @@
   let g:multi_cursor_quit_key='<Esc>'
 
 " nerdtree
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-  autocmd StdinReadPre * let s:std_in=1
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   let g:NERDSpaceDelims=1
   let g:NERDTreeQuitOnOpen=0 " close NERDTree after a file is opened
-  let NERDTreeShowHidden=1 " show hidden files in NERDTree
+  let g:NERDTreeShowHidden=1 " show hidden files in NERDTree
 
 " space open/closes folds
   nnoremap <leader> za
