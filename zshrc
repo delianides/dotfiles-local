@@ -1,10 +1,5 @@
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
-# completion
-autoload -U compinit
-compinit
-
-fpath=(/usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit
 compinit
 
@@ -12,6 +7,10 @@ compinit
 for function in ~/.zsh/functions/*; do
   source $function
 done
+
+fpath=(/usr/local/share/zsh/site-functions $fpath)
+autoload -U compinit
+compinit
 
 # makes color constants available
 autoload -U colors
@@ -81,11 +80,6 @@ setopt auto_cd
 cdpath=($HOME/Projects $HOME/Code $HOME/Sites)
 
 eval "$(hub alias -s)"
-source ~/.zsh/prompt.zsh
-# source /usr/local/opt/autoenv/activate.sh
-
-# Local config
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
@@ -93,3 +87,60 @@ export NVM_DIR="/Users/drew.delianides/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Prompt
+export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}"
+export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+export ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗%{$reset_color%}"
+export ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✓%{$reset_color%}"
+
+local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
+
+get_pwd(){
+  git_root=$PWD
+  while [[ $git_root != / && ! -e $git_root/.git ]]; do
+    git_root=$git_root:h
+  done
+  if [[ $git_root = / ]]; then
+    unset git_root
+    prompt_short_dir=%~
+  else
+    parent=${git_root%\/*}
+    prompt_short_dir=${PWD#$parent/}
+  fi
+  echo $prompt_short_dir
+}
+
+git_prompt_info() {
+  local ref
+  if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
+}
+
+# Checks if working tree is dirty
+parse_git_dirty() {
+  local STATUS=''
+  local FLAGS
+  FLAGS=('--porcelain')
+  if [[ "$(command git config --get oh-my-zsh.hide-dirty)" != "1" ]]; then
+    if [[ $POST_1_7_2_GIT -gt 0 ]]; then
+      FLAGS+='--ignore-submodules=dirty'
+    fi
+    if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
+      FLAGS+='--untracked-files=no'
+    fi
+    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+  fi
+  if [[ -n $STATUS ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+  else
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+  fi
+}
+
+setopt promptsubst
+export PS1='$ret_status %{$fg[white]%}$(get_pwd) $(git_prompt_info)%{$reset_color%}%{$reset_color%} '
+
