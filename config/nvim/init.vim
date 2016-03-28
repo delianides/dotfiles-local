@@ -101,6 +101,11 @@
   map q <Nop>
 " ------------------------------
 
+" see https://github.com/neovim/neovim/issues/2048
+  if has('nvim')
+    nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+  endif
+
 " Color Schemes
   syntax enable
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
