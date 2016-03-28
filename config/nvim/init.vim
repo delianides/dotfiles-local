@@ -103,7 +103,7 @@
 
 " see https://github.com/neovim/neovim/issues/2048
   if has('nvim')
-    nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+    nmap <silent> <bs> :<c-u>TmuxNavigateLeft<cr>
   endif
 
 " Color Schemes
@@ -212,8 +212,6 @@
   noremap L g_
   noremap J 5j
   noremap K 5k
-  " vmap < <gv " wonky
-  " vmap > >gv
 
 " Get off my lawn, aka don't use arrow keys in vim.
   nnoremap <Left> :echoe "Use h"<CR>
