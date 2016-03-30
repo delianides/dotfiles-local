@@ -22,6 +22,7 @@
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-sleuth'
+  Plug 'kassio/neoterm'
   Plug 'Yggdroot/indentLine'
   Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
   Plug 'MarcWeber/vim-addon-mw-utils'
@@ -40,7 +41,7 @@
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
-  Plug 'ujihisa/neco-look'
+  Plug 'ujihisa/neco-look', {'for': 'markdown'}
   Plug 'vim-scripts/Align'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
@@ -48,7 +49,6 @@
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'Shougo/unite.vim'
   Plug 'Shougo/unite-outline'
-  Plug 'ujihisa/unite-colorscheme'
   Plug 'junkblocker/unite-codesearch'
 
 " themes
@@ -63,6 +63,7 @@
   Plug 'othree/jsdoc-syntax.vim', {'for':['javascript', 'typescript']}
   Plug 'othree/es.next.syntax.vim', {'for': 'javascript'}
   Plug 'Quramy/tsuquyomi', {'for': ['typescript','javascript']}
+  Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
   Plug 'Raimondi/delimitMate', {'for': ['javascript', 'typescript', 'css', 'scss']}
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
@@ -162,7 +163,7 @@
 
 " custom key mappings and function calls
   noremap <leader>l :Align
-  nnoremap <leader>n :NERDTreeToggle<CR>
+  map <C-n> :NERDTreeToggle<CR>
   nnoremap <c-p> :fzf<CR>
   nnoremap <leader>wi :EraseBadWhitespace<CR>
   noremap <silent> <leader>V :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -312,7 +313,6 @@
   let g:unite_source_rec_async_command =['ag', '--follow', '--nocolor', '--nogroup','--hidden', '-g', '', '--ignore', '.git', '--ignore', '*.png', '--ignore', 'lib']
 
   nnoremap <silent> <c-p> :Unite -auto-resize -start-insert -direction=botright file_rec/neovim<CR>
-  nnoremap <silent> <leader>c :Unite -auto-resize -start-insert -direction=botright colorscheme<CR>
   nnoremap <silent> <leader>u :call dein#update()<CR>
   nnoremap <silent> <leader>m :Unite -auto-resize -start-insert -direction=botright redismru<CR>
 
