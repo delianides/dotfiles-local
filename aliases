@@ -1,5 +1,7 @@
 alias reload!='. ~/.zshrc'
 
+alias vim="nvim"
+
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 alias zshrc="mvim ~/.zshrc.local"
 
@@ -10,7 +12,6 @@ alias vdo="vagrant up --provider digital_ocean"
 alias vpr="vagrant provision"
 alias vpd="vagrant destroy"
 alias vs="vagrant status"
-alias ls='ls -la'
 
 #remap ssh
 #alias ssh="sshrc $1"
@@ -95,6 +96,7 @@ fleet_tunnel (){
     alias l='ls'
     alias ll='ls -al'
     alias lh='ls -Alh'
+    alias ls='ls -1' # List vertically
     alias -g G='| grep'
     alias -g M='| less'
     alias -g L='| wc -l'
