@@ -60,10 +60,11 @@
   Plug 'kchmck/vim-coffee-script' " coffeescript support
   Plug 'tpope/vim-ragtag' " for html
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
-  Plug 'othree/jsdoc-syntax.vim', {'for':['javascript', 'typescript']}
+  Plug 'othree/jsdoc-syntax.vim', {'for': ['javascript', 'typescript']}
   Plug 'othree/es.next.syntax.vim', {'for': 'javascript'}
   Plug 'Quramy/tsuquyomi', {'for': ['typescript','javascript']}
-  Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+  " Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+  Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
   Plug 'Raimondi/delimitMate', {'for': ['javascript', 'typescript', 'css', 'scss']}
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
@@ -174,6 +175,12 @@
   map <silent> <leader>v :set paste!<CR>
   map <Leader>te :!bw:conf q
   map <Leader>vi :tabe ~/.config/nvim/init.vim<CR>
+  noremap <leader>f :Autoformat<CR>
+  noremap <leader>tm :TableModeToggle<CR>
+  noremap <leader>gy :Goyo<CR>
+
+  autocmd! User GoyoEnter Limelight
+  autocmd! User GoyoLeave Limelight!
 
 " plugin settings
   let g:gist_clip_command = 'pbcopy'
@@ -187,6 +194,10 @@
   let g:multi_cursor_prev_key='<C-p>'
   let g:multi_cursor_skip_key='<C-x>'
   let g:multi_cursor_quit_key='<Esc>'
+
+" Color name (:help cterm-colors) or ANSI code
+  let g:limelight_conceal_ctermfg = 'gray'
+  let g:limelight_conceal_ctermfg = 240
 
 " nerdtree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -268,7 +279,25 @@
     au FileType go nmap <leader>c <Plug>(go-coverage)
 
 " typescript command
+    let g:tsuquyomi_disable_quickfix = 1
     autocmd FileType typescript nmap <buffer> <Leader>T : <C-u>echo tsuquyomi#hint()<CR>
+
+    let g:neomake_javascript_jshint_maker = {
+    \ 'args': ['--verbose'],
+    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+\ }
+
+    let g:neomake_typescript_tsc_maker = {
+        \ 'args': ['-m', 'commonjs', '--noEmit' ],
+        \ 'append_file': 0,
+        \ 'errorformat':
+            \ '%E%f %#(%l\,%c): error %m,' .
+            \ '%E%f %#(%l\,%c): %m,' .
+            \ '%Eerror %m,' .
+            \ '%C%\s%\+%m'
+    \ }
+
+    autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
 
 " github omni completion
     autocmd FileType gitcommit setl omnifunc=github_complete#complete
@@ -276,14 +305,6 @@
 " Allow stylesheets to autocomplete hyphenated words
     autocmd FileType css,scss,sass setlocal iskeyword+=-
 
-    function! neomake#makers#ft#javascript#eslint()
-      return {
-        \ 'args': ['-f', 'compact'],
-        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-        \ '%W%f: line %l\, col %c\, Warning - %m'
-        \ }
-    endfunction
-    let g:neomake_javascript_enabled_makers = ['eslint']
     autocmd! BufWritePost * Neomake
   endif
 
