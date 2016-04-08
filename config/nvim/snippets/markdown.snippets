@@ -1,2 +1,9 @@
-snippet ddnote
-		$0${1:`date +%Y-%m-%d`}
+snippet frontnote
+    ---
+    title: ${1}
+    date: `strftime("%m-%d-%Y")`
+    speaker: ${2}
+    tags: ${3}
+    ---
+    # ${4}
+    ${5}
