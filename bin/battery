@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+v= Hash.new()
+
+ARGF.each do |a|
+  if a.start_with? "Now"
+    #test for the first line
+    if a =~ /'(.*)'/
+      v[:source] = $~[1]
+    else
+      v[:source] = ""
+    end
+  elsif a.start_with?" -"
+    if a =~ /(\d{1,3})%;\s(.*);\s(\d:\d{2}|\(no estimate\))/
+      v[:percent] = $~[1].to_i
+      v[:state]   = $~[2]
+      v[:time]    = $~[3]
+    else
+      v[:percent] = "0"
+      v[:state]   = "unknown"
+      v[:time]    = "unknown"
+    end
+  end
+end
+
+outstring = ""
+if v[:source]== "Battery Power"
+  if v[:percent] >= 80
+    outstring += "#[fg=colour112]"
+  elsif v[:percent] < 80 && v[:percent] >= 40
+    outstring += "#[fg=colour214]"
+  else
+    outstring += "#[fg=colour88]"
+  end
+else
+ outstring +="#[fg=colour112]"
+end
+
+outstring += "#{v[:percent]}%"
+
+puts outstring
