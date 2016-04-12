@@ -24,17 +24,33 @@ ARGF.each do |a|
   end
 end
 
+# gradient="196 202 208 214 220 226 190 154 118 82"
+
 outstring = ""
 if v[:source]== "Battery Power"
-  if v[:percent] >= 80
-    outstring += "#[fg=colour112]"
-  elsif v[:percent] < 80 && v[:percent] >= 40
+  if v[:percent] >= 90
+    outstring += "#[fg=colour82]"
+  elsif v[:percent] < 90 && v[:percent] >= 80
+    outstring += "#[fg=colour118]"
+  elsif v[:percent] < 80 && v[:percent] >= 70
+    outstring += "#[fg=colour154]"
+  elsif v[:percent] < 70 && v[:percent] >= 60
+    outstring += "#[fg=colour190]"
+  elsif v[:percent] < 60 && v[:percent] >= 50
+    outstring += "#[fg=colour226]"
+  elsif v[:percent] < 50 && v[:percent] >= 40
+    outstring += "#[fg=colour220]"
+  elsif v[:percent] < 40 && v[:percent] >= 30
     outstring += "#[fg=colour214]"
-  else
-    outstring += "#[fg=colour88]"
+  elsif v[:percent] < 30 && v[:percent] >= 20
+    outstring += "#[fg=colour208]"
+  elsif v[:percent] < 20 && v[:percent] >= 10
+    outstring += "#[fg=colour202]"
+  elsif v[:percent] < 10
+    outstring += "#[fg=colour196]"
   end
 else
- outstring +="#[fg=colour112]"
+ outstring +="#[fg=colour82]"
 end
 
 outstring += "#{v[:percent]}%"
