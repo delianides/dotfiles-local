@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-I've merged some of the settings from [thoughtbot](https://github.com/thoughtbot/dotfiles) system into this repo.
+Welcome to my dotfiles! The files here are a pretty minimal setup for easily running Docker, Tmux, and NeoVim. I'm currently using [RCM](https://github.com/thoughtbot/rcm) from thoughtbot to manage everything.
 
 Installation
 ------------
@@ -27,4 +27,11 @@ Reposting usage instructions here:
   support for tags and multiple source directories.
 - `lsrc` shows you all your dotfiles and where they would be symlinked
   to. It is used by `rcup` but is provided for your own use, too.
+
+Inspiration
+-----------
+
+[Zach Holman](https://github.com/holman/dotfiles)
+[Mike Hartington](https://github.com/mhartington/dotfiles)
+[Nick Nisi](http://https://github.com/nicknisi/dotfiles)
 
