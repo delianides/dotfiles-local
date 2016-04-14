@@ -68,7 +68,7 @@ bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^F' history-incremental-pattern-search-forward
 
 # use .localrc for SUPER SECRET CRAP that you don't
-for file in ~/.{aliases,dockfunc,localrc,path}; do
+for file in ~/.{aliases,dockfunc,localrc,path,notefunc}; do
   [ -r "$file" ] && source "$file"
 done
 

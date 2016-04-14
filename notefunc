@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# New Note with Title
+ne() {
+   vim -c ":Note $*"
+}
+
+# New Blank Note
+n() {
+   vim -c :Note
+}
+
+# Searches Notes
+nls() {
+   ls -c ~/Notes/ | egrep -i "$*"
+}

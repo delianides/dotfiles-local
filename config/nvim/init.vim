@@ -42,6 +42,7 @@
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
   Plug 'ujihisa/neco-look', {'for': 'markdown'}
+  Plug 'xolox/vim-notes', {'for': 'markdown'}
   Plug 'vim-scripts/Align'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
