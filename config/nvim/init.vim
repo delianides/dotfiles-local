@@ -149,11 +149,13 @@
   set autoindent             " automatic indent new lines
   set smartindent            " be smart about it
   set wrapmargin=8           " wrap lines when coming within n characters from side
-  set formatoptions+=n,1       " support for numbered/bullet lists
+  set formatoptions+=n,1     " support for numbered/bullet lists
+  set nofoldenable           " disable fold
   set wildmenu               " turn on wild menu
   set wildmode=longest,list,full
   set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
   set shortmess=filtIoOA     " shorten messages
+  set completeopt-=preview   " disable preview/scratch pad
   set showmatch              " brackets/braces that is
   set mat=7                  " duration to show matching brace (1/10 sec)
   set ignorecase             " ignore case when searching
@@ -205,9 +207,6 @@
   let g:NERDSpaceDelims=1
   let g:NERDTreeQuitOnOpen=0 " close NERDTree after a file is opened
   let g:NERDTreeShowHidden=1 " show hidden files in NERDTree
-
-" space open/closes folds
-  nnoremap <leader> za
 
 " Navigate between vim and tmux
   let g:tmux_navigator_no_mappings = 1
@@ -286,17 +285,18 @@
     let g:neomake_javascript_jshint_maker = {
     \ 'args': ['--verbose'],
     \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-\ }
+    \ }
 
     let g:neomake_typescript_tsc_maker = {
-        \ 'args': ['-m', 'commonjs', '--noEmit' ],
-        \ 'append_file': 0,
-        \ 'errorformat':
-            \ '%E%f %#(%l\,%c): error %m,' .
-            \ '%E%f %#(%l\,%c): %m,' .
-            \ '%Eerror %m,' .
-            \ '%C%\s%\+%m'
-    \ }
+      \ 'args': [
+      \ '-m', 'commonjs', '--noEmit', '--target', 'ES5', '--experimentalDecorators'
+      \ ],
+      \ 'errorformat':
+      \ '%E%f %#(%l\,%c): error %m,' .
+      \ '%E%f %#(%l\,%c): %m,' .
+      \ '%Eerror %m,' .
+      \ '%C%\s%\+%m'
+      \ }
 
     autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
 
@@ -312,6 +312,7 @@
 " format with goimports instead of gofmt
   let g:go_fmt_command = "goimports"
   let g:neomake_go_enabled_makers = ['golint']
+  let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
   let g:neomake_verbose = 0
   let g:neomake_airline = 1
 
