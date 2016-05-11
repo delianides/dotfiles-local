@@ -1,7 +1,4 @@
 " nvim commands line up here
-  if &compatible
-    set nocompatible
-  endif
   call plug#begin('~/.config/nvim/plugged')
 
 " tools
