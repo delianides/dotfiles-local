@@ -8,3 +8,5 @@ irssi/saved_nick_colors
 irssi/scripts/autorun/blocker.pl
 irssi/startup
 irssi/nicklist-**/
+
+tag-vim/vim/bundle
