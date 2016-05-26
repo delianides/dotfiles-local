@@ -1,0 +1,241 @@
+" THE IMPORTANT STUFF "
+" ---------------------------------
+" Leader key
+  let mapleader = ' '
+" exit to normal mode with 'jj', so i don't always have to hit the escape key
+  inoremap jj <ESC>
+" No need for ex mode
+  nnoremap Q <nop>
+" recording macros is not my thing
+  map q <Nop>
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+  cmap w!! w !sudo tee > /dev/null %
+" ----------------------------------
+
+  call plug#begin('~/.vim/bundle')
+" vim-plug: https://github.com/junegunn/vim-plug
+  set rtp+=/usr/local/opt/fzf
+
+  Plug 'airblade/vim-gitgutter'
+  Plug 'ap/vim-css-color'
+  Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
+  Plug 'scrooloose/syntastic'
+  Plug 'bitc/vim-bad-whitespace'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'tmux-plugins/vim-tmux-focus-events'
+  Plug 'tmux-plugins/vim-tmux'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-dispatch'
+  Plug 'tpope/vim-sleuth'
+  Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
+  Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
+  Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim
+  Plug 'rhysd/github-complete.vim'
+  Plug 'Shougo/neoinclude.vim'
+  Plug 'Shougo/neocomplete.vim'
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
+  Plug 'honza/vim-snippets'
+  Plug 'vim-scripts/Align'
+  Plug 'mattn/gist-vim'
+  Plug 'mattn/webapi-vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+
+  " themes
+  Plug 'vim-airline/vim-airline'
+  Plug 'mhartington/oceanic-next'
+
+  " syntax
+  Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim
+  Plug 'tpope/vim-ragtag' " for html
+  Plug 'kchmck/vim-coffee-script' " coffeescript support
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
+  Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+  Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'moll/vim-node', { 'for': 'javascript' } " node support
+  Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
+  Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+  Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
+  Plug 'tpope/vim-markdown', {'for': 'markdown'}
+  Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
+  Plug 'fatih/vim-go', { 'for': 'go' } " go support
+  Plug 'tpope/vim-git' " git support
+  Plug 'cakebaker/scss-syntax.vim' " sass support
+  Plug 'evidens/vim-twig' " twig support
+  Plug 'nono/vim-handlebars' " handlebars support
+  Plug 'vim-ruby/vim-ruby' " ruby support
+  Plug 'smerrill/vcl-vim-plugin' " varnish config language
+  Plug 'tclem/vim-arduino' " arduino support
+  Plug 'hashivim/vim-hashicorp-tools' " hashicorp tools support, mostly for hcl
+  Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+  Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd language
+  call plug#end()
+
+" Turn on syntax highlighting and filetype detection.
+" vim-plug loads all the extra syntax and ftdetect files, so turn them on after
+" we load plugins.
+  filetype plugin indent on
+  syntax enable
+  colorscheme OceanicNext
+
+  set background=dark
+  set clipboard+=unnamedplus
+  set hidden
+  set pastetoggle=<f6> " for neovim
+  set nopaste
+  set noshowmode
+  set noswapfile
+  set relativenumber number
+  set tabstop=2 shiftwidth=2 expandtab
+  set conceallevel=0
+  set autoread " detect when a file is changed
+  set laststatus=2
+  set wrap linebreak nolist
+  set undofile
+  set undodir="$HOME/.VIM_UNDO_FILES"
+  set nobackup      " disable automatic creation of backup files
+  set nowritebackup " changes default behavior of saving files to 'write,delete,rename'
+  set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+  set incsearch     " do incremental searching
+  set scrolloff=10  " number of lines to show below the cursor before the buffer scrolls down
+  set autoindent             " automatic indent new lines
+  set smartindent            " be smart about it
+  set wrapmargin=8           " wrap lines when coming within n characters from side
+  set formatoptions+=n,1     " support for numbered/bullet lists
+  set nofoldenable           " disable fold
+  set wildmenu               " turn on wild menu
+  set wildmode=longest,list,full
+  set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
+  set shortmess=filtIoOA     " shorten messages
+  set completeopt-=preview   " disable preview/scratch pad
+  set showmatch              " brackets/braces that is
+  set mat=7                  " duration to show matching brace (1/10 sec)
+  set ignorecase             " ignore case when searching
+  set nohlsearch             " don't highlight searches
+  set visualbell             " shut up
+  set noerrorbells           " ditto
+  set splitbelow
+  set splitright
+  set complete+=kspell
+
+" Set spellfile to location that is guaranteed to exist, can be symlinked to
+" Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
+  set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
+
+  autocmd bufenter *
+    \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  let g:gist_clip_command = 'pbcopy'
+  let g:gitgutter_map_keys = 0
+  let g:NERDSpaceDelims=1
+  let g:NERDTreeQuitOnOpen=0 " close NERDTree after a file is opened
+  let g:NERDTreeShowHidden=1 " show hidden files in NERDTree
+  let g:neosnippet#enable_snipmate_compatibility = 1 " SuperTab like snippets behavior.
+
+" *******************************
+" Vim-airline
+" *******************************
+  let g:airline_theme='oceanicnext'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#fnamemod = ':t'
+  let g:airline#extensions#tabline#show_tab_nr = 1
+  let g:airline_powerline_fonts = 1
+
+" on opening the file, clear search-highlighting
+  autocmd BufReadCmd set nohlsearch
+
+  " Without this, the next line copies a bunch of netrw settings like `let
+  " g:netrw_dirhistmax` to the system clipboard.
+  " I never use netrw, so disable its history.
+  let g:netrw_dirhistmax = 0
+
+  augroup myfiletypes
+    autocmd!
+    " Include ! as a word character, so dw will delete all of e.g. gsub!,
+    " and not leave the "!"
+    au FileType ruby,eruby,yaml set iskeyword+=!,?
+    au FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
+    au BufNewFile,BufRead,BufWrite *.md,*.markdown syntax match Comment /\%^---\_.\{-}---$/
+	  au BufNewFile,BufRead *.ino set filetype=c
+	  au BufNewFile,BufRead *.svg set filetype=xml
+	  au BufNewFile,BufRead .babelrc set filetype=json
+	  au BufNewFile,BufRead .jshintrc set filetype=json
+	  au BufNewFile,BufRead .eslintrc set filetype=json
+    au VimResized * wincmd =
+  augroup END
+
+" custom key mappings and function calls
+  noremap <leader>l :Align
+  map <C-n> :NERDTreeToggle<CR>
+  nnoremap <leader>wi :EraseBadWhitespace<CR>
+  nmap <Leader>pi :source ~/.vimrc<cr>:PlugInstall<cr>
+  nmap <Leader>vi :tabe ~/.vimrc<CR>
+  map <leader>f ggVG==<CR>
+  map <leader>i mmgg=G`m<CR>
+  map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+  map <silent> <leader>v :set paste!<CR>
+  noremap <leader>f :Autoformat<CR>
+
+  noremap H ^
+  noremap L g_
+  noremap J 5j
+  noremap K 5k
+
+" Get off my lawn, aka don't use arrow keys in vim.
+  nnoremap <Left> :echoe "Use h"<CR>
+  nnoremap <Right> :echoe "Use l"<CR>
+  nnoremap <Up> :echoe "Use k"<CR>
+  nnoremap <Down> :echoe "Use j"<CR>
+
+" ******************************************
+" Neosnippet
+" ******************************************
+
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: "\<TAB>"
+
+
+" *******************************************
+" Fzf - Fuzzy Finder
+" *******************************************
+
+nnoremap <silent> <C-p> :call fzf#run({
+\   'down': '40%',
+\   'sink': 'botright split' })<CR>
+
+" *******************************************
+" Tmux - mappings
+" *******************************************
+
+  let g:tmux_navigator_no_mappings = 1
+  nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+  nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+  nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+  nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+  nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
+
+
