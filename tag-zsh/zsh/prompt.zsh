@@ -30,13 +30,13 @@ prompt_color() {
   [[ -n "$1" ]] && print "%{$fg[$2]%}$1%{$reset_color%}"
 }
 
-prompt_green()  { print "$(prompt_color "$1" 158)" }
-prompt_magenta(){ print "$(prompt_color "$1" 218)" }
-prompt_purple() { print "$(prompt_color "$1" 146)" }
-prompt_red()    { print "$(prompt_color "$1" 197)" }
+prompt_green()  { print "$(prompt_color "$1" 155)" }
+prompt_magenta(){ print "$(prompt_color "$1" 206)" }
+prompt_purple() { print "$(prompt_color "$1" 141)" }
+prompt_red()    { print "$(prompt_color "$1" 160)" }
 prompt_cyan()   { print "$(prompt_color "$1" 159)" }
-prompt_blue()   { print "$(prompt_color "$1" 031)" }
-prompt_yellow() { print "$(prompt_color "$1" 222)" }
+prompt_blue()   { print "$(prompt_color "$1" 032)" }
+prompt_yellow() { print "$(prompt_color "$1" 221)" }
 prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 
 ###########################################
