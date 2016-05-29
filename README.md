@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-Welcome to my dotfiles! The files here are a pretty minimal setup for easily running Docker, Tmux, and NeoVim. I'm currently using [RCM](https://github.com/thoughtbot/rcm) from thoughtbot to manage everything.
+Welcome to my dotfiles! The files here are a pretty minimal setup for easily running Docker, Tmux, and Vim. I'm currently using [RCM](https://github.com/thoughtbot/rcm) from thoughtbot to manage everything.
 
 Installation
 ------------
@@ -31,7 +31,9 @@ Reposting usage instructions here:
 Inspiration
 -----------
 
-[Zach Holman](https://github.com/holman/dotfiles)
-[Mike Hartington](https://github.com/mhartington/dotfiles)
-[Nick Nisi](http://https://github.com/nicknisi/dotfiles)
+- [Zach Holman](https://github.com/holman/dotfiles)
+- [Mike Hartington](https://github.com/mhartington/dotfiles)
+- [Nick Nisi](https://github.com/nicknisi/dotfiles)
+- [Chris Toomey](https://github.com/christoomey/dotfiles)
+- [Gabe Berke-Williams](https://github.com/gabebw/dotfiles)
 
