@@ -23,7 +23,7 @@ alias gmf="git merge --no-ff"
 alias ga="git add"
 alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | pbcopy"
-alias gc="git checkout"
+alias gco="git checkout"
 alias gcm="git commit -m"
 
 # these aliases take advantage of the previous function
