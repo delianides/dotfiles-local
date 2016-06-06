@@ -63,6 +63,7 @@
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
   Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+  Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
   Plug 'tpope/vim-markdown', {'for': 'markdown'}
   Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
