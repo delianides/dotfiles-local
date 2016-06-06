@@ -18,6 +18,17 @@ function start-local() {
 	fi
 }
 
+function stop-local() {
+	if _tmux_session_exists 'local'; then
+		tmux kill-session -t 'local'
+	fi
+}
+
+function restart-local() {
+	stop-local
+	start-local
+}
+
 _tmux_session_exists(){
 	local session_name="$1"
 	sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
