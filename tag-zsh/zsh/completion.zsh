@@ -5,6 +5,9 @@ fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
+setopt autocd
+cdpath=($HOME/Projects)
+
 # https://coderwall.com/p/jpj_6q
 # Search through history for previous commands matching everything up to current
 # cursor position. Move the cursor to the end of line after each match.
