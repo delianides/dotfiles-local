@@ -87,7 +87,7 @@
   colorscheme OceanicNext
 
   set background=dark
-  set clipboard+=unnamedplus
+  set clipboard+=unnamed
   set hidden
   set pastetoggle=<f6> " for neovim
   set nopaste
