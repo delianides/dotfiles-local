@@ -11,4 +11,7 @@ let g:indentLine_char='│'
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 
+" Align GitHub-flavored Markdown tables
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+
 setlocal tw=0 wrapmargin=0 wrap spell
