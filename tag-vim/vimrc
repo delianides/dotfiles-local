@@ -40,6 +40,7 @@
   Plug 'Shougo/neoinclude.vim'
   Plug 'Shougo/neocomplete.vim'
   Plug 'Shougo/neosnippet.vim'
+  Plug 'vim-scripts/Align'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
   Plug 'junegunn/vim-easy-align', { 'for': 'markdown' }
