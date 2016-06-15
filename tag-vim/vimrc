@@ -42,7 +42,7 @@
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
-  Plug 'vim-scripts/Align'
+  Plug 'junegunn/vim-easy-align', { 'for': 'markdown' }
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
