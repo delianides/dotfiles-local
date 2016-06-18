@@ -48,6 +48,7 @@
   Plug 'mattn/webapi-vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
   " themes
   Plug 'vim-airline/vim-airline'
@@ -58,7 +59,7 @@
   Plug 'tpope/vim-ragtag' " for html
   Plug 'kchmck/vim-coffee-script' " coffeescript support
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
-  Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' } | Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
   Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support

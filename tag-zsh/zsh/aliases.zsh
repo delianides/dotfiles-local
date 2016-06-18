@@ -2,9 +2,6 @@
 # ALIASES #
 ###########
 alias qq="cd . && source ~/.zshrc"
-alias cp="cp -iv"
-alias rm="rm -iv"
-alias mv="mv -iv"
 alias ls="ls -FGh"
 alias du="du -cksh"
 alias df="df -h"
