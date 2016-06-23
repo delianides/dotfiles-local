@@ -52,7 +52,10 @@
 
   " themes
   Plug 'vim-airline/vim-airline'
-  Plug 'mhartington/oceanic-next'
+  Plug 'vim-airline/vim-airline-themes'
+  " Plug 'mhartington/oceanic-next'
+  Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
+  " Plug 'lifepillar/vim-solarized8'
 
   " syntax
   Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim
@@ -61,7 +64,7 @@
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
   Plug 'Shougo/vimproc.vim', { 'do': 'make' } | Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
   Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
-  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
   Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
@@ -77,9 +80,16 @@
   Plug 'vim-ruby/vim-ruby' " ruby support
   Plug 'smerrill/vcl-vim-plugin' " varnish config language
   Plug 'tclem/vim-arduino' " arduino support
-  Plug 'hashivim/vim-hashicorp-tools' " hashicorp tools support, mostly for hcl
-  Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+  Plug 'hashivim/vim-consul'
+  Plug 'hashivim/vim-nomadproject'
+  Plug 'hashivim/vim-ottoproject'
+  Plug 'hashivim/vim-packer'
+  Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
+  Plug 'hashivim/vim-vagrant'
+  Plug 'hashivim/vim-vaultproject'
+  Plug 'docker/docker' , {'rtp': 'contrib/syntax/vim'}
   Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd language
+
   call plug#end()
 
 " Turn on syntax highlighting and filetype detection.
@@ -87,7 +97,7 @@
 " we load plugins.
   filetype plugin indent on
   syntax enable
-  colorscheme OceanicNext
+  colorscheme Tomorrow-Night
 
   set background=dark
   set clipboard+=unnamed
@@ -154,10 +164,10 @@
 " *******************************
 " Vim-airline
 " *******************************
-  let g:airline_theme='oceanicnext'
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#fnamemod = ':t'
-  let g:airline#extensions#tabline#show_tab_nr = 1
+  let g:airline_theme='tomorrow'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#show_tab_nr = 1
   let g:airline_powerline_fonts = 1
 
 " on opening the file, clear search-highlighting
