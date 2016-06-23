@@ -36,6 +36,31 @@ function whois() {
 
 function al { ls -t | head -n ${1:-10}; }
 
+function cd () {
+	if   [[ "x$*" == "x..." ]]; then
+		cd ../..
+			elif [[ "x$*" == "x...." ]]; then
+			cd ../../..
+			elif [[ "x$*" == "x....." ]]; then
+			cd ../../../..
+			elif [[ "x$*" == "x......" ]]; then
+			cd ../../../../..
+			elif [ -d ~/.autoenv ]; then
+			source ~/.autoenv/activate.sh
+			autoenv_cd "$@"
+	else
+		builtin cd "$@"
+			fi
+}
+
 # If piping something in, copy it.
 # If just doing `clip`, paste it.
 function clip { [ -t 0 ] && pbpaste || pbcopy;}
+
+alias ..='cd ..'
+alias cd..='cd ..'
+alias cd...='cd ../..'
+alias cd....='cd ../../..'
+alias cd.....='cd ../../../..'
+alias cd/='cd /'
+
