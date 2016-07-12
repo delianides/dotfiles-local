@@ -17,7 +17,7 @@ ARGF.each do |a|
       v[:state]   = $~[2]
       v[:time]    = $~[3]
     else
-      v[:percent] = "0"
+      v[:percent] = 0
       v[:state]   = "unknown"
       v[:time]    = "unknown"
     end
@@ -28,11 +28,11 @@ end
 
 outstring = ""
 if v[:source]== "Battery Power"
-  if v[:percent] >= 90
+  if v[:percent].to_i >= 90
     outstring += "#[fg=colour82]"
-  elsif v[:percent] < 90 && v[:percent] >= 80
+  elsif v[:percent].to_i < 90 && v[:percent] >= 80
     outstring += "#[fg=colour118]"
-  elsif v[:percent] < 80 && v[:percent] >= 70
+  elsif v[:percent].to_i < 80 && v[:percent] >= 70
     outstring += "#[fg=colour154]"
   elsif v[:percent] < 70 && v[:percent] >= 60
     outstring += "#[fg=colour190]"
