@@ -12,6 +12,7 @@ function g {
   fi
 }
 
+alias git=hub
 alias gd="git diff"
 # Grep with grouped output like Ack
 alias gg="git g"
