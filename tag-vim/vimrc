@@ -62,7 +62,7 @@
   Plug 'tpope/vim-ragtag' " for html
   Plug 'kchmck/vim-coffee-script' " coffeescript support
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
-  Plug 'Shougo/vimproc.vim', { 'do': 'make' } | Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+  Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
   Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
