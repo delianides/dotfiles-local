@@ -34,7 +34,7 @@
   Plug 'MarcWeber/vim-addon-mw-utils'
 
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+  Plug 'Shougo/deoplete.nvim'
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
