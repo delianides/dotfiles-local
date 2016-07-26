@@ -1,5 +1,7 @@
 " THE IMPORTANT STUFF "
 " ---------------------------------
+" VIMPATH
+  let $VIMPATH=expand('$HOME/.vim')
 " Leader key
   let mapleader = ' '
 " exit to normal mode with 'jj', so i don't always have to hit the escape key
@@ -23,7 +25,6 @@
   Plug 'bitc/vim-bad-whitespace'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
-  Plug 'tmux-plugins/vim-tmux'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
@@ -32,47 +33,44 @@
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-sleuth'
   Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'editorconfig/editorconfig-vim'
-  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
-  Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
-  Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim
-  Plug 'rhysd/github-complete.vim'
-  Plug 'Shougo/neoinclude.vim'
+
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   Plug 'Shougo/neocomplete.vim'
   Plug 'Shougo/neosnippet.vim'
-  Plug 'vim-scripts/Align'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
-  Plug 'junegunn/vim-easy-align', { 'for': 'markdown' }
+
+  Plug 'vim-scripts/Align'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+
 
   " themes
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   " Plug 'mhartington/oceanic-next'
   Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
-  " Plug 'lifepillar/vim-solarized8'
+  Plug 'fatih/molokai'
 
-  " syntax
-  Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim
-  Plug 'tpope/vim-ragtag' " for html
-  Plug 'kchmck/vim-coffee-script' " coffeescript support
+" *************************************************
+" Syntax
+" *************************************************
+  Plug 'tmux-plugins/vim-tmux'
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
-  Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
-  Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
+  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+  Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+  Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
   Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
   Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
   Plug 'tpope/vim-markdown', {'for': 'markdown'}
   Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
   Plug 'fatih/vim-go', { 'for': 'go' } " go support
+  Plug 'AndrewRadev/splitjoin.vim'
   Plug 'tpope/vim-git' " git support
   Plug 'cakebaker/scss-syntax.vim' " sass support
   Plug 'evidens/vim-twig' " twig support
@@ -159,7 +157,6 @@
   let g:NERDSpaceDelims=1
   let g:NERDTreeQuitOnOpen=0 " close NERDTree after a file is opened
   let g:NERDTreeShowHidden=1 " show hidden files in NERDTree
-  let g:neosnippet#enable_snipmate_compatibility = 1 " SuperTab like snippets behavior.
 
 " *******************************
 " Vim-airline

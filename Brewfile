@@ -17,7 +17,7 @@ cask 'iterm2'
 cask 'dropshare'
 
 # editor of the ages
-brew 'vim'
+brew 'vim', args: ['with-lua', 'with-python']
 
 # node version manager
 brew 'nvm'
