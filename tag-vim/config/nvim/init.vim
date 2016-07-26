@@ -20,8 +20,7 @@
 
   Plug 'airblade/vim-gitgutter'
   Plug 'ap/vim-css-color'
-  Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
-  Plug 'scrooloose/syntastic'
+
   Plug 'bitc/vim-bad-whitespace'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -35,7 +34,7 @@
   Plug 'MarcWeber/vim-addon-mw-utils'
 
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-  Plug 'Shougo/neocomplete.vim'
+  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
@@ -58,6 +57,7 @@
 " Syntax
 " *************************************************
   Plug 'tmux-plugins/vim-tmux'
+
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
@@ -68,9 +68,12 @@
   Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
   Plug 'tpope/vim-markdown', {'for': 'markdown'}
-  Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
+
   Plug 'fatih/vim-go', { 'for': 'go' } " go support
+  Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+  Plug 'zchee/deoplete-go', { 'do': 'make'}
   Plug 'AndrewRadev/splitjoin.vim'
+
   Plug 'tpope/vim-git' " git support
   Plug 'cakebaker/scss-syntax.vim' " sass support
   Plug 'evidens/vim-twig' " twig support
@@ -95,7 +98,13 @@
 " we load plugins.
   filetype plugin indent on
   syntax enable
-  colorscheme Tomorrow-Night
+  colorscheme molokai
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" see https://github.com/neovim/neovim/issues/2048
+  if has('nvim')
+    nmap <silent> <bs> :<c-u>TmuxNavigateLeft<cr>
+  endif
 
   set background=dark
   set clipboard+=unnamed
@@ -154,9 +163,6 @@
 
   let g:gist_clip_command = 'pbcopy'
   let g:gitgutter_map_keys = 0
-  let g:NERDSpaceDelims=1
-  let g:NERDTreeQuitOnOpen=0 " close NERDTree after a file is opened
-  let g:NERDTreeShowHidden=1 " show hidden files in NERDTree
 
 " *******************************
 " Vim-airline
@@ -188,19 +194,22 @@
 	  au BufNewFile,BufRead .jshintrc set filetype=json
 	  au BufNewFile,BufRead .eslintrc set filetype=json
     au VimResized * wincmd =
+
+    autocmd! BufWritePost * Neomake
   augroup END
+
+  let g:neomake_verbose = 0
+  let g:neomake_airline = 1
 
 " custom key mappings and function calls
   noremap <leader>l :Align
-  map <C-n> :NERDTreeToggle<CR>
   nnoremap <leader>wi :EraseBadWhitespace<CR>
   nmap <Leader>pi :source ~/.vimrc<cr>:PlugInstall<cr>
-  nmap <Leader>vi :tabe ~/.vimrc<CR>
   map <leader>f ggVG==<CR>
+  noremap <leader>f :Autoformat<CR>
   map <leader>i mmgg=G`m<CR>
   map <leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
   map <silent> <leader>v :set paste!<CR>
-  noremap <leader>f :Autoformat<CR>
 
   noremap H ^
   noremap L g_
@@ -212,6 +221,14 @@
   nnoremap <Right> :echoe "Use l"<CR>
   nnoremap <Up> :echoe "Use k"<CR>
   nnoremap <Down> :echoe "Use j"<CR>
+
+" ******************************************
+" Deoplete
+" ******************************************
+
+" deoplete.nvim recommend
+  set completeopt+=noselect
+  let g:deoplete#enable_at_startup = 1
 
 " ******************************************
 " Neosnippet
