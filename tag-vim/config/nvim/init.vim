@@ -1,3 +1,7 @@
+  function! DoRemote(arg)
+    UpdateRemotePlugins
+  endfunction
+
 " THE IMPORTANT STUFF "
 " ---------------------------------
 " VIMPATH
@@ -14,12 +18,13 @@
   cmap w!! w !sudo tee > /dev/null %
 " ----------------------------------
 
-  call plug#begin('~/.vim/bundle')
+  call plug#begin('~/.config/nvim/bundle')
 " vim-plug: https://github.com/junegunn/vim-plug
   set rtp+=/usr/local/opt/fzf
 
   Plug 'airblade/vim-gitgutter'
   Plug 'ap/vim-css-color'
+  Plug 'neomake/neomake'
 
   Plug 'bitc/vim-bad-whitespace'
   Plug 'christoomey/vim-tmux-navigator'
@@ -32,9 +37,10 @@
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-sleuth'
   Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'Raimondi/delimitMate'
 
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
@@ -44,7 +50,6 @@
   Plug 'mattn/webapi-vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-
 
   " themes
   Plug 'vim-airline/vim-airline'
@@ -63,14 +68,16 @@
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+  Plug 'mhartington/deoplete-typescript', {'for': 'typescript'}
   Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
+
   Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
   Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
   Plug 'tpope/vim-markdown', {'for': 'markdown'}
 
   Plug 'fatih/vim-go', { 'for': 'go' } " go support
-  Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+  Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/bundle/gocode/nvim/symlink.sh' }
   Plug 'zchee/deoplete-go', { 'do': 'make'}
   Plug 'AndrewRadev/splitjoin.vim'
 
@@ -98,8 +105,13 @@
 " we load plugins.
   filetype plugin indent on
   syntax enable
-  colorscheme molokai
+  colorscheme Tomorrow-Night
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" Enable true color
+  if exists('+termguicolors')
+    set termguicolors
+  endif
 
 " see https://github.com/neovim/neovim/issues/2048
   if has('nvim')
@@ -150,9 +162,6 @@
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
   set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
 
-  autocmd bufenter *
-    \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -168,9 +177,6 @@
 " Vim-airline
 " *******************************
   let g:airline_theme='tomorrow'
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#fnamemod = ':t'
-" let g:airline#extensions#tabline#show_tab_nr = 1
   let g:airline_powerline_fonts = 1
 
 " on opening the file, clear search-highlighting
@@ -204,7 +210,6 @@
 " custom key mappings and function calls
   noremap <leader>l :Align
   nnoremap <leader>wi :EraseBadWhitespace<CR>
-  nmap <Leader>pi :source ~/.vimrc<cr>:PlugInstall<cr>
   map <leader>f ggVG==<CR>
   noremap <leader>f :Autoformat<CR>
   map <leader>i mmgg=G`m<CR>
@@ -229,30 +234,51 @@
 " deoplete.nvim recommend
   set completeopt+=noselect
   let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_camel_case = 1
+  let g:deoplete#keyword_patterns = {}
+  let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+  let g:deoplete#sources#go = 'vim-go'
 
 " ******************************************
 " Neosnippet
 " ******************************************
 
+  let g:neosnippet#enable_snipmate_compatibility = 1
+  let g:neosnippet#expand_word_boundary = 1
   imap <C-k>     <Plug>(neosnippet_expand_or_jump)
   smap <C-k>     <Plug>(neosnippet_expand_or_jump)
   xmap <C-k>     <Plug>(neosnippet_expand_target)
+" Tell Neosnippet about the other snippets
+  " let g:neosnippet#snippets_directory='~/.config/repos/github.com/Shougo/neosnippet-snippets/neosnippets, ~/Github/ionic-snippets, ~/.config/repos/github.com/matthewsimo/angular-vim-snippets/snippets'
 
-  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)"
-    \: pumvisible() ? "\<C-n>" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)"
-    \: "\<TAB>"
+  imap <silent><expr><CR> pumvisible() ?
+    \ (neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : deoplete#mappings#close_popup())
+    \ : (delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")
 
+  imap <silent><expr><Tab> pumvisible() ? "\<C-n>"
+    \ : (neosnippet#jumpable() ? "\<Plug>(neosnippet_jump)"
+    \ : (<SID>is_whitespace() ? "\<Tab>"
+    \ : deoplete#mappings#manual_complete()))
+
+  smap <silent><expr><Tab> pumvisible() ? "\<C-n>"
+    \ : (neosnippet#jumpable() ? "\<Plug>(neosnippet_jump)"
+    \ : (<SID>is_whitespace() ? "\<Tab>"
+    \ : deoplete#mappings#manual_complete()))
+
+  inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:is_whitespace()
+    let col = col('.') - 1
+    return ! col || getline('.')[col - 1] =~? '\s'
+  endfunction
 
 " *******************************************
 " Fzf - Fuzzy Finder
 " *******************************************
 
-nnoremap <silent> <C-p> :call fzf#run({
-\   'down': '40%',
-\   'sink': 'botright split' })<CR>
+  nnoremap <silent> <C-p> :call fzf#run({
+  \   'down': '40%',
+  \   'sink': 'botright split' })<CR>
 
 " *******************************************
 " Tmux - mappings
@@ -264,5 +290,4 @@ nnoremap <silent> <C-p> :call fzf#run({
   nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
   nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
-
 
