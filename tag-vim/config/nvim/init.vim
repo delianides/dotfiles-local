@@ -285,4 +285,11 @@
   nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
   nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
+  if has('nvim')
+    tmap <C-j> <C-\><C-n>:TmuxNavigateDown<cr>
+    tmap <C-k> <C-\><C-n>:TmuxNavigateUp<cr>
+    tmap <C-l> <C-\><C-n>:TmuxNavigateRight<cr>
+    tmap <C-h> <C-\><C-n>:TmuxNavigateLeft<CR>
+    tmap <C-;> <C-\><C-n>:TmuxNavigatePrevious<cr>
+  endif
 
