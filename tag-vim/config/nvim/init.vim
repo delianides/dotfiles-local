@@ -1,7 +1,3 @@
-  function! DoRemote(arg)
-    UpdateRemotePlugins
-  endfunction
-
 " THE IMPORTANT STUFF "
 " ---------------------------------
 " VIMPATH
@@ -40,7 +36,9 @@
   Plug 'Raimondi/delimitMate'
 
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make'}
+  Plug 'mhartington/deoplete-typescript', {'for': 'typescript'}
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
@@ -54,7 +52,6 @@
   " themes
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  " Plug 'mhartington/oceanic-next'
   Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
   Plug 'fatih/molokai'
 
@@ -66,25 +63,23 @@
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+  Plug 'othree/jsdoc-syntax.vim', {'for':['javascript', 'typescript']}
+  Plug 'othree/es.next.syntax.vim', {'for': 'javascript'}
   Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
-  Plug 'mhartington/deoplete-typescript', {'for': 'typescript'}
   Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 
   Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
   Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
+
   Plug 'tpope/vim-markdown', {'for': 'markdown'}
 
-  Plug 'fatih/vim-go', { 'for': 'go' } " go support
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': 'go' } " go support
   Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/bundle/gocode/nvim/symlink.sh' }
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
   Plug 'AndrewRadev/splitjoin.vim'
 
   Plug 'tpope/vim-git' " git support
   Plug 'cakebaker/scss-syntax.vim' " sass support
-  Plug 'evidens/vim-twig' " twig support
-  Plug 'nono/vim-handlebars' " handlebars support
   Plug 'vim-ruby/vim-ruby' " ruby support
   Plug 'smerrill/vcl-vim-plugin' " varnish config language
   Plug 'tclem/vim-arduino' " arduino support
@@ -95,7 +90,7 @@
   Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
   Plug 'hashivim/vim-vagrant'
   Plug 'hashivim/vim-vaultproject'
-  Plug 'docker/docker' , {'rtp': 'contrib/syntax/vim'}
+  Plug 'ekalinin/Dockerfile.vim'
   Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd language
 
   call plug#end()
@@ -232,7 +227,7 @@
 " ******************************************
 
 " deoplete.nvim recommend
-  set completeopt+=noselect
+  " set completeopt+=noselect
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_camel_case = 1
   let g:deoplete#keyword_patterns = {}

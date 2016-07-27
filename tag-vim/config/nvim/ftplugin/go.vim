@@ -1,4 +1,4 @@
-set autowrite noexpandtab tabstop=4 shiftwidth=4
+setlocal autowrite noexpandtab tabstop=4 shiftwidth=4
 
 map <C-n> :cn<CR>
 map <C-m> :cp<CR>

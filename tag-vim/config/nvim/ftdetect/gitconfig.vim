@@ -1,1 +1,1 @@
-au BufRead,BufNewFile gitconfig set syntax=gitconfig
+autocmd BufRead,BufNewFile gitconfig set syntax=gitconfig

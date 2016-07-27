@@ -1,4 +1,1 @@
-set autoindent
-set noexpandtab
-set tabstop=4
-set shiftwidth=4
+set autoindent noexpandtab tabstop=4 shiftwidth=4
