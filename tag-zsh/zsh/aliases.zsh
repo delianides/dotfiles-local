@@ -1,6 +1,9 @@
 ###########
 # ALIASES #
 ###########
+
+alias vim="nvim"
+
 alias qq="cd . && source ~/.zshrc"
 alias ls="ls -FGh"
 alias du="du -cksh"
