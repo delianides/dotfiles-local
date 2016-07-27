@@ -25,7 +25,9 @@
   Plug 'bitc/vim-bad-whitespace'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
+  Plug 'wellle/tmux-complete.vim'
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-commentary'
@@ -34,11 +36,15 @@
   Plug 'tpope/vim-sleuth'
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'Raimondi/delimitMate'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'itmammoth/doorboy.vim'
 
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make'}
   Plug 'mhartington/deoplete-typescript', {'for': 'typescript'}
+  Plug 'SevereOverfl0w/deoplete-github'
+  Plug 'carlitux/deoplete-ternjs'
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
@@ -65,7 +71,7 @@
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
   Plug 'othree/jsdoc-syntax.vim', {'for':['javascript', 'typescript']}
   Plug 'othree/es.next.syntax.vim', {'for': 'javascript'}
-  Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
+  " Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
   Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 
   Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
@@ -189,16 +195,19 @@
     au FileType ruby,eruby,yaml set iskeyword+=!,?
     au FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
     au BufNewFile,BufRead,BufWrite *.md,*.markdown syntax match Comment /\%^---\_.\{-}---$/
-	  au BufNewFile,BufRead *.ino set filetype=c
-	  au BufNewFile,BufRead *.svg set filetype=xml
-	  au BufNewFile,BufRead .babelrc set filetype=json
-	  au BufNewFile,BufRead .jshintrc set filetype=json
-	  au BufNewFile,BufRead .eslintrc set filetype=json
+    au BufNewFile,BufRead *.ino set filetype=c
+    au BufNewFile,BufRead *.svg set filetype=xml
+    au BufNewFile,BufRead .babelrc set filetype=json
+    au BufNewFile,BufRead .jshintrc set filetype=json
+    au BufNewFile,BufRead .eslintrc set filetype=json
+    au BufRead,BufNewFile *.md setf markdown
+    autocmd FileType terraform setlocal commentstring=#\ %s
     au VimResized * wincmd =
 
     autocmd! BufWritePost * Neomake
   augroup END
 
+  let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
   let g:neomake_verbose = 0
   let g:neomake_airline = 1
 
@@ -225,15 +234,28 @@
 " ******************************************
 " Deoplete
 " ******************************************
-
-" deoplete.nvim recommend
-  " set completeopt+=noselect
+  set completeopt+=noselect
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_camel_case = 1
+  let g:deoplete#sources = {}
+  let g:deoplete#sources.gitcommit=['github']
   let g:deoplete#keyword_patterns = {}
   let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+  let g:deoplete#keyword_patterns.gitcommit = '.+'
+	let g:deoplete#omni#input_patterns = {}
+
+  call deoplete#util#set_pattern(
+    \ g:deoplete#omni#input_patterns,
+    \ 'gitcommit', [g:deoplete#keyword_patterns.gitcommit])
+
+  let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+  let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+  let g:deoplete#sources#go#use_cache = 1
+  let g:deoplete#sources#go#json_directory = '~/.cache/deoplete/go/$GOOS_$GOARCH'
   let g:deoplete#sources#go = 'vim-go'
 
+  let g:tern_request_timeout = 1
+  let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 " ******************************************
 " Neosnippet
 " ******************************************
@@ -268,6 +290,55 @@
   endfunction
 
 " *******************************************
+" Golang
+" *******************************************
+  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <leader>r <Plug>(go-run)
+  autocmd FileType go nmap <leader>b <Plug>(go-build)
+  autocmd FileType go nmap <leader>t <Plug>(go-test)
+  autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+
+  map <C-n> :cn<CR>
+  map <C-m> :cp<CR>
+  nnoremap <leader>a :cclose<CR>
+
+  let g:go_textobj_include_function_doc = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+  let g:go_highlight_structs = 1
+  let g:go_highlight_interfaces = 1
+  let g:go_highlight_operators = 0
+  let g:go_highlight_build_constraints = 1
+  let g:go_fmt_command = "goimports"
+  let g:go_snippet_engine = "neosnippet"
+
+  let g:neomake_go_enabled_makers = ['golint']
+
+" *******************************************
+" Typescript/Javascript
+" *******************************************
+"
+" let g:tsuquyomi_disable_quickfix = 1
+  let g:neomake_typescript_tsc_maker = {
+    \ 'args': [
+    \ '-m', 'commonjs', '--noEmit', '--target', 'ES5', '--experimentalDecorators'
+    \ ],
+    \ 'errorformat':
+    \ '%E%f %#(%l\,%c): error %m,' .
+    \ '%E%f %#(%l\,%c): %m,' .
+    \ '%Eerror %m,' .
+    \ '%C%\s%\+%m'
+    \ }
+
+  let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
+  let g:neomake_javascript_jshint_maker = {
+      \ 'args': ['--verbose'],
+      \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+      \ }
+
+  autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
+
+" *******************************************
 " Fzf - Fuzzy Finder
 " *******************************************
 
@@ -279,6 +350,7 @@
 " Tmux - mappings
 " *******************************************
 
+  let g:tmuxcomplete#trigger = ''
   let g:tmux_navigator_no_mappings = 1
   nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
   nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
