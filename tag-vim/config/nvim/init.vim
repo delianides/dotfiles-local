@@ -26,6 +26,8 @@
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'wellle/tmux-complete.vim'
+  Plug 'majutsushi/tagbar'
+  Plug 'ludovicchabant/vim-gutentags'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
