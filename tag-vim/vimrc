@@ -110,11 +110,6 @@
   syntax enable
   colorscheme Tomorrow-Night
 
-" Enable true color
-  if exists('+termguicolors')
-    set termguicolors
-  endif
-
 " see https://github.com/neovim/neovim/issues/2048
   if has('nvim')
     let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1

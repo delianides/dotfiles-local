@@ -1,3 +1,0 @@
-" Source VIMRC
-
-source ~/.vimrc
