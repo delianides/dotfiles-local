@@ -39,6 +39,10 @@
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'Raimondi/delimitMate'
   Plug 'itmammoth/doorboy.vim'
+  Plug 'editorconfig/editorconfig-vim'
+
+  Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+  Plug 'junegunn/limelight.vim', { 'for': 'markdown' }
 
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   Plug 'Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : { 'on': [] }
