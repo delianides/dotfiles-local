@@ -393,6 +393,26 @@
   autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
 
 " *******************************************
+" Markdown
+" *******************************************
+
+
+  function! s:goyo_enter()
+    silent !tmux set status off
+    Limelight
+  endfunction
+
+  function! s:goyo_leave()
+    silent !tmux set status on
+    Limelight!
+  endfunction
+
+  autocmd! User GoyoEnter
+  autocmd! User GoyoLeave
+  autocmd  User GoyoEnter nested call <SID>goyo_enter()
+  autocmd  User GoyoLeave nested call <SID>goyo_leave()
+
+" *******************************************
 " Fzf - Fuzzy Finder
 " *******************************************
 
