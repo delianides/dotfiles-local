@@ -27,6 +27,7 @@
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'wellle/tmux-complete.vim'
   Plug 'majutsushi/tagbar'
+  Plug 'metakirby5/codi.vim'
   " Plug 'ludovicchabant/vim-gutentags'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
@@ -43,6 +44,9 @@
 
   Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
   Plug 'junegunn/limelight.vim', { 'for': 'markdown' }
+  Plug 'shime/vim-livedown', { 'for': 'markdown', 'do': 'npm install -g livedown' }
+  Plug 'tpope/vim-markdown', {'for': 'markdown'}
+  Plug 'junegunn/vim-easy-align'
 
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   Plug 'Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : { 'on': [] }
@@ -55,7 +59,6 @@
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
 
-  Plug 'vim-scripts/Align'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -84,7 +87,6 @@
   Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 
-  Plug 'tpope/vim-markdown', {'for': 'markdown'}
 
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': 'go' } " go support
   Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/bundle/gocode/nvim/symlink.sh' }
@@ -216,7 +218,6 @@
   let g:neomake_airline = 1
 
 " custom key mappings and function calls
-  noremap <leader>l :Align
   nnoremap <leader>wi :EraseBadWhitespace<CR>
   map <leader>f ggVG==<CR>
   noremap <leader>f :Autoformat<CR>
@@ -398,8 +399,6 @@
 " *******************************************
 " Markdown
 " *******************************************
-
-
   function! s:goyo_enter()
     silent !tmux set status off
     Limelight
@@ -414,6 +413,7 @@
   autocmd! User GoyoLeave
   autocmd  User GoyoEnter nested call <SID>goyo_enter()
   autocmd  User GoyoLeave nested call <SID>goyo_leave()
+  au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 " *******************************************
 " Fzf - Fuzzy Finder
