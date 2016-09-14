@@ -1,5 +1,3 @@
-" THE IMPORTANT STUFF "
-" ---------------------------------
 " VIMPATH
   let $VIMPATH=expand('$HOME/.vim')
 " Leader key
@@ -52,7 +50,7 @@
   Plug 'Shougo/deoplete.nvim', has('nvim') ? { 'do': ':UpdateRemotePlugins' } : { 'on': [] }
   Plug 'Shougo/neocomplete.vim', has('vim') ? { } : { 'on': [] }
   Plug 'zchee/deoplete-go', has('nvim') ? { 'for': 'go', 'do': 'make'} : { 'on': [] }
-  Plug 'mhartington/deoplete-typescript', has('nvim') ? {'for': 'typescript'} : { 'on': [] }
+  " Plug 'mhartington/deoplete-typescript', has('nvim') ? {'for': 'typescript'} : { 'on': [] }
   Plug 'SevereOverfl0w/deoplete-github', has('nvim') ? {} : { 'on': [] }
   Plug 'carlitux/deoplete-ternjs', has('nvim') ? {} : { 'on' : [] }
   Plug 'Shougo/neosnippet.vim'
@@ -76,14 +74,15 @@
   Plug 'tmux-plugins/vim-tmux'
 
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
+  Plug 'flowtype/vim-flow', { 'for': 'javascript' } " flowtype
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
   Plug 'othree/jsdoc-syntax.vim', {'for':['javascript', 'typescript']}
   Plug 'othree/es.next.syntax.vim', {'for': 'javascript'}
   " Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
-  Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
+  " Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 
-  Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+  " Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
   Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 
@@ -373,28 +372,24 @@
   let g:neomake_go_enabled_makers = ['golint']
 
 " *******************************************
-" Typescript/Javascript
+" Typescript/Javascript/Flowtype
 " *******************************************
 "
 " let g:tsuquyomi_disable_quickfix = 1
-  let g:neomake_typescript_tsc_maker = {
-    \ 'args': [
-    \ '-m', 'commonjs', '--noEmit', '--target', 'ES5', '--experimentalDecorators'
-    \ ],
-    \ 'errorformat':
-    \ '%E%f %#(%l\,%c): error %m,' .
-    \ '%E%f %#(%l\,%c): %m,' .
-    \ '%Eerror %m,' .
-    \ '%C%\s%\+%m'
-    \ }
+" let g:neomake_typescript_tsc_maker = {
+"   \ 'args': [
+"   \ '-m', 'commonjs', '--noEmit', '--target', 'ES5', '--experimentalDecorators'
+"   \ ],
+"   \ 'errorformat':
+"   \ '%E%f %#(%l\,%c): error %m,' .
+"   \ '%E%f %#(%l\,%c): %m,' .
+"   \ '%Eerror %m,' .
+"   \ '%C%\s%\+%m'
+"   \ }
 
-  let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
-  let g:neomake_javascript_jshint_maker = {
-      \ 'args': ['--verbose'],
-      \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-      \ }
+" let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
 
-  autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
+  autocmd FileType javascript let g:neomake_javascript_enabled_makers = ['eslint']
 
 " *******************************************
 " Markdown
