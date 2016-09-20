@@ -52,7 +52,6 @@
   Plug 'zchee/deoplete-go', has('nvim') ? { 'for': 'go', 'do': 'make'} : { 'on': [] }
   " Plug 'mhartington/deoplete-typescript', has('nvim') ? {'for': 'typescript'} : { 'on': [] }
   Plug 'SevereOverfl0w/deoplete-github', has('nvim') ? {} : { 'on': [] }
-  Plug 'carlitux/deoplete-ternjs', has('nvim') ? {} : { 'on' : [] }
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
@@ -82,7 +81,7 @@
   " Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
   " Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 
-  " Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+  Plug 'mxw/vim-jsx', { 'for': ['jsx','javascript'] } " JSX support
   Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 
@@ -190,6 +189,8 @@
   " I never use netrw, so disable its history.
   let g:netrw_dirhistmax = 0
 
+  autocmd! BufWritePost,BufEnter * Neomake
+
   augroup myfiletypes
     autocmd!
     " Include ! as a word character, so dw will delete all of e.g. gsub!,
@@ -209,7 +210,6 @@
     au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
     au VimResized * wincmd =
-    autocmd! BufWritePost * Neomake
   augroup END
 
   let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
@@ -374,6 +374,7 @@
 " *******************************************
 " Typescript/Javascript/Flowtype
 " *******************************************
+  let g:jsx_ext_required = 0
 "
 " let g:tsuquyomi_disable_quickfix = 1
 " let g:neomake_typescript_tsc_maker = {
@@ -389,6 +390,8 @@
 
 " let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
 
+" use project eslint from npm bin directory
+  autocmd FileType javascript let g:neomake_javascript_eslint_exe = system('PATH=$(npm bin):$PATH && which eslint | tr -d "\n"')
   autocmd FileType javascript let g:neomake_javascript_enabled_makers = ['eslint']
 
 " *******************************************
