@@ -73,7 +73,7 @@
   Plug 'tmux-plugins/vim-tmux'
 
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
-  Plug 'flowtype/vim-flow', { 'for': 'javascript' } " flowtype
+  Plug 'flowtype/vim-flow', { 'for': ['javascript','jsx'] } " flowtype
   Plug 'moll/vim-node', { 'for': 'javascript' } " node support
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
   Plug 'othree/jsdoc-syntax.vim', {'for':['javascript', 'typescript']}
@@ -374,8 +374,8 @@
 " *******************************************
 " Typescript/Javascript/Flowtype
 " *******************************************
-  let g:jsx_ext_required = 0
-"
+
+
 " let g:tsuquyomi_disable_quickfix = 1
 " let g:neomake_typescript_tsc_maker = {
 "   \ 'args': [
@@ -389,6 +389,9 @@
 "   \ }
 
 " let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
+"
+  let g:jsx_ext_required = 0
+  let g:flow#flowpath = system('PATH=$(npm bin):$PATH && which flow | tr -d "\n"')
 
 " use project eslint from npm bin directory
   autocmd FileType javascript let g:neomake_javascript_eslint_exe = system('PATH=$(npm bin):$PATH && which eslint | tr -d "\n"')
