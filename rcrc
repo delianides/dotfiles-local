@@ -1,4 +1,4 @@
 EXCLUDES="README.md LICENSE Brewfile"
 DOTFILES_DIRS="$HOME/.dotfiles"
-TAGS="vim zsh git tmux"
+TAGS="vim zsh git tmux phoenix bitbar"
 
