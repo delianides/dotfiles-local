@@ -3,6 +3,7 @@
 [user]
   name = delianides
   email = github@delianides.com
+  signingkey = 21760CDA
 [alias]
   co = checkout
   promote = !$ZSH/bin/git-promote
@@ -36,6 +37,7 @@
   path = .gitconfig.local
 [commit]
   template = ~/.gitmessage
+	gpgsign = true
 [fetch]
   prune = true
 
