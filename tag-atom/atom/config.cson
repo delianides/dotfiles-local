@@ -1,0 +1,17 @@
+"*":
+  core:
+    disabledPackages: [
+      "background-tips"
+    ]
+    themes: [
+      "seti-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    invisibles: {}
+  "exception-reporting":
+    userId: "a67c98af-a2ff-ed93-7401-5fca84b6e48e"
+  "one-dark-ui":
+    layoutMode: "Compact"
+  welcome:
+    showOnStartup: false
