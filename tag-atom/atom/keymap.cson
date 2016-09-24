@@ -26,8 +26,5 @@
 # Atom Flight Manual:
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 
-'.editor.vim-mode.insert-mode':
-    'j': 'insert-incomplete-keybinding'
-
-'.vim-mode.insert-mode:not(.mini)':
-  'j j': 'vim-mode:activate-command-mode'
+'atom-text-editor.vim-mode.insert-mode':
+  'j': 'exit-insert-mode-if-preceded-by-k'

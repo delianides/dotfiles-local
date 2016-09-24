@@ -10,8 +10,13 @@
 #   editor.onDidSave ->
 #     console.log "Saved! #{editor.getPath()}"
 
-atom.workspaceView.command 'insert-incomplete-keybinding', (e)->
-    if oe = e.originalEvent && e.originalEvent.originalEvent
-        char = String.fromCharCode(oe.which)
-        char = char.toLowerCase() unless oe.shift
-        atom.workspace.activePaneItem.insertText(char)
+atom.commands.add 'atom-text-editor', 'exit-insert-mode-if-preceded-by-k': (e) ->
+  editor = @getModel()
+  pos = editor.getCursorBufferPosition()
+  range = [pos.traverse([0,-1]), pos]
+  lastChar = editor.getTextInBufferRange(range)
+  if lastChar != "k"
+    e.abortKeyBinding()
+  else
+    editor.backspace()
+    atom.commands.dispatch(e.currentTarget, 'vim-mode:activate-normal-mode')
