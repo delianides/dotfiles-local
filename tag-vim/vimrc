@@ -78,7 +78,7 @@
   Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
   Plug 'othree/jsdoc-syntax.vim', {'for':['javascript', 'typescript']}
   Plug 'othree/es.next.syntax.vim', {'for': 'javascript'}
-  Plug 'kchmck/vim-coffee-script', {'for': ['coffeescript', 'javascript']}
+  Plug 'kchmck/vim-coffee-script', {'for': ['coffee', 'javascript']}
   Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
   Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
 
