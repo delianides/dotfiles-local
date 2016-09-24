@@ -9,3 +9,9 @@
 # atom.workspace.observeTextEditors (editor) ->
 #   editor.onDidSave ->
 #     console.log "Saved! #{editor.getPath()}"
+
+atom.workspaceView.command 'insert-incomplete-keybinding', (e)->
+    if oe = e.originalEvent && e.originalEvent.originalEvent
+        char = String.fromCharCode(oe.which)
+        char = char.toLowerCase() unless oe.shift
+        atom.workspace.activePaneItem.insertText(char)
