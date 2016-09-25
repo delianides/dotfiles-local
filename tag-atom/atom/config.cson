@@ -21,9 +21,14 @@
   pigments:
     markerType: "gutter"
     sassShadeAndTintImplementation: "bourbon"
+  react:
+    enabledForAllJavascriptFiles: true
   "seti-ui":
     compactView: true
-    font: "Default Atom Font"
+    themeColor: "Steel"
+  "terminal-plus":
+    style:
+      theme: "homebrew"
   "tree-view":
     hideIgnoredNames: true
     hideVcsIgnoredFiles: true
