@@ -3,15 +3,29 @@
     disabledPackages: [
       "background-tips"
     ]
+    projectHome: "/Users/drew.delianides/Projects"
     themes: [
       "seti-ui"
       "base16-tomorrow-dark-theme"
     ]
   editor:
+    fontFamily: "Source Code Pro"
     invisibles: {}
+    scrollPastEnd: true
   "exception-reporting":
     userId: "a67c98af-a2ff-ed93-7401-5fca84b6e48e"
+  "git-diff":
+    showIconsInEditorGutter: true
   "one-dark-ui":
     layoutMode: "Compact"
+  pigments:
+    markerType: "gutter"
+    sassShadeAndTintImplementation: "bourbon"
+  "seti-ui":
+    compactView: true
+    font: "Default Atom Font"
+  "tree-view":
+    hideIgnoredNames: true
+    hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
