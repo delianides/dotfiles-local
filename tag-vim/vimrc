@@ -26,7 +26,6 @@
   Plug 'wellle/tmux-complete.vim'
   Plug 'majutsushi/tagbar'
   Plug 'metakirby5/codi.vim'
-  " Plug 'ludovicchabant/vim-gutentags'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
@@ -63,9 +62,7 @@
 
   " themes
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
-  Plug 'fatih/molokai'
+  Plug 'jacoborus/tender'
 
 " *************************************************
 " Syntax
@@ -81,8 +78,8 @@
   Plug 'kchmck/vim-coffee-script', {'for': ['coffee', 'javascript']}
   Plug 'Quramy/tsuquyomi', {'for': 'typescript'}
   Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
-
   Plug 'mxw/vim-jsx', { 'for': ['jsx','javascript'] } " JSX support
+  Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
   Plug 'jparise/vim-graphql'
   Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 
@@ -96,28 +93,16 @@
   Plug 'vim-ruby/vim-ruby' " ruby support
   Plug 'smerrill/vcl-vim-plugin' " varnish config language
   Plug 'tclem/vim-arduino' " arduino support
-  Plug 'hashivim/vim-consul'
-  Plug 'hashivim/vim-nomadproject'
-  Plug 'hashivim/vim-ottoproject'
-  Plug 'hashivim/vim-packer'
-  Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
-  Plug 'hashivim/vim-vagrant'
-  Plug 'hashivim/vim-vaultproject'
+  Plug 'hashivim/vim-hashicorp-tools'
   Plug 'ekalinin/Dockerfile.vim'
   Plug 'Matt-Deacalion/vim-systemd-syntax' " systemd language
 
   call plug#end()
-
-" Turn on syntax highlighting and filetype detection.
-" vim-plug loads all the extra syntax and ftdetect files, so turn them on after
-" we load plugins.
   filetype plugin indent on
   syntax enable
-  colorscheme Tomorrow-Night
 
 " see https://github.com/neovim/neovim/issues/2048
   if has('nvim')
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
     nmap <silent> <bs> :<c-u>TmuxNavigateLeft<cr>
   endif
 
@@ -175,12 +160,6 @@
 
   let g:gist_clip_command = 'pbcopy'
   let g:gitgutter_map_keys = 0
-
-" *******************************
-" Vim-airline
-" *******************************
-  let g:airline_theme='tomorrow'
-  let g:airline_powerline_fonts = 1
 
 " on opening the file, clear search-highlighting
   autocmd BufReadCmd set nohlsearch
@@ -444,3 +423,13 @@
     tmap <C-;> <C-\><C-n>:TmuxNavigatePrevious<cr>
   endif
 
+
+" Turn on syntax highlighting and filetype detection.
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+syntax enable
+colorscheme tender
+let g:airline_theme='tender'
+let g:airline_powerline_fonts = 1
