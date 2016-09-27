@@ -33,7 +33,7 @@ prompt_color() {
 prompt_green()  { print "$(prompt_color "$1" 155)" }
 prompt_magenta(){ print "$(prompt_color "$1" 206)" }
 prompt_purple() { print "$(prompt_color "$1" 141)" }
-prompt_red()    { print "$(prompt_color "$1" 160)" }
+prompt_red()    { print "$(prompt_color "$1" 009)" }
 prompt_cyan()   { print "$(prompt_color "$1" 159)" }
 prompt_blue()   { print "$(prompt_color "$1" 032)" }
 prompt_yellow() { print "$(prompt_color "$1" 221)" }
@@ -50,7 +50,7 @@ prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 #
 # ~/foo/bar is shown as "foo/bar"
 # ~/foo is shown as ~/foo (not /Users/gabe/foo)
-prompt_shortened_path() { print "$(prompt_purple "%2~")" }
+prompt_shortened_path() { print "$(prompt_red "%2~")" }
 
 #######################
 #  GIT (branch, vcs)  #
