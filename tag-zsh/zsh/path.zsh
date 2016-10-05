@@ -2,7 +2,10 @@
 export GOPATH="$HOME/Projects/go"
 export GOBIN="$HOME/Projects/go/bin"
 
-# Homebrew
+# Android Dev
+export ANDROID_HOME=/usr/local/opt/android-sdk
+
+#Homebrew
 export PATH="/usr/local/bin:$PATH"
 
 export PATH=$HOME/.bin:$PATH
