@@ -132,7 +132,7 @@ Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'flowtype/vim-flow', { 'for': ['javascript','javascript.jsx'] }
 
 " javascript syntax highlighting with ES6 and ES7
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/es.next.syntax.vim', {'for': ['javascript','javascript.jsx']}
 
 " coffeescript syntax highlighting
@@ -440,6 +440,10 @@ nnoremap <silent> <C-p> :call fzf#run({
     \   'down': '40%',
     \   'sink': 'botright split' })<CR>
 
+imap <c-x><c-w> <plug>(fzf-complete-word)
+imap <c-x><c-p> <plug>(fzf-complete-path)
+imap <c-x><c-f> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 "
 " }}}
 
