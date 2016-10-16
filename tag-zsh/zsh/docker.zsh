@@ -12,9 +12,17 @@ function docker-delete-stopped(){
 	fi
 }
 
+function docker-remove-images(){
+  docker rmi -f $(docker images -aq)
+}
+
 function docker-default(){
   docker-machine restart default
   eval $(docker-machine env default)
+}
+
+function docker-kill-all(){
+  docker rm -f $(docker ps -aq)
 }
 
 function relies_on(){
@@ -28,6 +36,14 @@ function relies_on(){
 			$container
 		fi
 	done
+}
+
+ds(){
+  docker ps "$@"
+}
+
+dcu(){
+  docker-compose up "$@"
 }
 
 aws(){
