@@ -45,6 +45,9 @@ Plug 'tpope/vim-fugitive'
 " search github issues in vim
 Plug 'tpope/vim-rhubarb'
 
+" netrw play nicely
+Plug 'tpope/vim-vinegar'
+
 " show git changes in column
 Plug 'airblade/vim-gitgutter'
 
@@ -250,15 +253,9 @@ set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
 "
 " }}} end settings
 
-" {{{ netrw file browser
+" {{{ netrw file browser configured through tpope/vim-vinegar
 "
-" from https://github.com/mcantor/no_plugins/blob/master/no_plugins.vim
-let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 "
 " }}}
 
