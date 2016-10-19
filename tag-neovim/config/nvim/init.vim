@@ -79,7 +79,7 @@ Plug 'mhartington/deoplete-typescript', {'for': 'typescript'}
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 " autocomplete for flow typed javascript
-Plug 'steelsojka/deoplete-flow', { 'for': ['javascript','javascript.jsx'] }
+" Plug 'steelsojka/deoplete-flow', { 'for': ['javascript','javascript.jsx'] }
 
 " snippets
 Plug 'Shougo/neosnippet.vim'
@@ -256,17 +256,32 @@ set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
 " {{{ netrw file browser configured through tpope/vim-vinegar
 "
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_banner=0        " disable annoying banner
+
 "
 " }}}
 
 " {{{ filetype configurations with linting
 "
 " neomake
+"
+" for debugging, 0 is none, 3 is debug
 let g:neomake_verbose = 0
 let g:neomake_airline = 1
 let g:neomake_go_enabled_makers = ['golint']
-autocmd FileType javascript let g:neomake_javascript_eslint_exe = system('PATH=$(npm bin):$PATH && which eslint | tr -d "\n"')
-autocmd FileType javascript let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_eslint_exe = system('PATH=$(npm bin):$PATH && which eslint | tr -d "\n"')
+let g:neomake_javascript_enabled_makers = ['eslint']
+
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ 'texthl': 'ErrorMsg',
+  \ }
+
+autocmd! BufWritePost,BufEnter * Neomake
 
 " markdown
 autocmd FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
@@ -289,7 +304,7 @@ autocmd BufNewFile,BufRead .babelrc set filetype=json
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
 autocmd BufNewFile,BufRead .eslintrc set filetype=json
 autocmd VimResized * wincmd =
-autocmd! BufWritePost,BufEnter * Neomake
+
 "
 " }}}
 
@@ -367,9 +382,9 @@ endfunction
 
 let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
 
-if g:flow_path != 'flow not found'
-    let g:deoplete#sources#flow#flow_bin = g:flow_path
-endif
+" if g:flow_path != 'flow not found'
+"     let g:deoplete#sources#flow#flow_bin = g:flow_path
+" endif
 "
 " }}}
 
