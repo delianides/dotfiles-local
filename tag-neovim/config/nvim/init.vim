@@ -1,4 +1,4 @@
-" vim: fdm=marker foldlevel=0 foldenable sw=4 ts=4 sts=4
+" vim: fdm=marker foldlevel=99 foldenable sw=4 ts=4 sts=4
 
 "        _
 " __   _(_)_ __ ___  _ __ ___
@@ -94,7 +94,7 @@ Plug 'honza/vim-snippets'
 Plug 'justinj/vim-react-snippets', { 'for': 'javascript' }
 
 " ctags generation, install jsctags for javascript
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags', { 'do': 'npm install -g jsctags' }
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 
 " code outline with ctags
 Plug 'majutsushi/tagbar'
