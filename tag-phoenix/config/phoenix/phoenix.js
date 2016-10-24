@@ -1,155 +1,181 @@
-#!/usr/bin/env coffee -p
+var CENTRE, CONTROL_ALT_SHIFT, CONTROL_CMD, CONTROL_SHIFT, ChainWindow, HIDDEN_DOCK_MARGIN, INCREMENT, LEFT, NE, NW, RIGHT, SE, SW;
 
-# Preferences
-Phoenix.set
-  daemon: true
+Phoenix.set({
+  daemon: true,
   openAtLogin: true
+});
 
-# Globals
-HIDDEN_DOCK_MARGIN = 3
-INCREMENT = 0.05
-CONTROL_CMD = [ 'ctrl', 'cmd' ]
-CONTROL_SHIFT = [ 'ctrl', 'shift' ]
-CONTROL_ALT_SHIFT = [ 'ctrl', 'alt', 'shift' ]
+HIDDEN_DOCK_MARGIN = 3;
+INCREMENT = 0.05;
+CONTROL_CMD = ['ctrl', 'cmd'];
+CONTROL_SHIFT = ['ctrl', 'shift'];
+CONTROL_ALT_SHIFT = ['ctrl', 'alt', 'shift'];
+LEFT = 'left';
+RIGHT = 'right';
+CENTRE = 'centre';
+NW = 'nw';
+NE = 'ne';
+SE = 'se';
+SW = 'sw';
 
-# Relative Directions
-LEFT = 'left'
-RIGHT = 'right'
-CENTRE = 'centre'
+ChainWindow = (function() {
+  function ChainWindow(window1, margin) {
+    this.window = window1;
+    this.margin = margin != null ? margin : 10;
+    this.frame = this.window.frame();
+    this.parent = this.window.screen().flippedVisibleFrame();
+  }
 
-# Cardinal Directions
-NW = 'nw'
-NE = 'ne'
-SE = 'se'
-SW = 'sw'
+  ChainWindow.prototype.difference = function() {
+    return {
+      x: this.parent.x - this.frame.x,
+      y: this.parent.y - this.frame.y,
+      width: this.parent.width - this.frame.width,
+      height: this.parent.height - this.frame.height
+    };
+  };
 
-class ChainWindow
-  constructor: (@window, @margin = 10) ->
-    @frame = @window.frame()
-    @parent = @window.screen().flippedVisibleFrame()
+  ChainWindow.prototype.set = function() {
+    this.window.setFrame(this.frame);
+    this.frame = this.window.frame();
+    return this;
+  };
 
-  # Difference frame
-  difference: ->
-    x: @parent.x - @frame.x
-    y: @parent.y - @frame.y
-    width: @parent.width - @frame.width
-    height: @parent.height - @frame.height
+  ChainWindow.prototype.screen = function(screen) {
+    this.parent = screen.flippedVisibleFrame();
+    return this;
+  };
 
-  # Set frame
-  set: ->
-    @window.setFrame @frame
-    @frame = @window.frame()
-    this
+  ChainWindow.prototype.to = function(direction) {
+    var difference;
+    difference = this.difference();
+    switch (direction) {
+      case NW:
+      case SW:
+        this.frame.x = this.parent.x + this.margin;
+        break;
+      case NE:
+      case SE:
+        this.frame.x = this.parent.x + difference.width - this.margin;
+        break;
+      case CENTRE:
+        this.frame.x = this.parent.x + (difference.width / 2);
+    }
+    switch (direction) {
+      case NW:
+      case NE:
+        this.frame.y = this.parent.y + this.margin;
+        break;
+      case SE:
+      case SW:
+        this.frame.y = this.parent.y + difference.height - this.margin;
+        break;
+      case CENTRE:
+        this.frame.y = this.parent.y + (difference.height / 2);
+    }
+    return this;
+  };
 
-  # Move to screen
-  screen: (screen) ->
-    @parent = screen.flippedVisibleFrame()
-    this
+  ChainWindow.prototype.resize = function(factor) {
+    var delta, difference;
+    difference = this.difference();
+    if (factor.width != null) {
+      delta = Math.min(this.parent.width * factor.width, difference.x + difference.width - this.margin);
+      this.frame.width += delta;
+    }
+    if (factor.height != null) {
+      delta = Math.min(this.parent.height * factor.height, difference.height - this.frame.y + this.margin + HIDDEN_DOCK_MARGIN);
+      this.frame.height += delta;
+    }
+    return this;
+  };
 
-  # Move to cardinal directions NW, NE, SE, SW or relative direction CENTRE
-  to: (direction) ->
+  ChainWindow.prototype.maximise = function() {
+    this.frame.width = this.parent.width - (2 * this.margin);
+    this.frame.height = this.parent.height - (2 * this.margin);
+    return this;
+  };
 
-    difference = @difference()
+  ChainWindow.prototype.halve = function() {
+    this.frame.width /= 2;
+    return this;
+  };
 
-    # X-coordinate
-    switch direction
-      when NW, SW
-        @frame.x = @parent.x + @margin
-      when NE, SE
-        @frame.x = @parent.x + difference.width - @margin
-      when CENTRE
-        @frame.x = @parent.x + (difference.width / 2)
+  ChainWindow.prototype.fit = function() {
+    var difference;
+    difference = this.difference();
+    if (difference.width < 0 || difference.height < 0) {
+      this.maximise();
+    }
+    return this;
+  };
 
-    # Y-coordinate
-    switch direction
-      when NW, NE
-        @frame.y = @parent.y + @margin
-      when SE, SW
-        @frame.y = @parent.y + difference.height - @margin
-      when CENTRE
-        @frame.y = @parent.y + (difference.height / 2)
+  ChainWindow.prototype.fill = function(direction) {
+    this.maximise();
+    if (direction === LEFT || direction === RIGHT) {
+      this.halve();
+    }
+    switch (direction) {
+      case LEFT:
+        this.to(NW);
+        break;
+      case RIGHT:
+        this.to(NE);
+        break;
+      default:
+        this.to(NW);
+    }
+    return this;
+  };
 
-    this
+  return ChainWindow;
 
-  # Resize SE-corner by factor
-  resize: (factor) ->
-    difference = @difference()
-    if factor.width?
-      delta = Math.min @parent.width * factor.width, difference.x + difference.width - @margin
-      @frame.width += delta
-    if factor.height?
-      delta = Math.min @parent.height * factor.height, difference.height - @frame.y + @margin + HIDDEN_DOCK_MARGIN
-      @frame.height += delta
-    this
+})();
 
-  # Maximise to fill whole screen
-  maximise: ->
-    @frame.width = @parent.width - (2 * @margin)
-    @frame.height = @parent.height - (2 * @margin)
-    this
+Window.prototype.chain = function() {
+  return new ChainWindow(this);
+};
 
-  # Halve width
-  halve: ->
-    @frame.width /= 2
-    this
+Window.prototype.to = function(direction, screen) {
+  var window;
+  window = this.chain();
+  if (screen != null) {
+    window.screen(screen).fit();
+  }
+  return window.to(direction).set();
+};
 
-  # Fit to screen
-  fit: ->
-    difference = @difference()
-    @maximise() if difference.width < 0 or difference.height < 0
-    this
+Window.prototype.fill = function(direction, screen) {
+  var window;
+  window = this.chain();
+  if (screen != null) {
+    window.screen(screen);
+  }
+  window.fill(direction).set();
+  if (direction === RIGHT) {
+    return window.to(NE).set();
+  }
+};
 
-  # Fill relatively to LEFT or RIGHT-side of screen, or fill whole screen
-  fill: (direction) ->
-    @maximise()
-    @halve() if direction in [ LEFT, RIGHT ]
-    switch direction
-      when LEFT then @to NW
-      when RIGHT then @to NE
-      else @to NW
-    this
+Window.prototype.resize = function(factor) {
+  return this.chain().resize(factor).set();
+};
 
-# Chain a Window-object
-Window::chain = ->
-  new ChainWindow this
+Key.on('a', CONTROL_CMD, function() {
+  var window;
+  window = Window.focused();
+  return window != null ? window.fill(null, window.screen().next()) : void 0;
+});
 
-# To direction in screen
-Window::to = (direction, screen) ->
-  window = @chain()
-  window.screen(screen).fit() if screen?
-  window.to(direction).set()
+Key.on('l', CONTROL_CMD, function() {
+  var window;
+  window = Window.focused();
+  return window != null ? window.fill(LEFT, window.screen().next()) : void 0;
+});
 
-# Fill in screen
-Window::fill = (direction, screen) ->
-  window = @chain()
-  window.screen screen if screen?
-  window.fill(direction).set()
-  window.to(NE).set() if direction is RIGHT # Ensure position for windows larger than expected
+Key.on('r', CONTROL_CMD, function() {
+  var window;
+  window = Window.focused();
+  return window != null ? window.fill(RIGHT, window.screen().next()) : void 0;
+});
 
-# Resize by factor
-Window::resize = (factor) ->
-  @chain().resize(factor).set()
-
-
-
-# Key Bindings
-Key.on 'a', CONTROL_CMD, ->
-  window = Window.focused()
-  window?.fill null, window.screen().next()
-
-# Fill Bindings
-Key.on 'l', CONTROL_CMD, ->
-  window = Window.focused()
-  window?.fill LEFT, window.screen().next()
-
-Key.on 'r', CONTROL_CMD, ->
-  window = Window.focused()
-  window?.fill RIGHT, window.screen().next()
-
-# cmd+ctrl+l: move to left half of the screen
-# cmd+ctrl+r: move to right have of the screen
-# cmd+ctrl+a: fullscreen
-# on Helium app launch, resize to small window in the bottom right of the screen
-# each command should support multiple screens
-
-# vim:syn=coffee
