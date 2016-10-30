@@ -1,1 +1,1 @@
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS foldlevel=99 foldmethod=syntax
+autocmd FileType javascript setlocal foldlevel=99

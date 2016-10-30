@@ -1,1 +1,1 @@
-autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags foldmethod=expr foldlevel=99
+autocmd FileType html setlocal foldmethod=expr foldlevel=99

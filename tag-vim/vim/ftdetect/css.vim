@@ -1,1 +1,1 @@
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS foldlevel=syntax foldlevel=99
+autocmd FileType css setlocal foldlevel=syntax foldlevel=99
