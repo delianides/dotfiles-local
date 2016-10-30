@@ -40,9 +40,13 @@ Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous two commands
 Plug 'tpope/vim-sensible' " sensible vim settings we can all agree on
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' } " distraction free markdown writing
-Plug 'shime/vim-livedown', { 'for': 'markdown', 'do': 'npm install -g livedown' } " preview markdown files in a webbrowser
-Plug 'lifepillar/vim-mucomplete' " autocomplete
-Plug 'SirVer/ultisnips' " snippets
+
+Plug 'lifepillar/vim-mucomplete'
+Plug 'SirVer/ultisnips'
+
+Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
+Plug 'OmniSharp/omnisharp-vim', { 'do': ' cd server && xbuild' }
+
 Plug 'honza/vim-snippets' " another collection of snippets
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'justinj/vim-react-snippets', { 'for': 'javascript' } " react collection of snippets
