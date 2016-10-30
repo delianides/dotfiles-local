@@ -1,8 +1,9 @@
 if has('autocmd')
-  augroup WincentAutocmds
+  augroup Autocmds
     autocmd!
 
     autocmd VimResized * execute "normal! \<c-w>="
+    autocmd VimResized * wincmd =
 
     " http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
     autocmd VimEnter * autocmd WinEnter * let w:created=1
