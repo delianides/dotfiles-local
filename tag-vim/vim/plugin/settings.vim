@@ -35,7 +35,7 @@ set wrapmargin=8           " wrap lines when coming within n characters from sid
 set formatoptions+=n,1     " support for numbered/bullet lists
 set wildmode=longest:full,full
 set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
-set shortmess=filtIoOA     " shorten messages
+set shortmess=filtIoOAc    " shorten messages
 set completeopt-=preview
 set completeopt+=menuone
 set showmatch              " brackets/braces that is
