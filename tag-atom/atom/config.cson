@@ -3,11 +3,12 @@
     disabledPackages: [
       "background-tips"
       "language-babel"
+      "vim-mode"
     ]
     projectHome: "/Users/drew.delianides/Projects"
     themes: [
       "seti-ui"
-      "base16-tomorrow-dark-theme"
+      "monokai"
     ]
   editor:
     fontFamily: "Source Code Pro"

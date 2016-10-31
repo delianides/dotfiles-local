@@ -41,15 +41,14 @@ Plug 'tpope/vim-repeat' " allows . to repeat previous two commands
 Plug 'tpope/vim-sensible' " sensible vim settings we can all agree on
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' } " distraction free markdown writing
 
+" Plug 'SirVer/ultisnips'
+" Plug 'justinj/vim-react-snippets', { 'for': 'javascript' } " react collection of snippets
+" Plug 'honza/vim-snippets' " another collection of snippets
 Plug 'lifepillar/vim-mucomplete'
-Plug 'SirVer/ultisnips'
-
 Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
 Plug 'OmniSharp/omnisharp-vim', { 'do': ' cd server && xbuild' }
 
-Plug 'honza/vim-snippets' " another collection of snippets
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
-Plug 'justinj/vim-react-snippets', { 'for': 'javascript' } " react collection of snippets
 " need to investigate ctags a bit more
 " Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags' " ctags generation, install jsctags for javascript
 " code outline with ctags
@@ -58,7 +57,7 @@ Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'tpope/vim-git' " git syntax
 Plug 'tpope/vim-markdown', {'for': 'markdown'} " markdown specific syntax settings
 Plug 'tmux-plugins/vim-tmux' " syntax for tmux.conf
-Plug 'flowtype/vim-flow', { 'for': ['javascript','javascript.jsx'] } " Flowtype
+Plug 'flowtype/vim-flow', { 'for': 'javascript' } " Flowtype
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] } " ES6 and ES7
 Plug 'othree/es.next.syntax.vim', {'for': ['javascript','javascript.jsx']} " ES6 and ES7
 Plug 'kchmck/vim-coffee-script', {'for': ['coffee', 'javascript']} " coffeescript syntax highlighting
@@ -86,4 +85,180 @@ colorscheme molokai
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
 
+augroup Autocmds
+    autocmd!
+    " http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
+    autocmd VimEnter * autocmd WinEnter * let w:created=1
+    autocmd VimEnter * let w:created=1
+
+    autocmd VimResized * wincmd =
+    " Disable paste mode on leaving insert mode.
+    autocmd InsertLeave * set nopaste
+augroup END
+
+
+set background=dark
+set clipboard+=unnamed
+set hidden
+set nopaste
+set noshowmode
+set noswapfile
+
+set list                   " show whitespace
+set listchars=nbsp:⦸       " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+set listchars+=tab:▷┅      " WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7)
+                           " + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
+set listchars+=extends:»   " RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
+set listchars+=precedes:«  " LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
+set listchars+=trail:•     " BULLET (U+2022, UTF-8: E2 80 A2)
+set nojoinspaces           " don't autoinsert two spaces after '.', '?', '!' for join command
+
+if has('linebreak')
+  let &showbreak='↳ '      " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
+endif  
+
+set relativenumber number
+set tabstop=2 shiftwidth=2 expandtab
+set laststatus=2
+set wrap linebreak nolist
+set undofile
+set undodir="$HOME/.VIM_UNDO_FILES"
+set nobackup               " disable automatic creation of backup files
+set nowritebackup          " changes default behavior of saving files to 'write,delete,rename'
+set noswapfile             " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set scrolloff=10           " number of lines to show below the cursor before the buffer scrolls down
+set showcmd
+set smarttab
+set smartindent            " be smart about it
+set wrapmargin=8           " wrap lines when coming within n characters from side
+set formatoptions+=n,1     " support for numbered/bullet lists
+set wildmode=longest:full,full
+set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
+set shortmess=filtIoOAc    " shorten messages
+set completeopt-=preview
+set completeopt+=menuone
+set showmatch              " brackets/braces that is
+set mat=7                  " duration to show matching brace (1/10 sec)
+set ignorecase             " ignore case when searching
+set nocursorcolumn         " speed up syntax highlighting
+set nocursorline
+set nohlsearch             " don't highlight searches
+set visualbell             " shut up
+set noerrorbells           " ditto
+set splitbelow
+set splitright
+set textwidth=80
+set complete+=kspell
+
+set spellcapcheck=
+set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
+
+set foldenable
+set foldmethod=indent
+set foldlevel=999
+
+augroup myFileTypes
+    autocmd FileType css setlocal foldlevel=syntax foldlevel=99
+    autocmd FileType html setlocal foldmethod=expr foldlevel=99
+    autocmd FileType javascript setlocal foldlevel=99
+    autocmd FileType json setlocal foldmethod=syntax foldlevel=99
+    autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
+    autocmd FileType terraform setlocal commentstring=#\ %s
+    autocmd FileType typescript setl foldmethod=syntax foldlevel=99
+    autocmd FileType gitconfig setlocal noexpandtab
+    autocmd FileType go setlocal noexpandtab sw=4 ts=4
+    autocmd FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
+    autocmd filetype ruby setlocal sw=2 smartindent ts=2
+
+    autocmd BufNewFile,BufRead *.ino set filetype=c
+    autocmd BufNewFile,BufRead *.svg set filetype=xml
+    autocmd BufNewFile,BufRead .eslintrc set filetype=json
+    autocmd BufNewFile,BufRead .babelrc set filetype=json
+    autocmd BufNewFile,BufRead .jshintrc set filetype=json
+    autocmd BufNewFile,BufRead .md call functions#plaintext()
+    autocmd BufReadPost *
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+augroup END
+
+nnoremap s za
+nnoremap S zA
+
+noremap H ^
+noremap L g_
+noremap J 5j
+noremap K 5k
+
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+nnoremap <silent> <Leader>wi :call functions#zap()<CR>
+
+" fold and unfold
+nnoremap <leader>fu zM<CR>
+nnoremap <leader>uf zR<CR>
+" Focus the current fold by closing all others
+nnoremap <leader>flf mzzM`zzv
+
+vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+
+nnoremap <silent> <C-p> :call fzf#run({
+    \   'down': '40%',
+    \   'sink': 'botright split' })<CR>
+" imap <c-x><c-w> <plug>(fzf-complete-word)
+" imap <c-x><c-p> <plug>(fzf-complete-path)
+" imap <c-x><c-f> <plug>(fzf-complete-file-ag)
+" imap <c-x><c-l> <plug>(fzf-complete-line)
+
+command! -nargs=* -complete=file Preview call commands#preview(<f-args>)
+
+let g:gitgutter_map_keys = 0
+let g:go_textobj_include_function_doc = 1
+let g:go_fmt_command = "goimports"
+let g:go_snippet_engine = "neosnippet"
+let g:jsx_ext_required = 0
+let g:flow#flowpath = system('PATH=$(npm bin):$PATH && which flow | tr -d "\n"')
+let g:vim_json_syntax_conceal = 0
+let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
+let g:tmuxcomplete#trigger = ''
+
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_banner=0        " disable annoying banner
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+
+" XXX need to work on this
+hi ALEError guifg=white guibg=red
+hi ALEWarning guifg=black guibg=yellow
+
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#auto_select = 0
+let g:mucomplete#no_mappings = 1
+let g:mucomplete#chains = { 'default' : ['file', 'omni', 'c-n', 'c-p' ] }
+
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsExpandTrigger="<C-J>"
+let g:UltiSnipsJumpForwardTrigger="<C-J>"
+let g:UltiSnipsJumpBackwardTrigger="<C-K>"
+
+augroup mucomplete
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=tern#Complete
+  autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  autocmd FileType markdown,txt let b:mucomplete_chain = ['file', 'c-n', 'dict', 'spel']
+augroup END
 

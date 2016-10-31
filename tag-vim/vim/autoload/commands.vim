@@ -1,5 +1,6 @@
 function s:preview(file)
   silent execute "!open -a 'Markoff.app' " . shellescape(a:file)
+  redraw!
 endfunction
 
 function commands#preview(...)
