@@ -32,7 +32,9 @@ Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-rhubarb' " omni completion from github
 Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'airblade/vim-gitgutter' " show git changes in column
-Plug 'w0rp/ale' " async linting tool
+Plug 'terryma/vim-multiple-cursors'
+" Plug 'w0rp/ale' " async linting tool
+Plug 'neomake/neomake' " linting tool
 Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
@@ -50,15 +52,15 @@ Plug 'majutsushi/tagbar'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'tpope/vim-git' " git syntax
 Plug 'tpope/vim-markdown', {'for': 'markdown'} " markdown specific syntax settings
+Plug 'moorereason/vim-markdownfmt'
 Plug 'tmux-plugins/vim-tmux' " syntax for tmux.conf
-Plug 'flowtype/vim-flow', { 'for': 'javascript' } " Flowtype
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] } " ES6 and ES7
 Plug 'othree/es.next.syntax.vim', {'for': ['javascript','javascript.jsx']} " ES6 and ES7
 Plug 'kchmck/vim-coffee-script', {'for': ['coffee', 'javascript']} " coffeescript syntax highlighting
 Plug 'cespare/vim-toml'
 Plug 'Quramy/tsuquyomi', {'for': 'typescript'} " TypeScript
 Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'} " TypeScript
-Plug 'mxw/vim-jsx', { 'for': ['javascript','javascript.jsx'] } " JSX support
+" Plug 'mxw/vim-jsx', { 'for': ['javascript','javascript.jsx'] } " JSX support
 Plug 'jparise/vim-graphql' " GraphQL
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': 'go' } " Golang
@@ -181,16 +183,8 @@ nnoremap <Down> :echoe "Use j"<CR>
 nnoremap <silent> <Leader>wi :StripWhitespace<CR>
 
 vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
-nnoremap <leader>a :cclose<CR>
+nnoremap <leader>c :ccl <bar> lcl<CR>
 
-nnoremap <silent> <C-p> :call fzf#run({
-    \   'down': '40%',
-    \   'sink': 'botright split' })<CR>
-
-" imap <c-x><c-w> <plug>(fzf-complete-word)
-" imap <c-x><c-p> <plug>(fzf-complete-path)
-" imap <c-x><c-f> <plug>(fzf-complete-file-ag)
-" imap <c-x><c-l> <plug>(fzf-complete-line)
 
 command! -nargs=* -complete=file Preview call commands#preview(<f-args>)
 
@@ -199,41 +193,14 @@ let g:go_textobj_include_function_doc = 1
 let g:go_fmt_command = "goimports"
 let g:go_snippet_engine = "neosnippet"
 let g:jsx_ext_required = 0
-let g:flow#flowpath = system('PATH=$(npm bin):$PATH && which flow | tr -d "\n"')
 let g:vim_json_syntax_conceal = 0
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
+let g:markdownfmt_command = 'mdfmt'
 let g:tmuxcomplete#trigger = ''
 let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_banner=0        " disable annoying banner
 
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}
 
-" XXX need to work on this
-hi ALEError guifg=white guibg=red
-hi ALEWarning guifg=black guibg=yellow
-
-let g:ale_sign_error = 'E'
-let g:ale_sign_warning = 'W'
-
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#auto_select = 0
-let g:mucomplete#no_mappings = 1
-let g:mucomplete#chains = { 'default' : ['file', 'omni', 'c-n', 'c-p' ] }
-
-augroup mucomplete
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=tern#Complete
-  autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  autocmd FileType markdown,txt let b:mucomplete_chain = ['file', 'c-n', 'dict', 'spel']
-augroup END
 
