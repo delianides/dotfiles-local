@@ -33,8 +33,8 @@ Plug 'tpope/vim-rhubarb' " omni completion from github
 Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'w0rp/ale' " async linting tool
-Plug 'neomake/neomake' " linting tool
+Plug 'w0rp/ale' " async linting tool
+" Plug 'neomake/neomake' " linting tool
 Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
@@ -185,13 +185,14 @@ nnoremap <silent> <Leader>wi :StripWhitespace<CR>
 vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 nnoremap <leader>c :ccl <bar> lcl<CR>
 
+let g:multi_cursor_quit_key='<C-c>'
+nnoremap <C-c> :call multiple_cursors#quit()<CR>
 
 command! -nargs=* -complete=file Preview call commands#preview(<f-args>)
 
 let g:gitgutter_map_keys = 0
 let g:go_textobj_include_function_doc = 1
 let g:go_fmt_command = "goimports"
-let g:go_snippet_engine = "neosnippet"
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
