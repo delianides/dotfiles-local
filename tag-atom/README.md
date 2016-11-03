@@ -1,6 +1,0 @@
-Atom
-====
-
-`apm stars --install`
-
-
