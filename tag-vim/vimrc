@@ -101,7 +101,6 @@ augroup vimrcEx
         \ endif
 augroup END
 
-
 set background=dark
 set clipboard+=unnamed
 set hidden
@@ -134,8 +133,6 @@ set wildmode=longest:full,full
 set wildignore+=.git,*.jpg,*.png,*.gif,*.jpeg,.DS_Store
 set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
 set shortmess=filtIoOAc    " shorten messages
-set completeopt-=preview
-set completeopt+=menuone
 set showmatch              " brackets/braces that is
 set mat=7                  " duration to show matching brace (1/10 sec)
 set ignorecase             " ignore case when searching
@@ -147,7 +144,6 @@ set noerrorbells           " ditto
 set splitbelow
 set splitright
 set textwidth=80
-set complete+=kspell
 
 set spellcapcheck=
 set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
