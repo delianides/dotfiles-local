@@ -1,4 +1,4 @@
-" vim: fdm=marker foldlevel=99 foldenable sw=4 ts=4 sts=4
+" vim: fdm=marker foldlevel=98 foldenable sw=4 ts=4 sts=4
 "        _
 " __   _(_)_ __ ___  _ __ ___
 " \ \ / / | '_ ` _ \| '__/ __|
@@ -44,8 +44,7 @@ Plug 'junegunn/goyo.vim', { 'for': 'markdown' } " distraction free markdown writ
 Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'lifepillar/vim-mucomplete'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
-Plug 'OmniSharp/omnisharp-vim', { 'do': ' cd server && xbuild' }
+" Plug 'OmniSharp/omnisharp-vim', { 'do': ' cd server && xbuild' }
 
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'majutsushi/tagbar'
@@ -108,23 +107,18 @@ set nopaste
 set noshowmode
 set noswapfile
 set nojoinspaces           " don't autoinsert two spaces after '.', '?', '!' for join command
-
-if has('linebreak')
-  let &showbreak='↳ '      " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
-endif
-
 set relativenumber number
 set tabstop=2 shiftwidth=2 expandtab
 set laststatus=2
 set wrap linebreak nolist
-set nofoldenable
+set nofoldenable           " no folds
 set undofile
 set undodir="$HOME/.VIM_UNDO_FILES"
 set nobackup               " disable automatic creation of backup files
 set nowritebackup          " changes default behavior of saving files to 'write,delete,rename'
 set noswapfile             " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set scrolloff=10           " number of lines to show below the cursor before the buffer scrolls down
-set showcmd
+set noshowcmd
 set smarttab
 set smartindent            " be smart about it
 set wrapmargin=8           " wrap lines when coming within n characters from side
@@ -147,6 +141,10 @@ set textwidth=80
 
 set spellcapcheck=
 set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
+
+if has('linebreak')
+  let &showbreak='↳ '      " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
+endif
 
 autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
 autocmd FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
@@ -189,11 +187,12 @@ command! -nargs=* -complete=file Preview call commands#preview(<f-args>)
 let g:gitgutter_map_keys = 0
 let g:go_textobj_include_function_doc = 1
 let g:go_fmt_command = "goimports"
+
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
+
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
 let g:markdownfmt_command = 'mdfmt'
-let g:tmuxcomplete#trigger = ''
 let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'

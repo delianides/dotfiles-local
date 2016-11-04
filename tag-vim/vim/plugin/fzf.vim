@@ -1,3 +1,6 @@
+" search files in the current project starting from root...
+" root is last directory before ~/Projects"
+"
 nnoremap <silent> <C-p> :call fzf#run({
     \   'down': '40%',
     \   'sink': 'botright split' })<CR>

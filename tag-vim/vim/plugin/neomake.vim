@@ -1,4 +1,4 @@
-if exists(":Neomake")
+if &runtimepath =~ 'neomake'
 	" for debugging, 0 is none, 3 is debug
 	let g:neomake_verbose = 0
 	let g:neomake_airline = 1
