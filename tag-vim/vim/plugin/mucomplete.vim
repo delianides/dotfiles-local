@@ -2,7 +2,7 @@
 let g:tmuxcomplete#trigger = 'omnifunc'
 
 let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#no_mappings = 1
+" let g:mucomplete#no_mappings = 0
 let g:mucomplete#chains = { 'default' : ['file', 'omni', 'c-n', 'c-p' ] }
 
 " should be menu,menuone,noinsert,noselect
