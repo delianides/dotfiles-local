@@ -1,7 +1,20 @@
 if &runtimepath =~ 'ale'
 	let g:ale_linters = {
-	\   'javascript': ['eslint','flow'],
+	\   'javascript': ['eslint'],
 	\}
+
+	function! StrTrim(txt)
+	  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+	endfunction
+
+	if findfile('.flowconfig', '.;') !=# ''
+	  let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
+	  if g:flow_path != 'flow not found'
+		let g:ale_linters = {
+		\   'javascript': ['eslint', 'flow'],
+		\}
+	  endif
+	endif
 
 	" XXX need to work on this
 	hi ALEErrorSign guifg=white guibg=red
