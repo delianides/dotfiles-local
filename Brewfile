@@ -1,13 +1,13 @@
 # this will probably be installed manually
 tap 'thoughtbot/formulae'
 brew 'rcm'
-
 brew 'mas'
-tap 'caskroom/cask'
-tap Homebrew/bundle
-brew 'brew-cask'
 
-cask 'dropshare'
+tap 'caskroom/cask'
+
+tap Homebrew/bundle
+
+brew 'brew-cask'
 cask 'google-chrome'
 cask 'firefox'
 cask 'alfred'
@@ -15,10 +15,16 @@ cask 'google-play-music-desktop-player'
 cask 'things'
 cask 'iterm2'
 cask 'dropshare'
+cask 'spotify'
+cask 'phoenix'
+cask 'graphiql'
+cask 'bitbar'
+cask 'mountain-duck'
 
 # editor of the ages
 brew 'vim', args: ['with-lua', 'with-python', '']
 
+brew 'markdown'
 # node version manager
 brew 'nvm'
 
@@ -27,6 +33,8 @@ brew 'ctags'
 
 # fuzzy finder searching
 brew 'fzf'
+
+brew 'forego'
 
 # directory based .env files
 brew 'autoenv'
@@ -77,6 +85,7 @@ brew 'tmux'
 
 # run the output of commands
 brew 'watch'
+brew 'watchman'
 
 # cli based browser
 brew 'wget'
@@ -87,19 +96,22 @@ brew 'python3'
 # window management
 brew 'spectacle'
 
+brew 'glide'
+
 # Install Apps from the MAC
+mas 'CloudApp'             , id: 417602904
+mas 'iA Writer'            , id: 775737590
+mas 'Pixelmator'           , id: 407963104
 mas 'Day One'              , id: 1055511498
 mas 'FoldingText'          , id: 540003654
 mas 'Markoff'              , id: 1084713122
 mas 'LastPass'             , id: 926036361
-mas 'Evernote'             , id: 406056744
 mas 'Helium'               , id: 1054607607
 mas 'Calcbot'              , id: 931657367
 mas 'LimeChat'             , id: 414030210
 mas 'Kromatic'             , id: 1049086746
 mas 'Skitch'               , id: 425955336
 mas 'GIPHY CAPTURE'        , id: 668208984
-mas 'Marked 2'             , id: 890031187
 mas '1Password'            , id: 443987910
 mas 'Tweetbot'             , id: 557168941
 mas 'Transmit'             , id: 403388562
@@ -109,5 +121,3 @@ mas 'Deckset'              , id: 847496013
 mas 'Airmail 3'            , id: 918858936
 mas 'Slack'                , id: 803453959
 mas 'GIFMaker'             , id: 1015930892
-mas 'PopHub'               , id: 928494006
-mas 'Dash'                 , id: 449589707
