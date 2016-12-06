@@ -5,7 +5,7 @@ brew 'mas'
 
 tap 'caskroom/cask'
 
-tap Homebrew/bundle
+tap 'Homebrew/bundle'
 
 brew 'brew-cask'
 cask 'google-chrome'
