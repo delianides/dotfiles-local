@@ -18,6 +18,7 @@ cask 'phoenix'
 cask 'graphiql'
 cask 'bitbar'
 cask 'mountain-duck'
+cask 'spectacle'
 
 # editor of the ages
 brew 'vim', args: ['with-lua', 'with-python', '']
@@ -93,9 +94,6 @@ brew 'wget'
 
 # boo python
 brew 'python3'
-
-# window management
-brew 'spectacle'
 
 brew 'glide'
 
