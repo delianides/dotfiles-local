@@ -4,10 +4,8 @@ brew 'rcm'
 brew 'mas'
 
 tap 'caskroom/cask'
-
 tap 'Homebrew/bundle'
 
-brew 'brew-cask'
 cask 'google-chrome'
 cask 'firefox'
 cask 'alfred'
@@ -24,7 +22,9 @@ cask 'mountain-duck'
 # editor of the ages
 brew 'vim', args: ['with-lua', 'with-python', '']
 
+# markdown
 brew 'markdown'
+
 # node version manager
 brew 'nvm'
 
@@ -34,6 +34,7 @@ brew 'ctags'
 # fuzzy finder searching
 brew 'fzf'
 
+# foreman for go
 brew 'forego'
 
 # directory based .env files
