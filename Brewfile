@@ -18,6 +18,7 @@ cask 'graphiql'
 cask 'bitbar'
 cask 'mountain-duck'
 cask 'spectacle'
+cask 'dropshare'
 
 # editor of the ages
 brew 'vim', args: ['with-lua', 'with-python', '']
@@ -76,6 +77,7 @@ brew 'openssl'
 brew 'ssh-copy-id'
 
 # zsh syntax highlighting
+brew 'zsh'
 brew 'zsh-syntax-highlighting'
 
 # infrastructure as code
@@ -100,6 +102,7 @@ brew 'glide'
 mas 'CloudApp'             , id: 417602904
 mas 'iA Writer'            , id: 775737590
 mas 'Pixelmator'           , id: 407963104
+mas 'Deliveries'           , id: 924726344
 mas 'Day One'              , id: 1055511498
 mas 'FoldingText'          , id: 540003654
 mas 'Markoff'              , id: 1084713122
