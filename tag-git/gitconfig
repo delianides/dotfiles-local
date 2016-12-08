@@ -3,7 +3,7 @@
 [user]
   name = delianides
   email = github@delianides.com
-  signingkey = 21760CDA
+	signingkey = DFC7F5BE8FCCFCCB
 [alias]
   co = checkout
   promote = !$ZSH/bin/git-promote
