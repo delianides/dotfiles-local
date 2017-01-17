@@ -33,6 +33,7 @@ Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale' " async linting tool
+Plug 'sbdchd/neoformat' " formatting tool
 Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'Raimondi/delimitMate' "closing brackets or braces
