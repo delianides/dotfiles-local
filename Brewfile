@@ -12,6 +12,7 @@ cask 'alfred'
 cask 'google-play-music-desktop-player'
 cask 'things'
 cask 'iterm2'
+cask 'hyper'
 cask 'spotify'
 cask 'phoenix'
 cask 'graphiql'
@@ -52,6 +53,7 @@ brew 'git'
 
 # pgp
 brew 'gpg'
+brew 'keybase'
 
 # process manager written in go
 brew 'forego'
