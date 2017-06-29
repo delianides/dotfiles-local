@@ -42,14 +42,14 @@ Plug 'tpope/vim-repeat' " allows . to repeat previous two commands
 Plug 'tpope/vim-sensible' " sensible vim settings we can all agree on
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' } " distraction free markdown writing
 Plug 'ntpeters/vim-better-whitespace'
-
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'tpope/vim-rhubarb' " omni completion from github
 " Plug 'OmniSharp/omnisharp-vim', { 'do': ' cd server && xbuild' }
 
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
-Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-git' " git syntax
 Plug 'tpope/vim-markdown', {'for': 'markdown'} " markdown specific syntax settings
 Plug 'moorereason/vim-markdownfmt'
@@ -162,13 +162,21 @@ autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufRead *.ino set filetype=c
 autocmd BufNewFile,BufRead *.svg set filetype=xml
 autocmd BufNewFile,BufRead .eslintrc set filetype=json
+autocmd BufNewFile,BufRead *.graphcool set filetype=graphql
 autocmd BufNewFile,BufRead .babelrc set filetype=json
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
+
+" autocmd FileType javascript set formatprg=prettier\ --stdin\ --trailing-comma\ es5
+autocmd BufWritePre *.js Neoformat
+" autocmd FileType javascript set formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --trailing-comma\ es5
 
 noremap H ^
 noremap L g_
 noremap J 5j
 noremap K 5k
+
+map <C-d> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>

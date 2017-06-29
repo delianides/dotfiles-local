@@ -11,8 +11,9 @@ alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 
-alias ctags="`brew --prefix`/bin/ctags"
+alias re-source="source ~/.localrc"
 
+alias ctags="`brew --prefix`/bin/ctags"
 
 # Use modern regexps for grep, and do show color when `grep` is the final
 # command, but don't when piping to something else, because the added color

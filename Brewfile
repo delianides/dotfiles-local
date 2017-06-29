@@ -1,7 +1,9 @@
 # this will probably be installed manually
 tap 'thoughtbot/formulae'
+tap 'wallix/awless'
 brew 'rcm'
 brew 'mas'
+brew 'awless'
 
 tap 'caskroom/cask'
 tap 'Homebrew/bundle'
