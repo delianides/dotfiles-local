@@ -1,19 +1,15 @@
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'flow'],
 \}
 
-function! StrTrim(txt)
-  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-endfunction
+let g:ale_fixers = {
+\   'javascript': ['prettier','eslint'],
+\}
 
-if findfile('.flowconfig', '.;') !=# ''
-  let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
-  if g:flow_path != 'flow not found'
-	let g:ale_linters = {
-	\   'javascript': ['eslint', 'flow'],
-	\}
-  endif
-endif
+let g:ale_javascript_eslint_use_global = 0
+let g:ale_javascript_prettier_use_global = 1
+let g:ale_javascript_prettier_options = '--trailing-comma all'
+let g:ale_fix_on_save = 1
 
 hi ALEErrorSign guifg=red
 hi ALEWarningSign guifg=yellow

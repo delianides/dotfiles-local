@@ -15,6 +15,9 @@ alias re-source="source ~/.localrc"
 
 alias ctags="`brew --prefix`/bin/ctags"
 
+# spotify
+alias sp="spotify pause"
+
 # Use modern regexps for grep, and do show color when `grep` is the final
 # command, but don't when piping to something else, because the added color
 # codes will mess up the expected input.

@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline' "Airline
 Plug 'vim-airline/vim-airline-themes' " Airline Themes
 Plug 'fatih/molokai'
+
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
 Plug 'junegunn/vim-easy-align' " align lines based on args
 Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
@@ -32,8 +33,8 @@ Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale' " async linting tool
-Plug 'sbdchd/neoformat' " formatting tool
+Plug 'w0rp/ale' " async linting + formatting tool
+
 Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'Raimondi/delimitMate' "closing brackets or braces
@@ -47,7 +48,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'tpope/vim-rhubarb' " omni completion from github
-" Plug 'OmniSharp/omnisharp-vim', { 'do': ' cd server && xbuild' }
 
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'tpope/vim-git' " git syntax
@@ -55,18 +55,19 @@ Plug 'tpope/vim-markdown', {'for': 'markdown'} " markdown specific syntax settin
 Plug 'moorereason/vim-markdownfmt'
 Plug 'tmux-plugins/vim-tmux' " syntax for tmux.conf
 " Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
-Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] } " ES6 and ES7
-Plug 'othree/es.next.syntax.vim', {'for': ['javascript','javascript.jsx']} " ES6 and ES7
-Plug 'kchmck/vim-coffee-script', {'for': ['coffee', 'javascript']} " coffeescript syntax highlighting
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx']}
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx']}
+" Plug 'kchmck/vim-coffee-script', {'for': ['coffee']} " coffeescript syntax highlighting
 Plug 'cespare/vim-toml'
-Plug 'Quramy/tsuquyomi', {'for': 'typescript'} " TypeScript
-Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'} " TypeScript
+" Plug 'Quramy/tsuquyomi', {'for': 'typescript'} " TypeScript
+" Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'} " TypeScript
 " Plug 'mxw/vim-jsx', { 'for': ['javascript','javascript.jsx'] } " JSX support
 Plug 'jparise/vim-graphql' " GraphQL
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': 'go' } " Golang
 Plug 'cakebaker/scss-syntax.vim' " Sass
-Plug 'vim-ruby/vim-ruby' " Ruby
+Plug 'vim-ruby/vim-ruby', { 'for': ['ruby']} " Ruby
+Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'tclem/vim-arduino' " Arduino
 Plug 'hashivim/vim-hashicorp-tools' " HCL
 Plug 'fatih/vim-hclfmt'
@@ -121,6 +122,7 @@ set noswapfile             " http://robots.thoughtbot.com/post/18739402579/globa
 set scrolloff=10           " number of lines to show below the cursor before the buffer scrolls down
 set noshowcmd
 set smarttab
+set autoindent
 set smartindent            " be smart about it
 set wrapmargin=8           " wrap lines when coming within n characters from side
 set formatoptions+=n,1     " support for numbered/bullet lists
@@ -165,10 +167,6 @@ autocmd BufNewFile,BufRead .eslintrc set filetype=json
 autocmd BufNewFile,BufRead *.graphcool set filetype=graphql
 autocmd BufNewFile,BufRead .babelrc set filetype=json
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
-
-" autocmd FileType javascript set formatprg=prettier\ --stdin\ --trailing-comma\ es5
-autocmd BufWritePre *.js Neoformat
-" autocmd FileType javascript set formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --trailing-comma\ es5
 
 noremap H ^
 noremap L g_
