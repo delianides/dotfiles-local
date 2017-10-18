@@ -11,18 +11,15 @@ tap 'Homebrew/bundle'
 cask 'google-chrome'
 cask 'firefox'
 cask 'alfred'
-cask 'google-play-music-desktop-player'
-cask 'things'
 cask 'iterm2'
-cask 'hyper'
+# cask 'hyper'
 cask 'spotify'
 cask 'phoenix'
 cask 'graphiql'
 cask 'bitbar'
+cask 'dropshare'
 cask 'mountain-duck'
-# cask 'dropshare'
 cask 'kaleidoscope'
-cask 'paw'
 
 # editor of the ages
 brew 'vim', args: ['with-lua', 'with-python', '']
@@ -30,8 +27,9 @@ brew 'vim', args: ['with-lua', 'with-python', '']
 # markdown
 brew 'markdown'
 
-# node version manager
+# version manager
 brew 'nvm'
+brew 'rbenv'
 
 # ctags
 brew 'ctags'
@@ -52,6 +50,9 @@ brew 'docker-compose'
 
 # version control
 brew 'git'
+
+# better git logs
+brew 'tig'
 
 # pgp
 brew 'gpg'
@@ -90,6 +91,8 @@ brew 'zsh-syntax-highlighting'
 
 # infrastructure as code
 brew 'terraform'
+brew 'nomad'
+brew 'packer'
 
 # terminal multiplexer
 brew 'tmux'
@@ -107,14 +110,9 @@ brew 'python3'
 brew 'glide'
 
 # Install Apps from the MAC
-mas 'CloudApp'             , id: 417602904
-mas 'iA Writer'            , id: 775737590
 mas 'Pixelmator'           , id: 407963104
 mas 'Deliveries'           , id: 924726344
 mas 'Day One'              , id: 1055511498
-mas 'FoldingText'          , id: 540003654
-mas 'Markoff'              , id: 1084713122
-mas 'LastPass'             , id: 926036361
 mas 'Helium'               , id: 1054607607
 mas 'Calcbot'              , id: 931657367
 mas '1Password'            , id: 443987910
@@ -124,4 +122,6 @@ mas 'Xcode'                , id: 497799835
 mas 'Reeder'               , id: 880001334
 mas 'Deckset'              , id: 847496013
 mas 'Airmail 3'            , id: 918858936
+mas 'Things 3'             , id: 904280696
+mas 'Permute 2'            , id: 731738567
 mas 'Slack'                , id: 803453959
