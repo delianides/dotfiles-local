@@ -1,13 +1,12 @@
 " tmux autocomplete from other panes
 let g:tmuxcomplete#trigger = 'omnifunc'
-
 let g:mucomplete#enable_auto_at_startup = 1
-" let g:mucomplete#no_mappings = 0
+let g:mucomplete#no_mappings = 1
 let g:mucomplete#chains = { 'default' : ['file', 'omni', 'c-n', 'c-p' ] }
 
 " should be menu,menuone,noinsert,noselect
-set completeopt-=preview
-set completeopt+=menuone,noselect,noinsert
+" set completeopt-=preview
+set completeopt+=menuone,noinsert,noselect
 
 "	.	scan the current buffer ('wrapscan' is ignored)
 "	w	scan buffers from other windows
@@ -17,11 +16,16 @@ set completeopt+=menuone,noselect,noinsert
 "   i	scan current and included files
 "   t   tag completion
 set complete+=kspell
+set complete-=t
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+
+inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+inoremap <expr> <C-R>=...<CR> mucomplete#popup_exit("\<cr>")
 
 augroup mucomplete
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  autocmd FileType markdown,txt let b:mucomplete_chain = ['file', 'c-n', 'dict', 'spel']
 augroup END

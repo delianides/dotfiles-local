@@ -3,7 +3,6 @@
 ###########
 
 # alias vim="nvim"
-
 alias qq="cd . && source ~/.zshrc"
 alias ls="ls -FGh"
 alias du="du -cksh"
@@ -26,10 +25,7 @@ alias grep="egrep --color=auto"
 # Copy-pasting `$ python something.py` works
 alias \$=''
 alias diff="colordiff -u"
-alias mkdir="\mkdir -p"
-
-alias prettyjson="python -m json.tool"
-alias prettyxml="xmllint --format -"
+alias mkdir="mkdir -p"
 
 # Needs to be a function because `alias -` breaks
 function -() { cd - }

@@ -6,6 +6,7 @@ let g:ale_fixers = {
 \   'javascript': ['prettier','eslint'],
 \}
 
+let g:ale_sign_column_always = 1
 let g:ale_javascript_eslint_use_global = 0
 let g:ale_javascript_prettier_use_global = 1
 let g:ale_javascript_prettier_options = '--trailing-comma all'

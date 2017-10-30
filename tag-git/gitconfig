@@ -6,13 +6,9 @@
 	signingkey = DFC7F5BE8FCCFCCB
 [alias]
   co = checkout
-  promote = !$ZSH/bin/git-promote
-  wtf     = !$ZSH/bin/git-wtf
-  rank-contributers = !$ZSH/bin/git-rank-contributers
   count   = !git shortlog -sn
-  ksreview = "!f() { local SHA=${1:-HEAD}; local BRANCH=${2:-master}; if [ $SHA == $BRANCH ]; then SHA=HEAD; fi; git difftool -y -t Kaleidoscope $BRANCH...$SHA; }; f"
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	logg = log --graph --oneline --decorate --all
+	lgg = log --graph --oneline --decorate --all
 	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 	nuke = !git checkout master && git fetch --prune origin && git branch | xargs git branch -d $1
 	standup = !git log --all --author=`git config --get user.name` --since='9am yesterday' --format=%s

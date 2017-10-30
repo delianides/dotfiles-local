@@ -53,29 +53,3 @@ aws(){
 		--name aws \
 		jess/awscli "$@"
 }
-
-jiracli(){
-	docker run -it --rm \
-		-v $HOME/.jiracli.ini:/root/.jiracli.ini \
-		--log-driver none \
-		--name jiracli \
-		delianides/jiracli "$@"
-}
-
-irssi() {
-  docker rm -f irssi
-	docker run --rm -it \
-    --log-driver=none \
-    -u $(id -u):$(id -g) \
-		-v $HOME/.dotfiles/irssi:/home/user/.irssi \
-    -e IRC_PASSWORD=$IRC_PASSWORD \
-		--name irssi \
-		irssi
-}
-
-t(){
-	docker run -t --rm \
-		-v $HOME/.trc:/root/.trc \
-		--log-driver none \
-		jess/tcli "$@"
-}

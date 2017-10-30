@@ -20,67 +20,48 @@ cmap w!! w !sudo tee > /dev/null %
 
 call plug#begin('~/.vim/plugged')
 
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
+
+Plug 'tpope/vim-fugitive' " git commands in vim
+Plug 'tpope/vim-vinegar' " netrw play nicely
+Plug 'tpope/vim-sensible'
+Plug 'airblade/vim-gitgutter' " show git changes in column
+Plug 'w0rp/ale' " async linting + formatting tool
+Plug 'junegunn/vim-easy-align' " align lines based on args
+Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
+Plug 'AndrewRadev/splitjoin.vim' "join things together
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'tpope/vim-endwise'
+Plug 'jiangmiao/auto-pairs'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'Raimondi/delimitMate' "closing brackets or braces
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'tpope/vim-surround' " surround vim objects with a string
+Plug 'tpope/vim-commentary' " universal comment application
+Plug 'tpope/vim-repeat' " allows . to repeat previous two commands
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
+Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
+
+Plug 'sheerun/vim-polyglot' " includes most language packs
+" the following languages are not in polyglot
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/bundle/gocode/nvim/symlink.sh' }
+Plug 'ap/vim-css-color' " CSS Hex Color
+Plug 'jparise/vim-graphql' " GraphQL
+Plug 'flowtype/vim-flow', { 'for': [ 'javascript' ]}
+Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
+Plug 'fatih/vim-hclfmt'
+
 Plug 'vim-airline/vim-airline' "Airline
 Plug 'vim-airline/vim-airline-themes' " Airline Themes
 Plug 'fatih/molokai'
 
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
-Plug 'junegunn/vim-easy-align' " align lines based on args
-Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
-Plug 'AndrewRadev/splitjoin.vim' "join things together
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'tpope/vim-fugitive' " git commands in vim
-Plug 'tpope/vim-vinegar' " netrw play nicely
-Plug 'airblade/vim-gitgutter' " show git changes in column
-Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale' " async linting + formatting tool
-
-Plug 'ap/vim-css-color' " CSS Hex Color
-Plug 'tpope/vim-surround' " surround vim objects with a string
-Plug 'Raimondi/delimitMate' "closing brackets or braces
-Plug 'tpope/vim-commentary' " universal comment application
-Plug 'tpope/vim-repeat' " allows . to repeat previous two commands
-Plug 'tpope/vim-sensible' " sensible vim settings we can all agree on
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' } " distraction free markdown writing
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'lifepillar/vim-mucomplete'
-Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
-Plug 'tpope/vim-rhubarb' " omni completion from github
-
-Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
-Plug 'tpope/vim-git' " git syntax
-Plug 'tpope/vim-markdown', {'for': 'markdown'} " markdown specific syntax settings
-Plug 'moorereason/vim-markdownfmt'
-Plug 'tmux-plugins/vim-tmux' " syntax for tmux.conf
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx']}
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx']}
-" Plug 'kchmck/vim-coffee-script', {'for': ['coffee']} " coffeescript syntax highlighting
-Plug 'cespare/vim-toml'
-" Plug 'Quramy/tsuquyomi', {'for': 'typescript'} " TypeScript
-" Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'} " TypeScript
-" Plug 'mxw/vim-jsx', { 'for': ['javascript','javascript.jsx'] } " JSX support
-Plug 'jparise/vim-graphql' " GraphQL
-Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': 'go' } " Golang
-Plug 'cakebaker/scss-syntax.vim' " Sass
-Plug 'vim-ruby/vim-ruby', { 'for': ['ruby']} " Ruby
-Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-Plug 'tclem/vim-arduino' " Arduino
-Plug 'hashivim/vim-hashicorp-tools' " HCL
-Plug 'fatih/vim-hclfmt'
-Plug 'ekalinin/Dockerfile.vim' " Docker
-" Plug 'MarcWeber/vim-addon-mw-utils'
-
 call plug#end()
 
-if has("termguicolors")
-    set termguicolors
-endif
-
 colorscheme molokai
+set termguicolors
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
 
@@ -89,13 +70,10 @@ augroup vimrcEx
     " http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
     autocmd VimEnter * autocmd WinEnter * let w:created=1
     autocmd VimEnter * let w:created=1
-
     autocmd VimResized * wincmd =
     " Disable paste mode on leaving insert mode.
     autocmd InsertLeave * set nopaste
-
     autocmd BufWritePre * StripWhitespace
-
     autocmd BufReadPost *
         \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
@@ -173,6 +151,7 @@ noremap L g_
 noremap J 5j
 noremap K 5k
 
+
 map <C-d> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -186,15 +165,11 @@ nnoremap <silent> <Leader>wi :StripWhitespace<CR>
 vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 nnoremap <leader>c :ccl <bar> lcl<CR>
 
-let g:multi_cursor_quit_key='<C-c>'
-nnoremap <C-c> :call multiple_cursors#quit()<CR>
-
-command! -nargs=* -complete=file Preview call commands#preview(<f-args>)
-
 let g:gitgutter_map_keys = 0
 let g:go_textobj_include_function_doc = 1
 let g:go_fmt_command = "goimports"
 
+let g:tmux_navigator_disable_when_zoomed = 1
 let g:jsx_ext_required = 0
 let g:vim_json_syntax_conceal = 0
 
@@ -204,6 +179,3 @@ let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_banner=0        " disable annoying banner
-
-
-
