@@ -60,10 +60,12 @@ Plug 'fatih/molokai'
 
 call plug#end()
 
+syntax on
 colorscheme molokai
-set termguicolors
+let g:rehash256 = 1
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
+set t_Co=256
 
 augroup vimrcEx
     autocmd!

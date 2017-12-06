@@ -14,6 +14,8 @@ let g:ale_fix_on_save = 1
 
 hi ALEErrorSign guifg=red
 hi ALEWarningSign guifg=yellow
+" hi link ALEErrorSign    Error
+" hi link ALEWarningSign  Warning
 
 let g:airline_section_error = '%{ALEGetStatusLine()}'
 let g:ale_sign_error = 'E'
