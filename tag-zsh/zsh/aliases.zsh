@@ -14,6 +14,7 @@ alias re-source="source ~/.localrc"
 
 alias ctags="`brew --prefix`/bin/ctags"
 
+alias tmux="TERM=screen-256color-bce tmux"
 # spotify
 alias sp="spotify pause"
 

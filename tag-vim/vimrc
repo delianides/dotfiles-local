@@ -25,6 +25,7 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
 Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'tpope/vim-sensible'
+Plug 'wincent/terminus'
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'w0rp/ale' " async linting + formatting tool
 Plug 'junegunn/vim-easy-align' " align lines based on args
@@ -54,8 +55,8 @@ Plug 'flowtype/vim-flow', { 'for': [ 'javascript' ]}
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'fatih/vim-hclfmt'
 
+Plug 'skielbasa/vim-material-monokai'
 Plug 'vim-airline/vim-airline' "Airline
-Plug 'vim-airline/vim-airline-themes' " Airline Themes
 Plug 'fatih/molokai'
 
 call plug#end()
@@ -63,9 +64,9 @@ call plug#end()
 syntax on
 colorscheme molokai
 let g:rehash256 = 1
-let g:airline_theme='badwolf'
+set t_Co=256 "Tell vim we support 256 colours
+let g:airline_theme='materialmonokai'
 let g:airline_powerline_fonts = 1
-set t_Co=256
 
 augroup vimrcEx
     autocmd!
@@ -85,7 +86,6 @@ augroup END
 set background=dark
 set clipboard+=unnamed
 set hidden
-set nopaste
 set noshowmode
 set noswapfile
 set nojoinspaces           " don't autoinsert two spaces after '.', '?', '!' for join command
@@ -106,6 +106,7 @@ set autoindent
 set smartindent            " be smart about it
 set wrapmargin=8           " wrap lines when coming within n characters from side
 set formatoptions+=n,1     " support for numbered/bullet lists
+set formatoptions+=j
 set wildmode=longest:full,full
 set wildignore+=.git,*.jpg,*.png,*.gif,*.jpeg,.DS_Store
 set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
@@ -121,7 +122,6 @@ set noerrorbells           " ditto
 set splitbelow
 set splitright
 set textwidth=80
-
 set spellcapcheck=
 set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
 
@@ -153,9 +153,18 @@ noremap L g_
 noremap J 5j
 noremap K 5k
 
+nnoremap <BS> {
+onoremap <BS> {
+vnoremap <BS> {
+
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+vnoremap <CR> }
 
 map <C-d> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+nnoremap ? :GFiles<CR>
 
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
