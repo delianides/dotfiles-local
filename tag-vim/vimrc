@@ -45,8 +45,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
+Plug 'wakatime/vim-wakatime'
 
 Plug 'sheerun/vim-polyglot' " includes most language packs
+Plug 'fatih/vim-go'
 " the following languages are not in polyglot
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/bundle/gocode/nvim/symlink.sh' }
 Plug 'ap/vim-css-color' " CSS Hex Color
@@ -164,8 +166,6 @@ vnoremap <CR> }
 map <C-d> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-nnoremap ? :GFiles<CR>
-
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
@@ -178,6 +178,7 @@ nnoremap <leader>c :ccl <bar> lcl<CR>
 
 let g:gitgutter_map_keys = 0
 let g:go_textobj_include_function_doc = 1
+let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 
 let g:tmux_navigator_disable_when_zoomed = 1

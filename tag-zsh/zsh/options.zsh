@@ -15,6 +15,9 @@ setopt autopushd
 # Timestamp history entries
 setopt extended_history
 
+# bindkey -v
+# bindkey '^R' history-incremental-search-backward
+
 unsetopt correctall
 # Allow [ or ] wherever you want
 # (Prevents "zsh: no matches found: ...")

@@ -13,6 +13,8 @@
 	nuke = !git checkout master && git fetch --prune origin && git branch | xargs git branch -d $1
 	standup = !git log --all --author=`git config --get user.name` --since='9am yesterday' --format=%s
 	lazy-standup = !git standup | say
+	which-branch = !git rev-parse --abbrev-ref HEAD
+	copy-branch = !git which-branch | pbcopy
 [color]
   diff = auto
   status = auto
