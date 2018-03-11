@@ -22,9 +22,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
 
-Plug 'tpope/vim-fugitive' " git commands in vim
-Plug 'tpope/vim-vinegar' " netrw play nicely
-Plug 'tpope/vim-sensible'
 Plug 'wincent/terminus'
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'w0rp/ale' " async linting + formatting tool
@@ -32,14 +29,17 @@ Plug 'junegunn/vim-easy-align' " align lines based on args
 Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'tpope/vim-endwise'
-Plug 'jiangmiao/auto-pairs'
+Plug 'eapache/auto-pairs'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'Raimondi/delimitMate' "closing brackets or braces
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'tpope/vim-endwise' " closes blocks in certain languages
+Plug 'tpope/vim-fugitive' " git commands in vim
+Plug 'tpope/vim-vinegar' " netrw play nicely
+Plug 'tpope/vim-sensible' " sensible vim defaults
 Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
-Plug 'tpope/vim-repeat' " allows . to repeat previous two commands
+Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -55,6 +55,7 @@ Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'jparise/vim-graphql' " GraphQL
 Plug 'flowtype/vim-flow', { 'for': [ 'javascript' ]}
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
+Plug 'Quramy/tsuquyomi', { 'for': ['typescript'] }
 Plug 'fatih/vim-hclfmt'
 
 Plug 'skielbasa/vim-material-monokai'
@@ -180,6 +181,7 @@ let g:gitgutter_map_keys = 0
 let g:go_textobj_include_function_doc = 1
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
+let g:AutoPairsUseInsertedCount = 1
 
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:jsx_ext_required = 0
