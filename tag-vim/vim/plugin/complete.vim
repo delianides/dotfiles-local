@@ -20,7 +20,7 @@ set complete-=t
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 
-inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+" inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
 inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
 inoremap <expr> <C-R>=...<CR> mucomplete#popup_exit("\<cr>")
 

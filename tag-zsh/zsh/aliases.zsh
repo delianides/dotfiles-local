@@ -10,6 +10,8 @@ alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 
+alias aci="asciinema"
+
 alias re-source="source ~/.localrc"
 
 alias ctags="`brew --prefix`/bin/ctags"

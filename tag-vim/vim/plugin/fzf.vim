@@ -14,6 +14,7 @@ let g:fzf_action = {
 
 nnoremap <silent> <leader>g :GFiles<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <C-f> :Files<CR>
 nmap ; :Buffers<CR>
 nnoremap ? :GFiles<CR>
 

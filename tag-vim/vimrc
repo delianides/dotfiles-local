@@ -21,7 +21,7 @@ cmap w!! w !sudo tee > /dev/null %
 call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
-
+Plug 'airblade/vim-rooter' " automatically sets vims cwd to svc root
 Plug 'wincent/terminus'
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'w0rp/ale' " async linting + formatting tool
@@ -60,16 +60,30 @@ Plug 'fatih/vim-hclfmt'
 
 Plug 'skielbasa/vim-material-monokai'
 Plug 'vim-airline/vim-airline' "Airline
+Plug 'vim-airline/vim-airline-themes'
 Plug 'fatih/molokai'
 
-call plug#end()
 
+call plug#end()
 syntax on
 colorscheme molokai
+
+let g:airline_theme='luna'
+
 let g:rehash256 = 1
 set t_Co=256 "Tell vim we support 256 colours
-let g:airline_theme='materialmonokai'
 let g:airline_powerline_fonts = 1
+" function! AirlineInit()
+"   " first define a new part for modified
+"   call airline#parts#define('modified', {
+"     \ 'raw': '%m',
+"     \ 'accent': 'red',
+"     \ })
+
+"   " then override the default layout for section c with your new part
+"   let g:airline_section_c = airline#section#create(['%<', '%f', 'modified', ' ', 'readonly'])
+" endfunction
+" autocmd VimEnter * call AirlineInit()
 
 augroup vimrcEx
     autocmd!
