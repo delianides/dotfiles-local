@@ -1,6 +1,3 @@
-################
-#  COMPLETION  #
-################
 fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
@@ -17,4 +14,3 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
-

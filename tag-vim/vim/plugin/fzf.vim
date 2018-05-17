@@ -2,9 +2,6 @@
 " root is last directory before ~/Projects"
 "
 "
-
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-
 function! s:open_in_new_tmux_pane(lines)
 	call system("tmux split-window  -h \"vim ". a:lines[0] . "\"")
 endfunction
