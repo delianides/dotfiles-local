@@ -8,10 +8,10 @@ function start-local() {
 		if ! _tmux_session_exists 'local'; then
 			tmux new-session -d -s 'local' -n 'code' -c "$directory"
 			tmux select-window -t 'code'
-			tmux split-window -h -p 40
-			tmux select-pane -t 2
-			tmux split-window -v -p 25
-			tmux select-pane -t 1
+			# tmux split-window -h -p 40
+			# tmux select-pane -t 2
+			# tmux split-window -v -p 25
+			# tmux select-pane -t 1
 		fi
 
 		tmux attach-session -d -t 'local'

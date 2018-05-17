@@ -40,6 +40,7 @@ Plug 'tpope/vim-sensible' " sensible vim defaults
 Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
+Plug 'janko-m/vim-test' " run tests
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -58,50 +59,34 @@ Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'Quramy/tsuquyomi', { 'for': ['typescript'] }
 Plug 'fatih/vim-hclfmt'
 
-Plug 'skielbasa/vim-material-monokai'
-Plug 'vim-airline/vim-airline' "Airline
-Plug 'vim-airline/vim-airline-themes'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'itchyny/lightline.vim'
 Plug 'fatih/molokai'
-
 
 call plug#end()
 syntax on
 colorscheme molokai
 
-let g:airline_theme='luna'
-
 let g:rehash256 = 1
 set t_Co=256 "Tell vim we support 256 colours
-let g:airline_powerline_fonts = 1
-" function! AirlineInit()
-"   " first define a new part for modified
-"   call airline#parts#define('modified', {
-"     \ 'raw': '%m',
-"     \ 'accent': 'red',
-"     \ })
-
-"   " then override the default layout for section c with your new part
-"   let g:airline_section_c = airline#section#create(['%<', '%f', 'modified', ' ', 'readonly'])
-" endfunction
-" autocmd VimEnter * call AirlineInit()
 
 augroup vimrcEx
-    autocmd!
-    " http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
-    autocmd VimEnter * autocmd WinEnter * let w:created=1
-    autocmd VimEnter * let w:created=1
-    autocmd VimResized * wincmd =
-    " Disable paste mode on leaving insert mode.
-    autocmd InsertLeave * set nopaste
-    autocmd BufWritePre * StripWhitespace
-    autocmd BufReadPost *
-        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
+autocmd!
+" http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
+autocmd VimEnter * autocmd WinEnter * let w:created=1
+autocmd VimEnter * let w:created=1
+autocmd VimResized * wincmd =
+" Disable paste mode on leaving insert mode.
+autocmd InsertLeave * set nopaste
+autocmd BufWritePre * StripWhitespace
+autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
 augroup END
 
 set background=dark
-set clipboard+=unnamed
+set clipboard=unnamed
 set hidden
 set noshowmode
 set noswapfile
@@ -190,6 +175,10 @@ nnoremap <silent> <Leader>wi :StripWhitespace<CR>
 
 vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 nnoremap <leader>c :ccl <bar> lcl<CR>
+
+nmap <silent> <leader>n :TestNearest<CR>
+nmap <silent> <leader>f :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
 
 let g:gitgutter_map_keys = 0
 let g:go_textobj_include_function_doc = 1

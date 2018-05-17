@@ -21,8 +21,8 @@ set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 
 " inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-inoremap <expr> <C-R>=...<CR> mucomplete#popup_exit("\<cr>")
+" inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+" inoremap <expr> <C-R>=...<CR> mucomplete#popup_exit("\<cr>")
 
 augroup mucomplete
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS

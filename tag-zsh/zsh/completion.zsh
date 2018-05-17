@@ -6,7 +6,7 @@ autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
 setopt autocd
-cdpath=($HOME/Projects)
+cdpath=($HOME/Projects $HOME/Sites $HOME/Code)
 
 # https://coderwall.com/p/jpj_6q
 # Search through history for previous commands matching everything up to current

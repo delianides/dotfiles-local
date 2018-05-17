@@ -22,7 +22,7 @@ cask 'mountain-duck'
 cask 'kaleidoscope'
 
 # editor of the ages
-brew 'vim', args: ['with-lua', 'with-python', '']
+brew 'vim', args: ['with-lua', 'with-python', 'with-ruby']
 
 # markdown
 brew 'markdown'
