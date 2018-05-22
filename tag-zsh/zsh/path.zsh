@@ -1,6 +1,6 @@
 # Golang
-export GOPATH="$HOME/Projects/go"
-export GOBIN="$HOME/Projects/go/bin"
+export GOPATH="$HOME/Code/go"
+export GOBIN="$HOME/Code/go/bin"
 
 # Android Dev
 export ANDROID_HOME=/usr/local/opt/android-sdk
