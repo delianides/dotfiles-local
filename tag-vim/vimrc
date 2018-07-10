@@ -19,7 +19,6 @@ map q <Nop>
 cmap w!! w !sudo tee > /dev/null %
 
 call plug#begin('~/.vim/plugged')
-
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
 Plug 'airblade/vim-rooter' " automatically sets vims cwd to svc root
 Plug 'wincent/terminus'
@@ -28,12 +27,15 @@ Plug 'w0rp/ale' " async linting + formatting tool
 Plug 'junegunn/vim-easy-align' " align lines based on args
 Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
 Plug 'AndrewRadev/splitjoin.vim' "join things together
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
 Plug 'eapache/auto-pairs'
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'roxma/nvim-yarp'
+" Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'Raimondi/delimitMate' "closing brackets or braces
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'tpope/vim-endwise' " closes blocks in certain languages
+Plug 'tpope/vim-endwise', { 'for': ['ruby'] } " closes blocks in certain languages
 Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'tpope/vim-sensible' " sensible vim defaults
@@ -51,7 +53,7 @@ Plug 'wakatime/vim-wakatime'
 Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'fatih/vim-go'
 " the following languages are not in polyglot
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/bundle/gocode/nvim/symlink.sh' }
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'jparise/vim-graphql' " GraphQL
 Plug 'flowtype/vim-flow', { 'for': [ 'javascript' ]}
@@ -59,16 +61,18 @@ Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'Quramy/tsuquyomi', { 'for': ['typescript'] }
 Plug 'fatih/vim-hclfmt'
 
-Plug 'rafi/awesome-vim-colorschemes'
+Plug 'jacoborus/tender.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'fatih/molokai'
 
 call plug#end()
 syntax on
-colorscheme molokai
+set termguicolors
+colorscheme tender
 
-let g:rehash256 = 1
-set t_Co=256 "Tell vim we support 256 colours
+let g:lightline = { 'colorscheme': 'tender' }
+
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 augroup vimrcEx
 autocmd!
@@ -85,7 +89,6 @@ autocmd BufReadPost *
     \ endif
 augroup END
 
-set background=dark
 set clipboard=unnamed
 set hidden
 set noshowmode
@@ -155,17 +158,19 @@ noremap L g_
 noremap J 5j
 noremap K 5k
 
-nnoremap <BS> {
-onoremap <BS> {
-vnoremap <BS> {
+" nnoremap <BS> {
+" onoremap <BS> {
+" vnoremap <BS> {
 
-nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
-onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
-vnoremap <CR> }
+" nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+" onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+" vnoremap <CR> }
 
-map <C-d> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
+" Disable useless arrow keys
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
@@ -174,12 +179,19 @@ nnoremap <Down> :echoe "Use j"<CR>
 nnoremap <silent> <Leader>wi :StripWhitespace<CR>
 
 vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
-nnoremap <leader>c :ccl <bar> lcl<CR>
+" nnoremap <leader>c :ccl <bar> lcl<CR>
+
+nmap <leader>d :NERDTreeToggle<CR>
+nmap <leader>tf :NERDTreeFind<CR>
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['\.o$', '\~', '\.pyc$', '\.git$', '\.hg$', '\.DS_Store']
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 nmap <silent> <leader>n :TestNearest<CR>
 nmap <silent> <leader>f :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 
+let g:prettier#exec_cmd_async = 1
 let g:gitgutter_map_keys = 0
 let g:go_textobj_include_function_doc = 1
 let g:go_doc_keywordprg_enabled = 0

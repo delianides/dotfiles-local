@@ -16,7 +16,9 @@ alias re-source="source ~/.localrc"
 
 alias ctags="`brew --prefix`/bin/ctags"
 
-alias tmux="TERM=screen-256color-bce tmux"
+# alias tmux="TERM=screen-256color-bce tmux"
+alias tmux="tmux -2"
+
 # spotify
 alias sp="spotify pause"
 
@@ -66,10 +68,10 @@ function cd () {
 # If just doing `clip`, paste it.
 function clip { [ -t 0 ] && pbpaste || pbcopy;}
 
-alias ..='cd ..'
-alias cd..='cd ..'
-alias cd...='cd ../..'
-alias cd....='cd ../../..'
-alias cd.....='cd ../../../..'
-alias cd/='cd /'
+function archive () {
+  zip ${1}.zip ${1}
+  mv ${1}.zip ~/Dropbox\ \(Personal\)/@Graveyard/
+  rm -rf ${1}
+}
+
 

@@ -46,10 +46,3 @@ dcu(){
   docker-compose up "$@"
 }
 
-aws(){
-	docker run -it --rm \
-		-v $HOME/.aws:/root/.aws \
-		--log-driver none \
-		--name aws \
-		jess/awscli "$@"
-}

@@ -12,6 +12,9 @@ cask 'google-chrome'
 cask 'firefox'
 cask 'alfred'
 cask 'iterm2'
+cask 'transmit'
+cask 'istat-menus'
+cask '1password'
 # cask 'hyper'
 cask 'spotify'
 cask 'phoenix'
@@ -89,6 +92,9 @@ brew 'ssh-copy-id'
 brew 'zsh'
 brew 'zsh-syntax-highlighting'
 
+# font
+brew 'homebrew/cask-fonts/font-fira-code'
+
 # infrastructure as code
 brew 'terraform'
 brew 'nomad'
@@ -115,12 +121,9 @@ mas 'Deliveries'           , id: 924726344
 mas 'Day One'              , id: 1055511498
 mas 'Helium'               , id: 1054607607
 mas 'Calcbot'              , id: 931657367
-mas '1Password'            , id: 443987910
 mas 'Tweetbot'             , id: 557168941
-mas 'Transmit'             , id: 403388562
 mas 'Xcode'                , id: 497799835
 mas 'Reeder'               , id: 880001334
-mas 'Deckset'              , id: 847496013
 mas 'Airmail 3'            , id: 918858936
 mas 'Things 3'             , id: 904280696
 mas 'Permute 2'            , id: 731738567

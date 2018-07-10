@@ -6,7 +6,7 @@ export GOBIN="$HOME/Code/go/bin"
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
 #Homebrew
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:/Users/drew/Library/Python/2.7/bin:$PATH"
 
 export PATH=$HOME/.bin:$PATH
 
