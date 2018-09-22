@@ -73,5 +73,6 @@ function archive () {
   mv ${1}.zip ~/Dropbox\ \(Personal\)/@Graveyard/
   rm -rf ${1}
 }
+# place this after nvm initialization!
 
 

@@ -8,6 +8,7 @@ brew 'awless'
 tap 'caskroom/cask'
 tap 'Homebrew/bundle'
 
+cask 'visual-studio-code'
 cask 'google-chrome'
 cask 'firefox'
 cask 'alfred'
@@ -15,23 +16,24 @@ cask 'iterm2'
 cask 'transmit'
 cask 'istat-menus'
 cask '1password'
-# cask 'hyper'
+cask 'hyper'
 cask 'spotify'
 cask 'phoenix'
 cask 'graphiql'
 cask 'bitbar'
 cask 'dropshare'
-cask 'mountain-duck'
 cask 'kaleidoscope'
 
 # editor of the ages
 brew 'vim', args: ['with-lua', 'with-python', 'with-ruby']
+brew 'nvim'
 
 # markdown
 brew 'markdown'
 
 # version manager
 brew 'nvm'
+brew 'yarn', args: [ 'without-node' ]
 brew 'rbenv'
 
 # ctags
@@ -64,14 +66,13 @@ brew 'keybase'
 # process manager written in go
 brew 'forego'
 
-# go vendoring
-brew 'glide'
 
 # diff in pretty colors
 brew 'colordiff'
 
-# install golang binaries
+# install golang
 brew 'go'
+brew 'glide'
 
 # github bindings in git
 brew 'hub'
@@ -97,7 +98,6 @@ brew 'homebrew/cask-fonts/font-fira-code'
 
 # infrastructure as code
 brew 'terraform'
-brew 'nomad'
 brew 'packer'
 
 # terminal multiplexer
@@ -113,7 +113,6 @@ brew 'wget'
 # boo python
 brew 'python3'
 
-brew 'glide'
 
 # Install Apps from the MAC
 mas 'Pixelmator'           , id: 407963104

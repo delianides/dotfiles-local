@@ -21,7 +21,6 @@ cmap w!! w !sudo tee > /dev/null %
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
 Plug 'airblade/vim-rooter' " automatically sets vims cwd to svc root
-Plug 'wincent/terminus'
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'w0rp/ale' " async linting + formatting tool
 Plug 'junegunn/vim-easy-align' " align lines based on args
@@ -29,9 +28,6 @@ Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
 Plug 'eapache/auto-pairs'
-" Plug 'Shougo/deoplete.nvim'
-" Plug 'roxma/nvim-yarp'
-" Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'Raimondi/delimitMate' "closing brackets or braces
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -52,6 +48,7 @@ Plug 'wakatime/vim-wakatime'
 
 Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'fatih/vim-go'
+Plug 'MaxMEllon/vim-jsx-pretty'
 " the following languages are not in polyglot
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'ap/vim-css-color' " CSS Hex Color
@@ -61,15 +58,28 @@ Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'Quramy/tsuquyomi', { 'for': ['typescript'] }
 Plug 'fatih/vim-hclfmt'
 
-Plug 'jacoborus/tender.vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'fatih/molokai'
+Plug 'NLKNguyen/papercolor-theme'
+
 Plug 'itchyny/lightline.vim'
+
 
 call plug#end()
 syntax on
 set termguicolors
-colorscheme tender
+colorscheme molokai
 
-let g:lightline = { 'colorscheme': 'tender' }
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -88,6 +98,8 @@ autocmd BufReadPost *
     \   exe "normal g`\"" |
     \ endif
 augroup END
+
+autocmd VimEnter hi xmlAttrib cterm=italic ctermfg=214
 
 set clipboard=unnamed
 set hidden
@@ -198,9 +210,12 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 let g:AutoPairsUseInsertedCount = 1
 
+let g:polyglot_disabled = ['jsx']
+
 let g:tmux_navigator_disable_when_zoomed = 1
-let g:jsx_ext_required = 0
+let g:vim_jsx_pretty_colorful_config = 1
 let g:vim_json_syntax_conceal = 0
+let g:javascript_plugin_flow = 1
 
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
 let g:markdownfmt_command = 'mdfmt'
