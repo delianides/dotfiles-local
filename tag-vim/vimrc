@@ -19,11 +19,10 @@ map q <Nop>
 cmap w!! w !sudo tee > /dev/null %
 
 call plug#begin('~/.vim/plugged')
+
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
-Plug 'airblade/vim-rooter' " automatically sets vims cwd to svc root
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'w0rp/ale' " async linting + formatting tool
-Plug 'junegunn/vim-easy-align' " align lines based on args
 Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
@@ -49,6 +48,7 @@ Plug 'wakatime/vim-wakatime'
 Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'fatih/vim-go'
 Plug 'MaxMEllon/vim-jsx-pretty'
+
 " the following languages are not in polyglot
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'ap/vim-css-color' " CSS Hex Color
@@ -56,14 +56,13 @@ Plug 'jparise/vim-graphql' " GraphQL
 Plug 'flowtype/vim-flow', { 'for': [ 'javascript' ]}
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'Quramy/tsuquyomi', { 'for': ['typescript'] }
+Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-hclfmt'
 
-Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'fatih/molokai'
-Plug 'NLKNguyen/papercolor-theme'
-
 Plug 'itchyny/lightline.vim'
-
+Plug 'Yggdroot/indentLine'
+Plug 'RRethy/vim-illuminate'
 
 call plug#end()
 syntax on
@@ -170,13 +169,8 @@ noremap L g_
 noremap J 5j
 noremap K 5k
 
-" nnoremap <BS> {
-" onoremap <BS> {
-" vnoremap <BS> {
-
-" nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
-" onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
-" vnoremap <CR> }
+vmap < <gv
+vmap > >gv
 
 " Disable useless arrow keys
 inoremap <Up> <NOP>
@@ -191,7 +185,6 @@ nnoremap <Down> :echoe "Use j"<CR>
 nnoremap <silent> <Leader>wi :StripWhitespace<CR>
 
 vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
-" nnoremap <leader>c :ccl <bar> lcl<CR>
 
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>tf :NERDTreeFind<CR>
@@ -203,8 +196,16 @@ nmap <silent> <leader>n :TestNearest<CR>
 nmap <silent> <leader>f :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 
-let g:prettier#exec_cmd_async = 1
+
+set signcolumn=yes
 let g:gitgutter_map_keys = 0
+let g:conflict_marker_enable_mappings = 0
+let g:gitgutter_sign_added = '│'
+let g:gitgutter_sign_modified = '│'
+let g:gitgutter_sign_removed = '│'
+let g:gitgutter_sign_removed_first_line = '│'
+let g:gitgutter_sign_modified_removed = '│'
+
 let g:go_textobj_include_function_doc = 1
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
@@ -215,7 +216,6 @@ let g:polyglot_disabled = ['jsx']
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:vim_json_syntax_conceal = 0
-let g:javascript_plugin_flow = 1
 
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
 let g:markdownfmt_command = 'mdfmt'
