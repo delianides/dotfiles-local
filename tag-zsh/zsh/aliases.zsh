@@ -19,6 +19,8 @@ alias ctags="`brew --prefix`/bin/ctags"
 # alias tmux="TERM=screen-256color-bce tmux"
 alias tmux="tmux -2"
 
+alias ssh='TERM=xterm-256color ssh'
+
 # spotify
 alias sp="spotify pause"
 

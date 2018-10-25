@@ -60,14 +60,17 @@ Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-hclfmt'
 
 Plug 'fatih/molokai'
+" Plug 'crusoexia/vim-monokai'
 Plug 'itchyny/lightline.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'RRethy/vim-illuminate'
 
 call plug#end()
 syntax on
-set termguicolors
 colorscheme molokai
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 
 let g:lightline = {
       \ 'colorscheme': 'powerline',
@@ -79,9 +82,6 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
-
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 augroup vimrcEx
 autocmd!
@@ -145,6 +145,7 @@ if has('linebreak')
   let &showbreak='↳ '      " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
 endif
 
+highlight Comment cterm=italic
 autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
 autocmd FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
 autocmd BufNewFile,BufRead *.rb setlocal sw=2 smartindent ts=2
@@ -211,14 +212,16 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 let g:AutoPairsUseInsertedCount = 1
 
-let g:polyglot_disabled = ['jsx']
+let g:polyglot_disabled = ['jsx', 'typescript']
+let g:flow#showquickfix = 0
+let g:typescript_indent_disable = 1
+let g:tsuquyomi_disable_quickfix = 1
 
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:vim_json_syntax_conceal = 0
 
-let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
-let g:markdownfmt_command = 'mdfmt'
+let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
 let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'

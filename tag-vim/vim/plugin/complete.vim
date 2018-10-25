@@ -21,8 +21,8 @@ set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 
 let g:AutoPairsMapCR = 0
-imap <Plug>MyCR <Plug>(MUcompleteCR)<Plug>AutoPairsReturn
-imap <cr> <Plug>MyCR
+" imap <Plug>MyCR <Plug>(MUcompleteCR)<Plug>AutoPairsReturn
+" imap <cr> <Plug>MyCR
 
 let g:AutoPairsMapSpace = 0
 imap <silent> <expr> <space> pumvisible()

@@ -10,8 +10,6 @@ let g:ale_fixers = {
 \   'markdown': [ 'prettier' ],
 \}
 
-let g:ale_completion_enabled = 1
-
 " let g:ale_linters_ignore = { 'typescript': [ 'tslint' ] }
 
 let g:ale_sign_column_always = 1
@@ -33,5 +31,5 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_set_highlights = 0
 let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 0
+let g:ale_set_quickfix = 1
 

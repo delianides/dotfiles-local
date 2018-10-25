@@ -17,10 +17,8 @@ let g:fzf_action = {
   \ 'enter': 'vsplit',
   \ }
 
-nnoremap <silent> <leader>g :GFiles<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <C-f> :Files<CR>
-nmap ; :Buffers<CR>
-nnoremap ? :GFiles<CR>
+nnoremap <silent> <C-b> :Buffers<CR>
+nnoremap <silent> <C-f> :GitFiles<CR>
+nnoremap <silent> <C-p> :Ag
 
 
