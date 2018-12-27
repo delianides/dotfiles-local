@@ -26,7 +26,6 @@ cask 'kaleidoscope'
 
 # editor of the ages
 brew 'vim', args: ['with-lua', 'with-python', 'with-ruby']
-brew 'nvim'
 
 # markdown
 brew 'markdown'

@@ -9,6 +9,7 @@ alias du="du -cksh"
 alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
+alias rm="trash"
 
 alias aci="asciinema"
 

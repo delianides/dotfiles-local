@@ -8,6 +8,7 @@ let g:ale_fixers = {
 \   'typescript': ['prettier', 'tslint'],
 \   'graphql': [ 'prettier' ],
 \   'markdown': [ 'prettier' ],
+\   'json': ['prettier']
 \}
 
 " let g:ale_linters_ignore = { 'typescript': [ 'tslint' ] }
@@ -33,3 +34,5 @@ let g:ale_set_highlights = 0
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 
+nnoremap <leader>ad :ALEDetail<CR>
+nnoremap <leader>gd :ALEGoToDefinitionInVSplit<CR>

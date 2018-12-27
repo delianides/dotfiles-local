@@ -2,7 +2,7 @@
 let g:tmuxcomplete#trigger = 'omnifunc'
 let g:mucomplete#enable_auto_at_startup = 1
 " let g:mucomplete#no_mappings = 1
-let g:mucomplete#chains = { 'default' : ['file', 'omni', 'c-n', 'c-p' ] }
+let g:mucomplete#chains = { 'default' : ['file', 'c-n', 'c-p', 'omni'], 'txt': ['file'], 'md': ['file'], 'yml': ['file'], 'yaml': [ 'file' ] }
 
 " should be menu,menuone,noinsert,noselect
 " set completeopt-=preview
@@ -16,14 +16,11 @@ set wildmode=list:longest,full
 "	kspell  use the currently active spell checking |spell|
 "   i	scan current and included files
 "   t   tag completion
-set complete-=t
+set complete-=t,w,b,u
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 
 let g:AutoPairsMapCR = 0
-" imap <Plug>MyCR <Plug>(MUcompleteCR)<Plug>AutoPairsReturn
-" imap <cr> <Plug>MyCR
-
 let g:AutoPairsMapSpace = 0
 imap <silent> <expr> <space> pumvisible()
 	\ ? "<space>"

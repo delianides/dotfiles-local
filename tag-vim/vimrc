@@ -26,8 +26,9 @@ Plug 'w0rp/ale' " async linting + formatting tool
 Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
-Plug 'eapache/auto-pairs'
-Plug 'lifepillar/vim-mucomplete'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+" Plug 'lifepillar/vim-mucomplete'
 Plug 'Raimondi/delimitMate' "closing brackets or braces
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-endwise', { 'for': ['ruby'] } " closes blocks in certain languages
@@ -37,6 +38,7 @@ Plug 'tpope/vim-sensible' " sensible vim defaults
 Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
+Plug 'tpope/vim-unimpaired' " Moving around
 Plug 'janko-m/vim-test' " run tests
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree'
@@ -47,13 +49,13 @@ Plug 'wakatime/vim-wakatime'
 
 Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'fatih/vim-go'
-Plug 'MaxMEllon/vim-jsx-pretty'
 
 " the following languages are not in polyglot
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'jparise/vim-graphql' " GraphQL
-Plug 'flowtype/vim-flow', { 'for': [ 'javascript' ]}
+" Plug 'flowtype/vim-flow', { 'for': [ 'javascript' ]}
+Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascript', 'jsx' ] }
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'Quramy/tsuquyomi', { 'for': ['typescript'] }
 Plug 'leafgarland/typescript-vim'
@@ -62,6 +64,7 @@ Plug 'fatih/vim-hclfmt'
 Plug 'fatih/molokai'
 " Plug 'crusoexia/vim-monokai'
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'Yggdroot/indentLine'
 Plug 'RRethy/vim-illuminate'
 
@@ -76,11 +79,24 @@ let g:lightline = {
       \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
       \ },
+      \ 'component_expand': {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ },
+      \ 'component_type': {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
       \ }
 
 augroup vimrcEx
@@ -89,8 +105,6 @@ autocmd!
 autocmd VimEnter * autocmd WinEnter * let w:created=1
 autocmd VimEnter * let w:created=1
 autocmd VimResized * wincmd =
-" Disable paste mode on leaving insert mode.
-autocmd InsertLeave * set nopaste
 autocmd BufWritePre * StripWhitespace
 autocmd BufReadPost *
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
@@ -161,9 +175,14 @@ autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufRead *.ino set filetype=c
 autocmd BufNewFile,BufRead *.svg set filetype=xml
 autocmd BufNewFile,BufRead .eslintrc set filetype=json
-autocmd BufNewFile,BufRead *.graphcool set filetype=graphql
 autocmd BufNewFile,BufRead .babelrc set filetype=json
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
+
+" Smart paste
+nnoremap <C-v> "+P=']
+inoremap <C-v> <C-o>"+P<C-o>=']
+" Disable paste mode on leaving insert mode.
+autocmd InsertLeave * set nopaste
 
 noremap H ^
 noremap L g_
@@ -183,9 +202,18 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
+" Bubble single lines
+nmap <C-K> [e
+nmap <C-J> ]e
+" Bubble multiple lines
+vmap <C-K> [egv
+vmap <C-J> ]egv
+
 nnoremap <silent> <Leader>wi :StripWhitespace<CR>
 
 vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>tf :NERDTreeFind<CR>
@@ -212,7 +240,7 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 let g:AutoPairsUseInsertedCount = 1
 
-let g:polyglot_disabled = ['jsx', 'typescript']
+let g:polyglot_disabled = ['typescript', 'markdown']
 let g:flow#showquickfix = 0
 let g:typescript_indent_disable = 1
 let g:tsuquyomi_disable_quickfix = 1
