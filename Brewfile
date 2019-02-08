@@ -24,6 +24,9 @@ cask 'dropshare'
 cask 'kaleidoscope'
 cask 'permute'
 cask 'vlc'
+cask 'ngrok'
+cask 'sequel-pro'
+cask 'spotify'
 
 # editor of the ages
 brew 'vim', args: ['with-lua', 'with-python', 'with-ruby']
@@ -43,6 +46,7 @@ brew 'ctags'
 brew 'fzf'
 
 # foreman for go
+brew 'go'
 brew 'forego'
 
 # directory based .env files
@@ -62,10 +66,6 @@ brew 'tig'
 # pgp
 brew 'gpg'
 brew 'keybase'
-
-# process manager written in go
-brew 'forego'
-
 
 # diff in pretty colors
 brew 'colordiff'
