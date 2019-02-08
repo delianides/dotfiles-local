@@ -27,16 +27,17 @@ cask 'vlc'
 cask 'ngrok'
 cask 'sequel-pro'
 cask 'spotify'
+cask '1password'
 
 # editor of the ages
-brew 'vim', args: ['with-lua', 'with-python', 'with-ruby']
+brew 'vim'
 
 # markdown
 brew 'markdown'
 
 # version manager
 brew 'nvm'
-brew 'yarn', args: [ 'without-node' ]
+brew 'yarn'
 brew 'rbenv'
 
 # ctags
@@ -65,7 +66,7 @@ brew 'tig'
 
 # pgp
 brew 'gpg'
-brew 'keybase'
+cask 'keybase'
 
 # diff in pretty colors
 brew 'colordiff'
@@ -126,5 +127,4 @@ mas 'Slack'                , id: 803453959
 mas 'Spark'                , id: 1176895641
 mas 'Tweetbot 3'           , id: 1384080005
 mas 'Ulysses'              , id: 1225570693
-mas '1Password'            , id: 1333542190
 
