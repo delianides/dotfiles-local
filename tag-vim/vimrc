@@ -179,8 +179,8 @@ autocmd BufNewFile,BufRead .babelrc set filetype=json
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
 
 " Smart paste
-nnoremap <C-v> "+P=']
-inoremap <C-v> <C-o>"+P<C-o>=']
+" nnoremap <C-v> "+P=']
+" inoremap <C-v> <C-o>"+P<C-o>=']
 " Disable paste mode on leaving insert mode.
 autocmd InsertLeave * set nopaste
 
