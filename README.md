@@ -24,6 +24,26 @@ $ tic -x xterm-256color-italic.terminfo
 Make sure italics are enabled for iTerm and you're using a font that supports
 them. (Fira, Dank Mono);
 
+For iTerm:
+
+`Go to Preferences > Profiles > Default.`
+`Make sure Text > Italic text allowed is checked.``
+`Set Terminal > Report Terminal Type to xterm-256color-italic.``
+
+This essentially sets the value of the environment variable TERM, which you could also set in your ~/.bashrc etc, depending on how you want to store your settings.
+
+For Tmux
+You need at least about version 2.5 (2.3 at least prevents backgrounds from working).
+
+Add this to your ~/.tmux.conf:
+
+```
+set -g default-terminal 'tmux-256color'
+set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+```
+
+[Source](https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be)
+
 
 Usage
 -----
