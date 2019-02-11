@@ -58,3 +58,5 @@
 [merge]
   tool = Kaleidoscope
 
+[gpg]
+	program = gpg
