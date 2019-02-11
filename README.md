@@ -11,8 +11,19 @@ Install Xcode or the command line tools so the required libraries are available 
 ```
 $ git clone https://github.com/delianides/dotfiles
 $ brew bundle dotfiles/Brewfile
-$ rcup -d dotfiles -d -x README.md -x LICENSE -x Brewfile
+$ rcup -d dotfiles -x README.md -x LICENSE -x Brewfile
 ```
+
+Tmux is configured for italics. Strange things might happen if you don't run:
+
+```
+$ tic -x tmux-256color.terminfo
+$ tic -x xterm-256color-italic.terminfo
+```
+
+Make sure italics are enabled for iTerm and you're using a font that supports
+them. (Fira, Dank Mono);
+
 
 Usage
 -----

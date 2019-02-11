@@ -28,6 +28,7 @@ cask 'ngrok'
 cask 'sequel-pro'
 cask 'spotify'
 cask '1password'
+cask 'now'
 
 # editor of the ages
 brew 'vim'
@@ -121,10 +122,10 @@ mas 'Helium'               , id: 1054607607
 mas 'Calcbot'              , id: 931657367
 mas 'Xcode'                , id: 497799835
 mas 'Reeder'               , id: 880001334
-mas 'Airmail 3'            , id: 918858936
 mas 'Things 3'             , id: 904280696
 mas 'Slack'                , id: 803453959
 mas 'Spark'                , id: 1176895641
 mas 'Tweetbot 3'           , id: 1384080005
 mas 'Ulysses'              , id: 1225570693
+mas 'Fantastical 2'        , id: 975937182
 

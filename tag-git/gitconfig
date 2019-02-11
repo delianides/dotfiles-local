@@ -3,7 +3,7 @@
 [user]
   name = delianides
   email = github@delianides.com
-	signingkey = 9D6B48701F91E7C0
+	signingkey = 176DA1CCB7283C28
 [alias]
   co = checkout
   count   = !git shortlog -sn
