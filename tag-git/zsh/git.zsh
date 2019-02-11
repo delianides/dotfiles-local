@@ -2,6 +2,9 @@
 # Git #
 #######
 
+# For Signing
+export GPG_TTY=$(tty)
+
 # By itself: run `git status`
 # With arguments: acts like `git`
 function g {
