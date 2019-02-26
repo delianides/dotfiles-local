@@ -29,6 +29,10 @@ cask 'sequel-pro'
 cask 'spotify'
 cask '1password'
 cask 'now'
+cask 'spectrum'
+cask 'postman'
+cask 'imageoptim'
+cask 'android-studio'
 
 # editor of the ages
 brew 'vim'
@@ -46,6 +50,8 @@ brew 'ctags'
 
 # fuzzy finder searching
 brew 'fzf'
+brew 'the_silver_searcher'
+brew 'fd'
 
 # foreman for go
 brew 'go'

@@ -20,11 +20,11 @@ set complete-=t,w,b,u
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 
-let g:AutoPairsMapCR = 0
-let g:AutoPairsMapSpace = 0
-imap <silent> <expr> <space> pumvisible()
-	\ ? "<space>"
-	\ : "<c-r>=AutoPairsSpace()<cr>"
+" let g:AutoPairsMapCR = 0
+" let g:AutoPairsMapSpace = 0
+" imap <silent> <expr> <space> pumvisible()
+" 	\ ? "<space>"
+" 	\ : "<c-r>=AutoPairsSpace()<cr>"
 
 augroup mucomplete
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS

@@ -26,7 +26,7 @@ Plug 'w0rp/ale' " async linting + formatting tool
 Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 " Plug 'lifepillar/vim-mucomplete'
 Plug 'Raimondi/delimitMate' "closing brackets or braces
@@ -239,7 +239,6 @@ let g:gitgutter_sign_modified_removed = '│'
 let g:go_textobj_include_function_doc = 1
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
-let g:AutoPairsUseInsertedCount = 1
 
 let g:polyglot_disabled = ['typescript', 'markdown']
 let g:flow#showquickfix = 0
