@@ -70,6 +70,7 @@ brew 'git'
 
 # better git logs
 brew 'tig'
+brew 'pre-commit'
 
 # pgp
 brew 'gpg'
