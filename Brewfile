@@ -107,6 +107,7 @@ brew 'homebrew/cask-fonts/font-fira-code'
 
 # infrastructure as code
 brew 'terraform'
+brew 'terraform-docs'
 brew 'packer'
 
 # terminal multiplexer
