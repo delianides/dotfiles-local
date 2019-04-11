@@ -122,6 +122,8 @@ brew 'wget'
 
 brew 'python3'
 
+brew 'ffmpeg'
+
 # Install Apps from the MAC
 mas 'Pixelmator'           , id: 407963104
 mas 'Deliveries'           , id: 924726344
