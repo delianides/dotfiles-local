@@ -34,9 +34,11 @@ cask 'postman'
 cask 'imageoptim'
 cask 'android-studio'
 cask 'marshallofsound-google-play-music-player'
+cask 'fork'
 
 # editor of the ages
 brew 'vim'
+brew 'nvim'
 
 # markdown
 brew 'markdown'
