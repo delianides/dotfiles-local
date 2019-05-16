@@ -33,6 +33,7 @@ cask 'spectrum'
 cask 'postman'
 cask 'imageoptim'
 cask 'android-studio'
+cask 'marshallofsound-google-play-music-player'
 
 # editor of the ages
 brew 'vim'

@@ -15,6 +15,7 @@
 	lazy-standup = !git standup | say
 	which-branch = !git rev-parse --abbrev-ref HEAD
 	copy-branch = !git which-branch | pbcopy
+	nflxprofile = config user.email \"drewd@netflixcontractors.com\"
 [color]
   diff = auto
   status = auto
