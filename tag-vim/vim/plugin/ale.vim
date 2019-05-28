@@ -4,8 +4,9 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
 \   'graphql': [ 'prettier' ],
 \   'markdown': [ 'prettier' ],
 \   'json': ['prettier']
@@ -15,9 +16,6 @@ let g:ale_fixers = {
 
 let g:ale_sign_column_always = 1
 let g:ale_javascript_eslint_use_global = 0
-let g:ale_javascript_prettier_use_global = 0
-" let g:ale_javascript_prettier_options = '--trailing-comma all'
-let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fix_on_save = 1
 
 hi ALEErrorSign guifg=red
@@ -36,3 +34,4 @@ let g:ale_set_quickfix = 1
 
 nnoremap <leader>ad :ALEDetail<CR>
 nnoremap <leader>gd :ALEGoToDefinitionInVSplit<CR>
+nnoremap <leader>gh :ALEHover<CR>

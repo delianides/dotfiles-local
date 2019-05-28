@@ -18,6 +18,7 @@ alias re-source="source ~/.localrc"
 alias ctags="`brew --prefix`/bin/ctags"
 
 alias tmux="tmux -2"
+alias vim="nvim"
 
 alias ssh='TERM=xterm-256color ssh'
 

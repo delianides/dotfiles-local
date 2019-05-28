@@ -23,14 +23,11 @@ call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
 Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'w0rp/ale' " async linting + formatting tool
-Plug 'lambdalisue/vim-gista', { 'on': 'Gista' } " manipulate gists in vim
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
 " Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-" Plug 'lifepillar/vim-mucomplete'
 Plug 'Raimondi/delimitMate' "closing brackets or braces
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-endwise', { 'for': ['ruby'] } " closes blocks in certain languages
 Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-vinegar' " netrw play nicely
@@ -40,33 +37,35 @@ Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
 Plug 'janko-m/vim-test' " run tests
-Plug 'ntpeters/vim-better-whitespace'
+Plug 'Yggdroot/indentLine'
+Plug 'RRethy/vim-illuminate'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'wakatime/vim-wakatime'
 
-Plug 'sheerun/vim-polyglot' " includes most language packs
+" Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'fatih/vim-go'
-
-" the following languages are not in polyglot
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-Plug 'ap/vim-css-color' " CSS Hex Color
-Plug 'jparise/vim-graphql' " GraphQL
-" Plug 'flowtype/vim-flow', { 'for': [ 'javascript' ]}
-Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascript', 'jsx' ] }
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-Plug 'Quramy/tsuquyomi', { 'for': ['typescript'] }
-Plug 'leafgarland/typescript-vim'
-Plug 'fatih/vim-hclfmt'
+Plug 'jparise/vim-graphql' " GraphQL
+Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascript', 'jsx' ]}
+Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'tsx' ]}
+Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'tsx']}
+" Plug 'HerringtonDarkholme/yats.vim'
+Plug 'ap/vim-css-color' " CSS Hex Color
+" Plug 'fatih/vim-hclfmt', { 'for': ''}
+
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+
+" For async completion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 Plug 'fatih/molokai'
 " Plug 'crusoexia/vim-monokai'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
-Plug 'Yggdroot/indentLine'
-Plug 'RRethy/vim-illuminate'
 
 call plug#end()
 syntax on
@@ -106,7 +105,6 @@ autocmd!
 autocmd VimEnter * autocmd WinEnter * let w:created=1
 autocmd VimEnter * let w:created=1
 autocmd VimResized * wincmd =
-autocmd BufWritePre * StripWhitespace
 autocmd BufReadPost *
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
@@ -240,7 +238,7 @@ let g:go_textobj_include_function_doc = 1
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 
-let g:polyglot_disabled = ['typescript', 'markdown']
+" let g:polyglot_disabled = ['typescript', 'markdown']
 let g:flow#showquickfix = 0
 let g:typescript_indent_disable = 1
 let g:tsuquyomi_disable_quickfix = 1
@@ -254,3 +252,6 @@ let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_banner=0        " disable annoying banner
+
+let g:deoplete#enable_at_startup = 1
+
