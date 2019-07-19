@@ -25,7 +25,6 @@ Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'w0rp/ale' " async linting + formatting tool
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
-" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'Raimondi/delimitMate' "closing brackets or braces
 Plug 'tpope/vim-endwise', { 'for': ['ruby'] } " closes blocks in certain languages
@@ -37,7 +36,6 @@ Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
 Plug 'janko-m/vim-test' " run tests
-Plug 'Yggdroot/indentLine'
 Plug 'RRethy/vim-illuminate'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -45,7 +43,7 @@ Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'wakatime/vim-wakatime'
 
-" Plug 'sheerun/vim-polyglot' " includes most language packs
+Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'jparise/vim-graphql' " GraphQL
@@ -235,7 +233,6 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 
 let g:flow#showquickfix = 0
-let g:typescript_indent_disable = 1
 
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:vim_jsx_pretty_colorful_config = 1
@@ -246,4 +243,3 @@ let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_banner=0        " disable annoying banner
-

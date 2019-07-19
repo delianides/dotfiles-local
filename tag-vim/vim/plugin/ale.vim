@@ -12,7 +12,7 @@ let g:ale_fixers = {
 \   'json': ['prettier']
 \}
 
-" let g:ale_linters_ignore = { 'typescript': [ 'tslint' ] }
+let g:ale_linters_ignore = { 'typescript': [ 'tslint' ] }
 
 let g:ale_sign_column_always = 1
 let g:ale_javascript_eslint_use_global = 0

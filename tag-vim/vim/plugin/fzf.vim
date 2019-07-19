@@ -16,6 +16,6 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 nnoremap <silent> <C-b> :Buffers<CR>
 nnoremap <silent> <C-f> :ProjectFiles<CR>
-nnoremap <silent> <C-p> :Ag
+nnoremap <silent> <C-p> :Ag<CR>
 
 
