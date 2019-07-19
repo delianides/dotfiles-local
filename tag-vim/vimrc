@@ -25,7 +25,6 @@ Plug 'airblade/vim-gitgutter' " show git changes in column
 Plug 'w0rp/ale' " async linting + formatting tool
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
-" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'Raimondi/delimitMate' "closing brackets or braces
 Plug 'tpope/vim-endwise', { 'for': ['ruby'] } " closes blocks in certain languages
@@ -37,7 +36,6 @@ Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
 Plug 'janko-m/vim-test' " run tests
-Plug 'Yggdroot/indentLine'
 Plug 'RRethy/vim-illuminate'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -45,25 +43,21 @@ Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'wakatime/vim-wakatime'
 
-" Plug 'sheerun/vim-polyglot' " includes most language packs
+Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'jparise/vim-graphql' " GraphQL
 Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascript', 'jsx' ]}
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'tsx' ]}
 Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'tsx']}
-" Plug 'HerringtonDarkholme/yats.vim'
+Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'ap/vim-css-color' " CSS Hex Color
-" Plug 'fatih/vim-hclfmt', { 'for': ''}
 
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-
 " For async completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 Plug 'fatih/molokai'
-" Plug 'crusoexia/vim-monokai'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 
@@ -158,7 +152,7 @@ if has('linebreak')
   let &showbreak='↳ '      " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
 endif
 
-highlight Comment cterm=italic
+" highlight Comment cterm=italic
 autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
 autocmd FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
 autocmd BufNewFile,BufRead *.rb setlocal sw=2 smartindent ts=2
@@ -238,20 +232,14 @@ let g:go_textobj_include_function_doc = 1
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 
-" let g:polyglot_disabled = ['typescript', 'markdown']
 let g:flow#showquickfix = 0
-let g:typescript_indent_disable = 1
-let g:tsuquyomi_disable_quickfix = 1
 
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:vim_jsx_pretty_colorful_config = 1
-let g:vim_json_syntax_conceal = 0
 
 let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
+let g:vim_markdown_conceal_code_blocks = 0
 let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_banner=0        " disable annoying banner
-
-let g:deoplete#enable_at_startup = 1
-

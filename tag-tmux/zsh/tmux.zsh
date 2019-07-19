@@ -34,3 +34,17 @@ _tmux_session_exists(){
 	sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
 	echo $sessions | grep -q "$session_name"
 }
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
+
+export FZF_COMPLETION_TRIGGER=';;'
+
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}

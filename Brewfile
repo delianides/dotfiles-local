@@ -34,6 +34,7 @@ cask 'postman'
 cask 'imageoptim'
 cask 'android-studio'
 cask 'marshallofsound-google-play-music-player'
+cask 'dash'
 cask 'fork'
 
 # editor of the ages
