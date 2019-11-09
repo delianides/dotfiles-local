@@ -22,7 +22,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
 Plug 'w0rp/ale' " async linting + formatting tool
-Plug 'airblade/vim-gitgutter', { 'commit': 'c75c83df531881008f8cf903eab7cd68bc19ff7a' } " show git changes in column
+Plug 'airblade/vim-gitgutter' ", { 'commit': 'c75c83df531881008f8cf903eab7cd68bc19ff7a' } show git changes in column
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
 Plug 'junegunn/vim-easy-align'
@@ -35,26 +35,21 @@ Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
-Plug 'janko-m/vim-test' " run tests
+Plug 'janko/vim-test' " run tests
 Plug 'RRethy/vim-illuminate'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
-Plug 'wakatime/vim-wakatime'
 
 Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'fatih/vim-go'
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
+" Plug 'herringtondarkholme/yats', { 'for': ['typescript']}
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-Plug 'jparise/vim-graphql' " GraphQL
-Plug 'maxmellon/vim-jsx-pretty', { 'for': [ 'javascript', 'jsx' ]}
-Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'tsx' ]}
-Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'tsx']}
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'ap/vim-css-color' " CSS Hex Color
-
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-" For async completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'fatih/molokai'
@@ -64,9 +59,8 @@ Plug 'maximbaz/lightline-ale'
 call plug#end()
 syntax on
 colorscheme molokai
-let g:rehash256 = 1
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
 let g:lightline = {
@@ -112,7 +106,8 @@ set hidden
 set noshowmode
 set noswapfile
 set nojoinspaces           " don't autoinsert two spaces after '.', '?', '!' for join command
-set relativenumber number
+set relativenumber
+set number
 set tabstop=2 shiftwidth=2 expandtab
 set laststatus=2
 set wrap linebreak nolist
@@ -214,20 +209,40 @@ let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.o$', '\~', '\.pyc$', '\.git$', '\.hg$', '\.DS_Store']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-nmap <silent> <leader>n :TestNearest<CR>
-nmap <silent> <leader>f :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
+let g:root_markers = ['package.json', '.git/']
+function! s:RunVimTest(cmd)
+    " I guess this part could be replaced by projectionist#project_root
+    for marker in g:root_markers
+        let marker_file = findfile(marker, expand('%:p:h') . ';')
+        if strlen(marker_file) > 0
+            let g:test#project_root = fnamemodify(marker_file, ":p:h")
+            break
+        endif
+        let marker_dir = finddir(marker, expand('%:p:h') . ';')
+        if strlen(marker_dir) > 0
+            let g:test#project_root = fnamemodify(marker_dir, ":p:h")
+            break
+        endif
+    endfor
 
+    execute a:cmd
+endfunction
+
+nnoremap <leader>f :call <SID>RunVimTest('TestFile')<cr>
+nnoremap <leader>n :call <SID>RunVimTest('TestNearest')<cr>
+nnoremap <leader>a :call <SID>RunVimTest('TestSuite')<cr>
 
 set signcolumn=yes
-let g:gitgutter_map_keys = 0
+" let g:gitgutter_map_keys = 0
 let g:conflict_marker_enable_mappings = 0
-let g:gitgutter_highlight_linenrs = 1
-let g:gitgutter_sign_added = '│'
-let g:gitgutter_sign_modified = '│'
-let g:gitgutter_sign_removed = '│'
-let g:gitgutter_sign_removed_first_line = '│'
-let g:gitgutter_sign_modified_removed = '│'
+" let g:gitgutter_highlight_linenrs = 1
+" let g:gitgutter_sign_added = '│'
+" let g:gitgutter_sign_modified = '│'
+" let g:gitgutter_sign_removed = '│'
+" let g:gitgutter_sign_removed_first_line = '│'
+" let g:gitgutter_sign_modified_removed = '│'
+
+let g:polyglot_disabled = ['typescript']
 
 let g:go_textobj_include_function_doc = 1
 let g:go_doc_keywordprg_enabled = 0
@@ -236,7 +251,6 @@ let g:go_fmt_command = "goimports"
 let g:flow#showquickfix = 0
 
 let g:tmux_navigator_disable_when_zoomed = 1
-let g:vim_jsx_pretty_colorful_config = 1
 
 let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
 let g:vim_markdown_conceal_code_blocks = 0
