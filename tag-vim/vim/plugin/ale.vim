@@ -1,6 +1,7 @@
 let g:ale_linters = {
 \   'javascript': ['eslint', 'flow'],
-\   'typescript': ['eslint', 'tsserver'],
+\   'typescript': ['eslint', 'tslint', 'tsserver'],
+\   'go': ['gopls', 'golint'],
 \}
 
 let g:ale_fixers = {
@@ -9,10 +10,11 @@ let g:ale_fixers = {
 \   'typescript': ['eslint'],
 \   'graphql': [ 'prettier' ],
 \   'markdown': [ 'prettier' ],
-\   'json': ['prettier']
+\   'json': ['prettier'],
+\   'go': ['goimports'],
 \}
 
-let g:ale_linters_ignore = { 'typescript': [ 'tslint' ] }
+" let g:ale_linters_ignore = { 'typescript': [ 'tslint' ] }
 
 let g:ale_sign_column_always = 1
 let g:ale_javascript_eslint_use_global = 0
