@@ -37,6 +37,8 @@ cask 'marshallofsound-google-play-music-player'
 cask 'dash'
 cask 'fork'
 cask 'figma'
+cask 'station'
+cask 'pgadmin4'
 
 # editor of the ages
 brew 'vim'
