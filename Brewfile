@@ -10,7 +10,7 @@ tap 'Homebrew/bundle'
 
 cask 'visual-studio-code'
 cask 'google-chrome'
-cask 'firefox'
+cask 'firefox-developer-edition'
 cask 'alfred'
 cask 'iterm2'
 cask 'transmit'
@@ -36,6 +36,9 @@ cask 'android-studio'
 cask 'marshallofsound-google-play-music-player'
 cask 'dash'
 cask 'fork'
+cask 'figma'
+cask 'station'
+cask 'pgadmin4'
 
 # editor of the ages
 brew 'vim'
