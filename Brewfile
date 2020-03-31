@@ -59,6 +59,7 @@ brew 'ctags'
 brew 'fzf'
 brew 'the_silver_searcher'
 brew 'fd'
+brew 'ripgrep'
 
 # foreman for go
 brew 'go'

@@ -2,6 +2,7 @@
 # ALIASES #
 ###########
 
+alias npm="NEWT_SKIP_VPNCHECK=1 newt exec npm"
 alias vim="nvim"
 alias qq="cd . && source ~/.zshrc"
 alias ls="ls -FGh"
@@ -76,6 +77,3 @@ function archive () {
   mv ${1}.zip ~/Dropbox\ \(Personal\)/@Graveyard/
   rm -rf ${1}
 }
-# place this after nvm initialization!
-
-
