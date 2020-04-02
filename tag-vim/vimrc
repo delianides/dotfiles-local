@@ -37,13 +37,15 @@ Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
 Plug 'janko/vim-test' " run tests
 Plug 'RRethy/vim-illuminate'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 
 Plug 'fatih/vim-go', { 'for': ['go', 'golang']}
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
+Plug 'pangloss/vim-javascript', { 'for': ['javascript']}
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
 Plug 'sheerun/vim-polyglot' " includes most language packs
 
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
@@ -256,17 +258,8 @@ let g:gitgutter_sign_modified_removed = '│'
 
 let g:polyglot_disabled = ['typescript', 'go']
 
-let g:go_textobj_include_function_doc = 1
-let g:go_doc_keywordprg_enabled = 0
-let g:go_fmt_command = "goimports"
-
-let g:flow#showquickfix = 0
-
 let g:tmux_navigator_disable_when_zoomed = 1
 
 let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
 let g:vim_markdown_conceal_code_blocks = 0
 let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
-
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_banner=0        " disable annoying banner
