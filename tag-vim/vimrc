@@ -21,13 +21,13 @@ cmap w!! w !sudo tee > /dev/null %
 call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
-Plug 'dense-analysis/ale' " async linting + formatting tool
+" Plug 'dense-analysis/ale' " async linting + formatting tool
 Plug 'airblade/vim-gitgutter' ", { 'commit': 'c75c83df531881008f8cf903eab7cd68bc19ff7a' } show git changes in column
 Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
 Plug 'junegunn/vim-easy-align'
-Plug 'Raimondi/delimitMate' "closing brackets or braces
-Plug 'tpope/vim-endwise', { 'for': ['ruby'] } " closes blocks in certain languages
+" Plug 'Raimondi/delimitMate' "closing brackets or braces
+" Plug 'tpope/vim-endwise', { 'for': ['ruby'] } " closes blocks in certain languages
 Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'tpope/vim-sensible' " sensible vim defaults
@@ -35,11 +35,13 @@ Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
-Plug 'janko/vim-test' " run tests
+" Plug 'janko/vim-test' " run tests
 Plug 'RRethy/vim-illuminate'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'preservim/nerdtree'
+
+Plug 'antoinemadec/coc-fzf'
 
 Plug 'fatih/vim-go', { 'for': ['go', 'golang']}
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
@@ -53,18 +55,30 @@ Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
 
 Plug 'fatih/molokai'
 
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-json',
+  \ 'coc-git',
+  \ 'coc-pairs',
+  \ 'coc-yaml',
+  \ 'coc-lists',
+  \ 'coc-rls',
+  \ 'coc-go',
+  \ 'coc-flow'
+  \ ]
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
 endif
-let g:deoplete#enable_at_startup = 1
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 
 call plug#end()
 syntax on
@@ -79,23 +93,12 @@ let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-  \   'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]]
+  \   'right': [[ 'cocstatus' ]]
   \ },
   \ 'component_function': {
   \   'gitbranch': 'fugitive#head',
+  \   'cocstatus': 'coc#status'
   \ },
-  \ 'component_expand': {
-  \  'linter_checking': 'lightline#ale#checking',
-  \  'linter_warnings': 'lightline#ale#warnings',
-  \  'linter_errors': 'lightline#ale#errors',
-  \  'linter_ok': 'lightline#ale#ok',
-  \ },
-  \ 'component_type': {
-  \     'linter_checking': 'left',
-  \     'linter_warnings': 'warning',
-  \     'linter_errors': 'error',
-  \     'linter_ok': 'left',
-  \ }
 \ }
 
 
@@ -181,6 +184,8 @@ autocmd BufNewFile,BufRead .eslintrc set filetype=json
 autocmd BufNewFile,BufRead .babelrc set filetype=json
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
 
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 " Smart paste
 " nnoremap <C-v> "+P=']
 " inoremap <C-v> <C-o>"+P<C-o>=']
@@ -257,7 +262,7 @@ let g:gitgutter_sign_removed = '│'
 let g:gitgutter_sign_removed_first_line = '│'
 let g:gitgutter_sign_modified_removed = '│'
 
-let g:polyglot_disabled = ['typescript', 'go']
+let g:polyglot_disabled = ['javascript', 'typescript', 'go']
 
 let g:tmux_navigator_disable_when_zoomed = 1
 
