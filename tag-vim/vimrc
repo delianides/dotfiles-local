@@ -21,13 +21,8 @@ cmap w!! w !sudo tee > /dev/null %
 call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
-" Plug 'dense-analysis/ale' " async linting + formatting tool
 Plug 'airblade/vim-gitgutter' ", { 'commit': 'c75c83df531881008f8cf903eab7cd68bc19ff7a' } show git changes in column
-Plug 'AndrewRadev/splitjoin.vim' "join things together
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
-Plug 'junegunn/vim-easy-align'
-" Plug 'Raimondi/delimitMate' "closing brackets or braces
-" Plug 'tpope/vim-endwise', { 'for': ['ruby'] } " closes blocks in certain languages
 Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'tpope/vim-sensible' " sensible vim defaults
@@ -35,50 +30,24 @@ Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
-" Plug 'janko/vim-test' " run tests
 Plug 'RRethy/vim-illuminate'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'preservim/nerdtree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " language server for neovim
+Plug 'antoinemadec/coc-fzf' " use fzf for coc-lists
 
-Plug 'antoinemadec/coc-fzf'
-
-Plug 'fatih/vim-go', { 'for': ['go', 'golang']}
+" Plug 'fatih/vim-go', { 'for': ['go', 'golang']}
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
-Plug 'pangloss/vim-javascript', { 'for': ['javascript']}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-
 Plug 'sheerun/vim-polyglot' " includes most language packs
-
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'ap/vim-css-color' " CSS Hex Color
+
 Plug 'itchyny/lightline.vim'
-
 Plug 'fatih/molokai'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-json',
-  \ 'coc-git',
-  \ 'coc-pairs',
-  \ 'coc-yaml',
-  \ 'coc-lists',
-  \ 'coc-rls',
-  \ 'coc-go',
-  \ 'coc-flow'
-  \ ]
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
 
 call plug#end()
 syntax on
@@ -114,8 +83,6 @@ autocmd BufReadPost *
     \ endif
 augroup END
 
-highlight Comment cterm=italic
-
 set clipboard=unnamed
 set signcolumn=yes
 set hidden
@@ -125,7 +92,6 @@ set nojoinspaces           " don't autoinsert two spaces after '.', '?', '!' for
 set relativenumber
 set number
 set tabstop=2 shiftwidth=2 expandtab
-set laststatus=2
 set wrap linebreak nolist
 set nofoldenable           " no folds
 set undofile
@@ -134,6 +100,8 @@ set nobackup               " disable automatic creation of backup files
 set nowritebackup          " changes default behavior of saving files to 'write,delete,rename'
 set noswapfile             " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set scrolloff=10           " number of lines to show below the cursor before the buffer scrolls down
+set cmdheight=2
+set updatetime=300
 set noshowcmd
 set smarttab
 set autoindent
@@ -217,44 +185,6 @@ nmap <C-J> ]e
 vmap <C-K> [egv
 vmap <C-J> ]egv
 
-nnoremap <silent> <Leader>wi :StripWhitespace<CR>
-
-vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-nmap <leader>d :NERDTreeToggle<CR>
-nmap <leader>tf :NERDTreeFind<CR>
-let NERDTreeShowHidden = 1
-let NERDTreeIgnore = ['\.o$', '\~', '\.pyc$', '\.git$', '\.hg$', '\.DS_Store']
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-let g:root_markers = ['package.json', '.git/']
-function! s:RunVimTest(cmd)
-    " I guess this part could be replaced by projectionist#project_root
-    for marker in g:root_markers
-        let marker_file = findfile(marker, expand('%:p:h') . ';')
-        if strlen(marker_file) > 0
-            let g:test#project_root = fnamemodify(marker_file, ":p:h")
-            break
-        endif
-        let marker_dir = finddir(marker, expand('%:p:h') . ';')
-        if strlen(marker_dir) > 0
-            let g:test#project_root = fnamemodify(marker_dir, ":p:h")
-            break
-        endif
-    endfor
-
-    execute a:cmd
-endfunction
-
-nnoremap <leader>f :call <SID>RunVimTest('TestFile')<cr>
-nnoremap <leader>n :call <SID>RunVimTest('TestNearest')<cr>
-nnoremap <leader>a :call <SID>RunVimTest('TestSuite')<cr>
-
-" let g:gitgutter_map_keys = 0
-" let g:conflict_marker_enable_mappings = 0
-" let g:gitgutter_highlight_linenrs = 1
 let g:python3_host_prog = '/usr/local/bin/python3'
 let g:gitgutter_sign_added = '│'
 let g:gitgutter_sign_modified = '│'
@@ -262,7 +192,7 @@ let g:gitgutter_sign_removed = '│'
 let g:gitgutter_sign_removed_first_line = '│'
 let g:gitgutter_sign_modified_removed = '│'
 
-let g:polyglot_disabled = ['javascript', 'typescript', 'go']
+let g:polyglot_disabled = ['jsx', 'typescript']
 
 let g:tmux_navigator_disable_when_zoomed = 1
 
