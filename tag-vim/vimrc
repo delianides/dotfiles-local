@@ -39,6 +39,7 @@ Plug 'janko/vim-test' " run tests
 Plug 'RRethy/vim-illuminate'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
+Plug 'preservim/nerdtree'
 
 Plug 'fatih/vim-go', { 'for': ['go', 'golang']}
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
