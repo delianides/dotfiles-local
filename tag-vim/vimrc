@@ -45,6 +45,7 @@ Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'ap/vim-css-color' " CSS Hex Color
+Plug 'preservim/nerdtree'
 
 Plug 'itchyny/lightline.vim'
 Plug 'fatih/molokai'
@@ -159,6 +160,9 @@ autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 " inoremap <C-v> <C-o>"+P<C-o>=']
 " Disable paste mode on leaving insert mode.
 autocmd InsertLeave * set nopaste
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>
 
 noremap H ^
 noremap L g_
