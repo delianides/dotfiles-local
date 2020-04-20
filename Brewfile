@@ -18,9 +18,6 @@ cask 'istat-menus'
 cask 'hyper'
 cask 'spotify'
 cask 'phoenix'
-cask 'graphiql'
-cask 'bitbar'
-cask 'dropshare'
 cask 'kaleidoscope'
 cask 'permute'
 cask 'vlc'
@@ -39,6 +36,13 @@ cask 'fork'
 cask 'figma'
 cask 'station'
 cask 'pgadmin4'
+
+cask 'font-anonymous-pro'
+cask 'font-fira-code'
+cask 'font-jetbrains-mono'
+cask 'font-space-mono'
+cask 'font-source-code-pro'
+cask 'font-roboto-mono'
 
 # editor of the ages
 brew 'vim'
@@ -133,17 +137,12 @@ brew 'python3'
 brew 'ffmpeg'
 
 # Install Apps from the MAC
-mas 'Pixelmator'           , id: 407963104
 mas 'Deliveries'           , id: 924726344
 mas 'Day One'              , id: 1055511498
-mas 'Helium'               , id: 1054607607
 mas 'Calcbot'              , id: 931657367
 mas 'Xcode'                , id: 497799835
 mas 'Reeder'               , id: 880001334
 mas 'Things 3'             , id: 904280696
-mas 'Slack'                , id: 803453959
 mas 'Spark'                , id: 1176895641
 mas 'Tweetbot 3'           , id: 1384080005
-mas 'Ulysses'              , id: 1225570693
-mas 'Fantastical 2'        , id: 975937182
 

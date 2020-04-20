@@ -1,4 +1,5 @@
 " Using floating windows of Neovim to start fzf
+" let g:fzf_layout = { 'down': '~20%', 'window': 'call floaterm#wrapper#fzf()' }
 let g:fzf_layout = { 'down': '~20%' }
 
 function! RipgrepFzf(query, fullscreen)
@@ -8,8 +9,8 @@ function! RipgrepFzf(query, fullscreen)
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
-
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
 if has('nvim')
   function! FloatingFZF(width, height, border_highlight)
     function! s:create_float(hl, opts)

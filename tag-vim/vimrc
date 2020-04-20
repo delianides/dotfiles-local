@@ -46,6 +46,7 @@ Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'preservim/nerdtree'
+Plug 'voldikss/vim-floaterm'
 
 Plug 'itchyny/lightline.vim'
 Plug 'fatih/molokai'
