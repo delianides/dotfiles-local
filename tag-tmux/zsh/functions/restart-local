@@ -1,0 +1,6 @@
+# vim:syntax=zsh
+
+function restart-local() {
+	stop-local
+	start-local
+}

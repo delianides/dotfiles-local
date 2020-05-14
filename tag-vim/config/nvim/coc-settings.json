@@ -1,0 +1,23 @@
+{
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "coc.preferences.jumpCommand": "vsplit",
+  "tsserver.implicitProjectConfig.experimentalDecorators": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "typescript.react",
+    "json",
+    "javascriptreact",
+    "typescript.tsx",
+    "javascript.jsx",
+    "graphql"
+  ],
+  "tsserver.formatOnType": true,
+  "coc.preferences.formatOnType": true,
+  "diagnostic.infoSign":"I",
+  "diagnostic.errorSign":"E",
+  "diagnostic.hintSign":"H",
+  "diagnostic.warningSign":"W",
+  "prettier.disableSuccessMessage": true
+}

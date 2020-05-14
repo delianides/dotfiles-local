@@ -1,0 +1,6 @@
+# vim:syntax=zsh
+
+function docker-default(){
+  docker-machine restart default
+  eval $(docker-machine env default)
+}
