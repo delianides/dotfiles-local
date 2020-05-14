@@ -12,9 +12,8 @@ cask 'visual-studio-code'
 cask 'google-chrome'
 cask 'firefox-developer-edition'
 cask 'alfred'
-cask 'iterm2'
+cask 'alacritty'
 cask 'transmit'
-cask 'istat-menus'
 cask 'hyper'
 cask 'spotify'
 cask 'phoenix'
@@ -29,8 +28,6 @@ cask 'now'
 cask 'spectrum'
 cask 'postman'
 cask 'imageoptim'
-cask 'android-studio'
-cask 'marshallofsound-google-play-music-player'
 cask 'dash'
 cask 'fork'
 cask 'figma'
@@ -52,21 +49,24 @@ brew 'nvim'
 brew 'markdown'
 
 # version manager
-brew 'nvm'
-brew 'yarn'
-brew 'rbenv'
+brew 'asdf'
+
+# lscolors
+brew 'exa'
 
 # ctags
 brew 'ctags'
 
+# spotifyd
+brew 'Spotifyd/tap/spotifyd'
+
 # fuzzy finder searching
 brew 'fzf'
-brew 'the_silver_searcher'
+brew 'the_silver_searcher' #ag
 brew 'fd'
-brew 'ripgrep'
+brew 'ripgrep' # rp
 
 # foreman for go
-brew 'go'
 brew 'forego'
 
 # directory based .env files
@@ -97,6 +97,7 @@ brew 'glide'
 
 # github bindings in git
 brew 'hub'
+brew 'github/gh/gh'
 
 # go static site generator
 brew 'hugo'
@@ -114,9 +115,6 @@ brew 'ssh-copy-id'
 brew 'zsh'
 brew 'zsh-syntax-highlighting'
 
-# font
-brew 'homebrew/cask-fonts/font-fira-code'
-
 # infrastructure as code
 brew 'terraform'
 brew 'terraform-docs'
@@ -131,8 +129,6 @@ brew 'watchman'
 
 # cli based browser
 brew 'wget'
-
-brew 'python3'
 
 brew 'ffmpeg'
 

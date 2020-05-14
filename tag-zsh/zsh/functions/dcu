@@ -1,0 +1,5 @@
+# vim:syntax=zsh
+
+function dcu(){
+  docker-compose up "$@"
+}

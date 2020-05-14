@@ -21,7 +21,6 @@ cmap w!! w !sudo tee > /dev/null %
 call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
-Plug 'airblade/vim-gitgutter' ", { 'commit': 'c75c83df531881008f8cf903eab7cd68bc19ff7a' } show git changes in column
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
 Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-vinegar' " netrw play nicely
@@ -37,14 +36,13 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " language server for neovim
 Plug 'antoinemadec/coc-fzf' " use fzf for coc-lists
 
-" Plug 'fatih/vim-go', { 'for': ['go', 'golang']}
+Plug 'junegunn/vim-easy-align'
+Plug 'hashivim/vim-terraform'
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
-Plug 'ap/vim-css-color' " CSS Hex Color
 Plug 'preservim/nerdtree'
 Plug 'voldikss/vim-floaterm'
 
@@ -74,17 +72,18 @@ let g:lightline = {
 
 
 augroup vimrcEx
-autocmd!
-" http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
-autocmd VimEnter * autocmd WinEnter * let w:created=1
-autocmd VimEnter * let w:created=1
-autocmd VimResized * wincmd =
-autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+    autocmd!
+    " http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
+    autocmd VimEnter * autocmd WinEnter * let w:created=1
+    autocmd VimEnter * let w:created=1
+    autocmd VimResized * wincmd =
+    autocmd BufReadPost *
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
 augroup END
 
+set modeline
 set clipboard=unnamed
 set signcolumn=yes
 set hidden
@@ -145,11 +144,13 @@ autocmd BufNewFile,BufRead *.md setlocal spell noet ts=4 sw=4
 autocmd FileType gitcommit setlocal spell
 autocmd FileType dockerfile,gitconfig,sh,toml set noexpandtab
 autocmd FileType terraform setlocal commentstring=#\ %s
+autocmd FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufRead *.ino set filetype=c
 autocmd BufNewFile,BufRead *.svg set filetype=xml
-autocmd BufNewFile,BufRead *.tsx set filetype=typescript.react
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead .eslintrc set filetype=json
 autocmd BufNewFile,BufRead .babelrc set filetype=json
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
@@ -189,6 +190,9 @@ nmap <C-J> ]e
 " Bubble multiple lines
 vmap <C-K> [egv
 vmap <C-J> ]egv
+
+nnoremap <C-t> :FloatermNew<CR>
+nnoremap <C-g> :FloatermNew --height=0.75 --width=0.75 --wintype=floating --name=lazygit --autoclose=2 lazygit<CR>
 
 let g:python3_host_prog = '/usr/local/bin/python3'
 let g:gitgutter_sign_added = '│'
