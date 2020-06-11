@@ -1,7 +1,7 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 window:
-  decorations: "none"
+  decorations: "full"
   startup_mode: "Fullscreen"
   padding:
     x: 10
@@ -57,3 +57,5 @@ colors:
     magenta: '#f82a71'
     cyan:    '#66d8ee'
     white:   '#f7f7f1'
+key_bindings:
+  - { key: F,        mods: Command, action: ToggleFullscreen }

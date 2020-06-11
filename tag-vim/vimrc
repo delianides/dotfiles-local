@@ -29,15 +29,19 @@ Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
+Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-dotenv'
 Plug 'RRethy/vim-illuminate'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " language server for neovim
 Plug 'antoinemadec/coc-fzf' " use fzf for coc-lists
+Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
 
 Plug 'junegunn/vim-easy-align'
 Plug 'hashivim/vim-terraform'
+Plug 'lalitkapoor/vim-js-sql'
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
@@ -107,7 +111,6 @@ set noshowcmd
 set smarttab
 set autoindent
 set showtabline=2
-set smartindent            " be smart about it
 set wrapmargin=8           " wrap lines when coming within n characters from side
 set formatoptions+=n,1     " support for numbered/bullet lists
 set formatoptions+=j
@@ -133,10 +136,9 @@ if has('linebreak')
   let &showbreak='↳ '      " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
 endif
 
-
 autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
 autocmd FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
-autocmd BufNewFile,BufRead *.rb setlocal sw=2 smartindent ts=2
+autocmd BufNewFile,BufRead *.rb setlocal sw=2 ts=2
 autocmd BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
 autocmd BufNewFile,BufRead *.md setlocal spell noet ts=4 sw=4

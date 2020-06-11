@@ -25,26 +25,6 @@ alias mkdir="mkdir -p"
 alias -g G="| grep "
 alias -g ONE="| awk '{ print \$1}'"
 
-# Git Aliases
-alias git=hub
-alias gd="git diff"
-# Grep with grouped output like Ack
-alias gg="git g"
-alias gs='git status -sb'
-alias amend-new="git commit --amend"
-alias gmf="git merge --no-ff"
-
-alias ga="git add"
-alias gai="git add --interactive"
-alias gcp="git rev-parse HEAD | pbcopy"
-alias gco="git checkout"
-alias gcm="git commit -m"
-
-# these aliases take advantage of the previous function
-alias ggpull='git pull origin $(current_branch)'
-alias ggpush='git push origin $(current_branch)'
-alias ggpnp='git pull origin $(current_branch) && git push origin $(current_branch)'
-
 unalias z
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'

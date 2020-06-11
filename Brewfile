@@ -79,6 +79,7 @@ brew 'docker-compose'
 
 # version control
 brew 'git'
+brew 'git-delta'
 
 # better git logs
 brew 'tig'
