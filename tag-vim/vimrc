@@ -41,7 +41,6 @@ Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
 
 Plug 'junegunn/vim-easy-align'
 Plug 'hashivim/vim-terraform'
-Plug 'lalitkapoor/vim-js-sql'
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
@@ -59,7 +58,6 @@ colorscheme molokai
 set termguicolors
 
 let g:monokai_term_italic = 1
-" let g:jellybeans_use_term_italics = 1
 
 let g:lightline = {
   \ 'colorscheme': 'powerline',
@@ -197,16 +195,7 @@ nnoremap <C-t> :FloatermNew<CR>
 nnoremap <C-g> :FloatermNew --height=0.75 --width=0.75 --wintype=floating --name=lazygit --autoclose=2 lazygit<CR>
 
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:gitgutter_sign_added = '│'
-let g:gitgutter_sign_modified = '│'
-let g:gitgutter_sign_removed = '│'
-let g:gitgutter_sign_removed_first_line = '│'
-let g:gitgutter_sign_modified_removed = '│'
-
 let g:polyglot_disabled = ['jsx', 'typescript']
-
 let g:tmux_navigator_disable_when_zoomed = 1
-
 let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
 let g:vim_markdown_conceal_code_blocks = 0
-let g:better_whitespace_filetypes_blacklist = ['markdown', 'md']
