@@ -7,7 +7,8 @@ let g:coc_global_extensions = [
   \ 'coc-lists',
   \ 'coc-rls',
   \ 'coc-go',
-  \ 'coc-highlight'
+  \ 'coc-highlight',
+  \ 'coc-snippets'
   \ ]
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/typescript')
@@ -60,7 +61,7 @@ endfunction
 
 autocmd CursorHoldI * :call <SID>show_hover_doc()
 autocmd CursorHold * :call <SID>show_hover_doc()
-" Use K to show documentation in preview window.
+" Use H to show documentation in preview window.
 nnoremap <silent> H :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()

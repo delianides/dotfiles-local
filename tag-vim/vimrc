@@ -20,34 +20,37 @@ cmap w!! w !sudo tee > /dev/null %
 
 call plug#begin('~/.vim/plugged')
 
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " FuzzyFind
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
 Plug 'tpope/vim-fugitive' " git commands in vim
 Plug 'tpope/vim-vinegar' " netrw play nicely
 Plug 'tpope/vim-sensible' " sensible vim defaults
 Plug 'tpope/vim-surround' " surround vim objects with a string
 Plug 'tpope/vim-commentary' " universal comment application
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat' " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired' " Moving around
-Plug 'tpope/vim-dadbod'
-Plug 'tpope/vim-dotenv'
+Plug 'justinmk/vim-dirvish' | Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'RRethy/vim-illuminate'
 Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
-Plug 'preservim/nerdtree'
+Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " language server for neovim
 Plug 'antoinemadec/coc-fzf' " use fzf for coc-lists
-Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
-
+" Plug 'rhysd/devdocs.vim'
+Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/vim-easy-align'
+
+Plug 'sheerun/vim-polyglot' " includes most language packs
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform'
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'sheerun/vim-polyglot' " includes most language packs
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-Plug 'preservim/nerdtree'
-Plug 'voldikss/vim-floaterm'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 Plug 'itchyny/lightline.vim'
 Plug 'fatih/molokai'
@@ -56,22 +59,7 @@ call plug#end()
 syntax on
 colorscheme molokai
 set termguicolors
-
 let g:monokai_term_italic = 1
-
-let g:lightline = {
-  \ 'colorscheme': 'powerline',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-  \   'right': [[ 'cocstatus' ]]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'fugitive#head',
-  \   'cocstatus': 'coc#status'
-  \ },
-\ }
-
 
 augroup vimrcEx
     autocmd!
@@ -84,55 +72,6 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 augroup END
-
-set modeline
-set clipboard=unnamed
-set signcolumn=yes
-set hidden
-set noshowmode
-set noswapfile
-set nojoinspaces           " don't autoinsert two spaces after '.', '?', '!' for join command
-set relativenumber
-set number
-set tabstop=2 shiftwidth=2 expandtab
-set wrap linebreak nolist
-set nofoldenable           " no folds
-set undofile
-set undodir="$HOME/.VIM_UNDO_FILES"
-set nobackup               " disable automatic creation of backup files
-set nowritebackup          " changes default behavior of saving files to 'write,delete,rename'
-set noswapfile             " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set scrolloff=10           " number of lines to show below the cursor before the buffer scrolls down
-set cmdheight=2
-set updatetime=300
-set noshowcmd
-set smarttab
-set autoindent
-set showtabline=2
-set wrapmargin=8           " wrap lines when coming within n characters from side
-set formatoptions+=n,1     " support for numbered/bullet lists
-set formatoptions+=j
-set wildmode=longest:full,full
-set wildignore+=.git,*.jpg,*.png,*.gif,*.jpeg,.DS_Store
-set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
-set shortmess=filtIoOAc    " shorten messages
-set showmatch              " brackets/braces that is
-set mat=7                  " duration to show matching brace (1/10 sec)
-set ignorecase             " ignore case when searching
-set nocursorcolumn         " speed up syntax highlighting
-set nocursorline
-set nohlsearch             " don't highlight searches
-set visualbell             " shut up
-set noerrorbells           " ditto
-set splitbelow
-set splitright
-set textwidth=80
-set spellcapcheck=
-set spellfile=$HOME/.vim/spell/.vim-spell-en.utf-8.add
-
-if has('linebreak')
-  let &showbreak='↳ '      " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
-endif
 
 autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
 autocmd FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
@@ -147,55 +86,10 @@ autocmd FileType terraform setlocal commentstring=#\ %s
 autocmd FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-autocmd BufNewFile,BufRead *.ino set filetype=c
-autocmd BufNewFile,BufRead *.svg set filetype=xml
-autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-autocmd BufNewFile,BufRead .eslintrc set filetype=json
-autocmd BufNewFile,BufRead .babelrc set filetype=json
-autocmd BufNewFile,BufRead .jshintrc set filetype=json
-
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 " Smart paste
 " nnoremap <C-v> "+P=']
 " inoremap <C-v> <C-o>"+P<C-o>=']
 " Disable paste mode on leaving insert mode.
 autocmd InsertLeave * set nopaste
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-map <C-n> :NERDTreeToggle<CR>
-
-noremap H ^
-noremap L g_
-noremap J 5j
-noremap K 5k
-
-vmap < <gv
-vmap > >gv
-
-" Disable useless arrow keys
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
-" Bubble single lines
-nmap <C-K> [e
-nmap <C-J> ]e
-" Bubble multiple lines
-vmap <C-K> [egv
-vmap <C-J> ]egv
-
-nnoremap <C-t> :FloatermNew<CR>
-nnoremap <C-g> :FloatermNew --height=0.75 --width=0.75 --wintype=floating --name=lazygit --autoclose=2 lazygit<CR>
-
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:polyglot_disabled = ['jsx', 'typescript']
-let g:tmux_navigator_disable_when_zoomed = 1
-let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
-let g:vim_markdown_conceal_code_blocks = 0
