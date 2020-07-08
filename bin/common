@@ -7,7 +7,7 @@ set -eo pipefail
 color() {
   local colornumber="$1"
   shift
-  tput setaf "$colornumber"
+  tput -T xterm setaf "$colornumber"
   echo "$*"
   tput sgr0
 }
