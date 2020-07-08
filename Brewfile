@@ -16,7 +16,7 @@ cask 'alacritty'
 cask 'transmit'
 cask 'hyper'
 cask 'spotify'
-cask 'phoenix'
+cask 'rectangle'
 cask 'kaleidoscope'
 cask 'permute'
 cask 'vlc'
@@ -31,7 +31,6 @@ cask 'imageoptim'
 cask 'dash'
 cask 'fork'
 cask 'figma'
-cask 'station'
 cask 'pgadmin4'
 
 cask 'font-anonymous-pro'
@@ -112,6 +111,9 @@ brew 'openssl'
 # tool for installed keys onto remote servers
 brew 'ssh-copy-id'
 
+# clipboard
+brew 'clipper'
+
 # zsh syntax highlighting
 brew 'zsh'
 brew 'zsh-syntax-highlighting'
@@ -132,14 +134,3 @@ brew 'watchman'
 brew 'wget'
 
 brew 'ffmpeg'
-
-# Install Apps from the MAC
-mas 'Deliveries'           , id: 924726344
-mas 'Day One'              , id: 1055511498
-mas 'Calcbot'              , id: 931657367
-mas 'Xcode'                , id: 497799835
-mas 'Reeder'               , id: 880001334
-mas 'Things 3'             , id: 904280696
-mas 'Spark'                , id: 1176895641
-mas 'Tweetbot 3'           , id: 1384080005
-

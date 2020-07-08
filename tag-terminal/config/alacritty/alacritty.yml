@@ -1,24 +1,43 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 window:
-  decorations: "full"
-  startup_mode: "Fullscreen"
+  dimensions:
+    columns: 0
+    lines: 0
   padding:
     x: 10
     y: 5
+  dynamic_padding: false
+  decorations: full
+scrolling:
+  history: 65536
+  multiplier: 3
 mouse:
   url:
     launcher: open
-    modifiers: "Control"
+    modifiers: Control
 font:
   normal: 
-    family: "Dank Mono"
+    family: Source Code Pro
+    style: Regular
+  bold:
+    family: Source Code Pro
+    style: Bold
   italic: 
-    family: "Dank Mono"
-  size: 18
+    family: Source Code Pro
+    style: Semibold Italic
+  size: 17
   offset:
-    y: 1
-    x: 1
+    y: 4
+    x: 0
+  glyph_offset:
+    x: 0
+    y: 0
+
+  use_thin_strokes: false
+
+draw_bold_text_with_bright_colors: true
+
 # Colors (One Dark)
 colors:
   # Default colors
@@ -59,3 +78,4 @@ colors:
     white:   '#f7f7f1'
 key_bindings:
   - { key: F,        mods: Command, action: ToggleFullscreen }
+

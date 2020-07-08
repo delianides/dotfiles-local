@@ -1,6 +1,11 @@
 {
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "coc.preferences.jumpCommand": "vsplit",
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "coc.preferences.formatOnSaveFiletypes": [
@@ -15,9 +20,13 @@
   ],
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
-  "diagnostic.infoSign":"I",
-  "diagnostic.errorSign":"E",
-  "diagnostic.hintSign":"H",
-  "diagnostic.warningSign":"W",
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.virtualTextPrefix": "■ ",
+  "signature.enable": false,
+  "diagnostic.infoSign": "I",
+  "diagnostic.errorSign": "E",
+  "diagnostic.hintSign": "H",
+  "diagnostic.warningSign": "W",
   "prettier.disableSuccessMessage": true
 }

@@ -1,9 +1,10 @@
-" vim: fdm=marker foldlevel=98 foldenable sw=4 ts=4 sts=4
+"
 "        _
 " __   _(_)_ __ ___  _ __ ___
 " \ \ / / | '_ ` _ \| '__/ __|
 "  \ V /| | | | | | | | | (__
 " (_)_/ |_|_| |_| |_|_|  \___|
+"
 "
 " VIMPATH
 let $VIMPATH=expand('$HOME/.vim')
@@ -20,76 +21,55 @@ cmap w!! w !sudo tee > /dev/null %
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'jeffkreeftmeijer/vim-numbertoggle' " when using splits show absolute number for inactive
-Plug 'tpope/vim-fugitive' " git commands in vim
-Plug 'tpope/vim-vinegar' " netrw play nicely
-Plug 'tpope/vim-sensible' " sensible vim defaults
-Plug 'tpope/vim-surround' " surround vim objects with a string
-Plug 'tpope/vim-commentary' " universal comment application
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-repeat' " allows . to repeat previous commands
-Plug 'tpope/vim-unimpaired' " Moving around
-Plug 'justinmk/vim-dirvish' | Plug 'kristijanhusak/vim-dirvish-git'
-Plug 'RRethy/vim-illuminate'
-Plug 'wellle/tmux-complete.vim'  " auto complete from adjacent tmux panes
-Plug 'christoomey/vim-tmux-navigator' " navigating tmux panes and vim buffers alike
-Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " language server for neovim
-Plug 'antoinemadec/coc-fzf' " use fzf for coc-lists
-" Plug 'rhysd/devdocs.vim'
-Plug 'voldikss/vim-floaterm'
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                 " make sure fzf is installed
+Plug 'junegunn/fzf.vim'                                             " command t like behavior but can fill search with anything
+Plug 'tpope/vim-fugitive'                                           " git commands in vim
+Plug 'tpope/vim-vinegar'                                            " netrw play nicely
+Plug 'tpope/vim-sensible'                                           " sensible vim defaults
+Plug 'tpope/vim-surround'                                           " surround vim objects with a string
+Plug 'tpope/vim-commentary'                                         " universal comment application
+Plug 'tpope/vim-eunuch'                                             " smart file management
+Plug 'tpope/vim-repeat'                                             " allows . to repeat previous commands
+Plug 'tpope/vim-unimpaired'                                         " Moving around
+Plug 'wincent/pinnacle'                                             " change colors
+Plug 'wincent/ferret'                                               " front for Ag, Fd, and Rp
+Plug 'wincent/terminus'                                             " vim interact with the terminal better
+Plug 'jiangmiao/auto-pairs'                                         " match brackets, parens, quotes in pair
+Plug 'justinmk/vim-dirvish' | Plug 'kristijanhusak/vim-dirvish-git' " file explorer
+Plug 'RRethy/vim-illuminate'                                        " highlight other instances of the word or symbol the cursor
+Plug 'wellle/tmux-complete.vim'                                     " auto complete from adjacent tmux panes
+Plug 'christoomey/vim-tmux-navigator'                               " navigating tmux panes and vim buffers alike
+Plug 'voldikss/vim-floaterm'                                        " terminal in window
+Plug 'junegunn/vim-easy-align'                                      " align text
+Plug 'jpalardy/vim-slime'                                           " send commands to repl
 
-Plug 'sheerun/vim-polyglot' " includes most language packs
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'hashivim/vim-terraform'
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
+
+Plug 'dense-analysis/ale'                                           " linting and fixing
+
+if has('nvim')
+  if has('nvim-0.5.0')
+    Plug 'neovim/nvim-lsp'
+    Plug 'nvim-lua/completion-nvim'
+    Plug 'nvim-lua/diagnostic-nvim'
+  endif
+  Plug 'norcalli/nvim-colorizer.lua'
+endif
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go', 'golang'] }
+Plug 'hashivim/vim-terraform', { 'for': ['terraform'] }
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
+Plug 'sheerun/vim-polyglot' " includes most language packs
 
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'fatih/molokai'
+Plug 'chriskempson/base16-vim'
+Plug 'flazz/vim-colorschemes'
 
 call plug#end()
-syntax on
 colorscheme molokai
 set termguicolors
-let g:monokai_term_italic = 1
-
-augroup vimrcEx
-    autocmd!
-    " http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
-    autocmd VimEnter * autocmd WinEnter * let w:created=1
-    autocmd VimEnter * let w:created=1
-    autocmd VimResized * wincmd =
-    autocmd BufReadPost *
-        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
-augroup END
-
-autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
-autocmd FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
-autocmd BufNewFile,BufRead *.rb setlocal sw=2 ts=2
-autocmd BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
-autocmd BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
-autocmd BufNewFile,BufRead *.md setlocal spell noet ts=4 sw=4
-
-autocmd FileType gitcommit setlocal spell
-autocmd FileType dockerfile,gitconfig,sh,toml set noexpandtab
-autocmd FileType terraform setlocal commentstring=#\ %s
-autocmd FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
-
-autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-" Smart paste
-" nnoremap <C-v> "+P=']
-" inoremap <C-v> <C-o>"+P<C-o>=']
-" Disable paste mode on leaving insert mode.
-autocmd InsertLeave * set nopaste
-
-let g:python3_host_prog = '/usr/local/bin/python3'

@@ -14,7 +14,7 @@ if !empty(expand($FZF_DEFAULT_OPTS))
   let $FZF_DEFAULT_OPTS .= ' --margin=1,4'
 endif
 
-let g:fzf_layout = { 'window': utils#fzf_window() }
+let g:fzf_layout = { 'window': utils#window#fzf_window() }
 let g:fzf_history_dir = expand('~/.fzf-history')
 let g:fzf_buffers_jump = 1
 let g:fzf_action = {
@@ -61,7 +61,7 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-command! ProjectFiles execute 'Files' utils#find_git_root()
+command! ProjectFiles execute 'Files' utils#git#find_root()
 
 nnoremap <silent> <C-f> :ProjectFiles<CR>
 nnoremap <silent> <leader><leader> :Files<CR>

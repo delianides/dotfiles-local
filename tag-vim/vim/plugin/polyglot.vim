@@ -1,2 +1,2 @@
-let g:polyglot_disabled = ['jsx', 'typescript', 'markdown', 'md']
+let g:polyglot_disabled = ['go', 'terraform']
 
