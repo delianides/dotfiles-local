@@ -1,4 +1,4 @@
-EXCLUDES="README.md LICENSE Brewfile tmux-256color.terminfo xterm-256color-italic.terminfo"
+EXCLUDES="README.md LICENSE Brewfile install .github"
 DOTFILES_DIRS="$HOME/.dotfiles"
-TAGS="asdf git terminal tmux vim zsh"
+TAGS="asdf git terminal tmux vim zsh macos"
 

@@ -1,0 +1,46 @@
+#!/bin/bash
+# vim: tw=0
+# from https://github.com/gabebw/dotfiles/blob/main/install.sh
+
+set -eo pipefail
+
+source $HOME/.bin/common
+
+quietly_brew_bundle(){
+  local brewfile=$1
+  shift
+  local regex='(^Using )|Homebrew Bundle complete|Skipping install of|It is not currently installed|Verifying SHA-256|==> (Downloading|Purging)|Already downloaded:|No SHA-256'
+  stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -vE "$regex" || true)
+}
+
+info "Checking for command-line tools..."
+if command_does_not_exist xcodebuild; then
+  stay_awake_while xcode-select --install
+fi
+
+info "Installing Homebrew (if not already installed)..."
+if command_does_not_exist brew; then
+  stay_awake_while /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+info "Installing Homebrew packages..."
+brew tap homebrew/bundle
+quietly_brew_bundle "./Brewfile" --verbose
+
+if ! echo "$SHELL" | grep -Fq zsh; then
+  info "Your shell is not Zsh. Changing it to Zsh..."
+  chsh -s /bin/zsh
+fi
+
+info "Linking dotfiles into ~..."
+# Before `rcup` runs, there is no ~/.rcrc, so we must tell `rcup` where to look.
+# We need the rcrc because it tells `rcup` to ignore thousands of useless Vim
+# backup files that slow it down significantly.
+export RCRC=rcrc
+stay_awake_while rcup -d .
+
+green "== Success!"
+
+yellow "== Post-install instructions =="
+yellow "1. Remap Caps Lock to Escape in the Keyboard prefpane"
+yellow "2. Set up top right Hot Corner -> Desktop in Desktop & Screen Saver prefpane"

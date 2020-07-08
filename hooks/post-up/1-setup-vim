@@ -1,0 +1,9 @@
+#!/bin/bash
+# vim: tw=0
+
+set -eo pipefail
+
+source $HOME/.bin/common
+
+info "Setup Vim Plugins"
+stay_awake_while vim +PlugInstall +qall
