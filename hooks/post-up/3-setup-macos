@@ -4,7 +4,7 @@
 
 set -eo pipefail
 
-source $HOME/.bin/common
+source ./bin/common
 
 info "Configuring MacOS..."
 stay_awake_while ./macos

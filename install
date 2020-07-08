@@ -4,7 +4,7 @@
 
 set -eo pipefail
 
-source $HOME/.bin/common
+source ./bin/common
 
 quietly_brew_bundle(){
   local brewfile=$1

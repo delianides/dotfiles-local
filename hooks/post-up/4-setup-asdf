@@ -4,7 +4,7 @@
 
 set -eo pipefail
 
-source $HOME/.bin/common
+source ./bin/common
 
 info "Installing ASDF version managing..."
 # Load asdf (before setup scripts) in case it's the first time installing it

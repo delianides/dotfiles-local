@@ -3,7 +3,7 @@
 
 set -eo pipefail
 
-source $HOME/.bin/common
+source ./bin/common
 
 info "Setup Vim Plugins"
 stay_awake_while vim +PlugInstall +qall
