@@ -2,7 +2,6 @@
 #
 cask_args appdir: '/Applications'
 
-tap "caskroom/cask"
 tap "derailed/k9s"
 tap "github/gh"
 tap "goreleaser/tap"
@@ -14,7 +13,6 @@ tap "homebrew/services"
 tap "jesseduffield/lazygit"
 tap "osx-cross/avr"
 tap "px4/px4"
-tap "spotifyd/tap"
 tap "thoughtbot/formulae"
 tap "wallix/awless"
 
@@ -52,7 +50,7 @@ brew "git"
 brew "git-crypt"
 brew "git-delta"
 brew "glide"
-brew "gnupg", link: false
+brew "gnupg"
 brew "helm"
 brew "httpie"
 brew "hub"
@@ -82,7 +80,7 @@ brew "tmux"
 brew "trash"
 brew "unzip"
 brew "vault"
-brew "vim", link: false, overwrite: true
+brew "vim"
 brew "watch"
 brew "watchman"
 brew "wget"
@@ -95,9 +93,7 @@ brew "goreleaser/tap/goreleaser"
 brew "jesseduffield/lazygit/lazygit"
 brew "osx-cross/avr/avr-gcc@8", link: true
 brew "px4/px4/gcc-arm-none-eabi"
-brew "spotifyd/tap/spotifyd"
 brew "thoughtbot/formulae/rcm"
-brew "wallix/awless/awless"
 
 cask "1password"
 cask "alacritty"
@@ -125,7 +121,6 @@ cask "kaleidoscope"
 cask "keybase"
 cask "kitty"
 cask "macvim"
-cask "marshallofsound-google-play-music-player"
 cask "ngrok"
 cask "now"
 cask "permute"
@@ -141,27 +136,11 @@ cask "virtualbox"
 cask "visual-studio-code"
 cask "vlc"
 
-mas "Agenda", id: 1287445660
 mas "Calcbot", id: 931657367
-mas "ColorSlurp", id: 1287239339
-mas "Day One", id: 1055511498
 mas "Deliveries", id: 924726344
-mas "Fantastical", id: 975937182
-mas "Gifski", id: 1351639930
-mas "GIPHY CAPTURE", id: 668208984
-mas "Harvest", id: 506189836
-mas "Helium", id: 1054607607
-mas "Keynote", id: 409183694
-mas "Markoff", id: 1084713122
-mas "Medis", id: 1063631769
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Pastebot", id: 1179623856
-mas "Pixelmator", id: 407963104
 mas "Reeder", id: 1449412482
 mas "Slack", id: 803453959
 mas "Spark", id: 1176895641
 mas "Things", id: 904280696
 mas "Tweetbot", id: 1384080005
-mas "Ulysses", id: 1225570693
 mas "Xcode", id: 497799835
