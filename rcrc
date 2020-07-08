@@ -1,4 +1,4 @@
 EXCLUDES="README.md LICENSE Brewfile tmux-256color.terminfo xterm-256color-italic.terminfo"
 DOTFILES_DIRS="$HOME/.dotfiles"
-TAGS="vim zsh git tmux phoenix bitbar"
+TAGS="asdf git terminal tmux vim zsh"
 
