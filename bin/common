@@ -9,7 +9,7 @@ color() {
   shift
   tput -T xterm setaf "$colornumber"
   echo "$*"
-  tput sgr0
+  tput -T xterm sgr0
 }
 
 # blue = 4
