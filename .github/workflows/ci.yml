@@ -10,10 +10,9 @@ jobs:
   test:
     name: "Run Install"
     runs-on: macos-latest
-    env:
-      HOMEBREW_BUNDLE_MAS_SKIP: 1
-
     steps:
     - uses: actions/checkout@v2
     - name: Run the `install` script
-      run: ./install
+      run: |
+        export HOMEBREW_BUNDLE_MAS_SKIP=$(brew bundle list --mas | paste -sd " " -)
+        ./install
