@@ -1,5 +1,8 @@
 scriptencoding utf-8
 
+set autoindent
+set smartindent
+
 if exists('$SUDO_USER')
   set nobackup                        " don't create root-owned files
   set nowritebackup                   " don't create root-owned files

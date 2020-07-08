@@ -59,7 +59,7 @@ endif
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go', 'golang'] }
 Plug 'hashivim/vim-terraform', { 'for': ['terraform'] }
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
 Plug 'sheerun/vim-polyglot' " includes most language packs
