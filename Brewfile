@@ -30,7 +30,6 @@ brew "avrdude"
 brew "awscli"
 brew "clipper", restart_service: true
 brew "cmatrix"
-brew "cocoapods", link: false
 brew "colordiff"
 brew "ctags"
 brew "curl"
