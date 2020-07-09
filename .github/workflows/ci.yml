@@ -13,7 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run the `install` script
-      shell: zsh {0}
+      env: 
+        SHELL: /bin/zsh
       run: |
         export HOMEBREW_BUNDLE_MAS_SKIP=$(brew bundle list --mas | paste -sd " " -)
         ./install
