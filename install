@@ -27,9 +27,11 @@ info "Installing Homebrew packages..."
 brew tap homebrew/bundle
 quietly_brew_bundle "./Brewfile" --verbose
 
-if ! echo "$SHELL" | grep -Fq zsh; then
-  info "Your shell is not Zsh. Changing it to Zsh..."
-  chsh -s /bin/zsh
+if "$CI" != true ; then
+  if ! echo "$SHELL" | grep -Fq zsh; then
+    info "Your shell is not Zsh. Changing it to Zsh..."
+    chsh -s /bin/zsh
+  fi
 fi
 
 info "Linking dotfiles into ~..."
