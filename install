@@ -9,8 +9,8 @@ source ./bin/common
 quietly_brew_bundle(){
   local brewfile=$1
   shift
-  local regex='(^Using )|Homebrew Bundle complete|Skipping install of|It is not currently installed|Verifying SHA-256|==> (Downloading|Purging)|Already downloaded:|No SHA-256|Cloning into'
-  stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -Ev "$regex" || true)
+  local regex='(^Using|Installing|Skipping )|error|failed'
+  stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -Ei "$regex" || true)
 }
 
 info "Checking for command-line tools..."
@@ -27,7 +27,7 @@ info "Installing Homebrew packages..."
 brew tap homebrew/bundle
 quietly_brew_bundle "./Brewfile" --verbose
 
-if "$CI" != true ; then
+if "$CI" != "true"; then
   if ! echo "$SHELL" | grep -Fq zsh; then
     info "Your shell is not Zsh. Changing it to Zsh..."
     chsh -s /bin/zsh
