@@ -30,6 +30,7 @@ else
   set directory+=.
 endif
 
+set nowrap
 set noemoji                           " don't assume all emoji are double width
 set expandtab                         " always use spaces instead of tabs
 set clipboard=unnamed
