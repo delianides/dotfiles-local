@@ -1,6 +1,6 @@
 dotfiles
 ========
-![dotfiles](https://github.com/delianides/dotfiles/workflows/Dotfiles%20on%20MacOS/badge.svg?branch=master)
+![Dotfiles on MacOS](https://github.com/delianides/dotfiles/workflows/Dotfiles%20on%20MacOS/badge.svg)
 
 Welcome to my dotfiles! The files here are a pretty minimal setup for easily running Docker, Tmux, and Vim. I'm currently using [RCM](https://github.com/thoughtbot/rcm) from thoughtbot to manage everything.
 
