@@ -1,48 +1,22 @@
 dotfiles
 ========
+![dotfiles](https://github.com/delianides/dotfiles/workflows/Dotfiles%20on%20MacOS/badge.svg?branch=master)
 
 Welcome to my dotfiles! The files here are a pretty minimal setup for easily running Docker, Tmux, and Vim. I'm currently using [RCM](https://github.com/thoughtbot/rcm) from thoughtbot to manage everything.
 
 Installation
 ------------
 
-Install Xcode or the command line tools so the required libraries are available during compilation.
-
 ```
-$ git clone https://github.com/delianides/dotfiles
-$ brew bundle dotfiles/Brewfile
-$ rcup -d dotfiles -x README.md -x LICENSE -x Brewfile
+$ ./install
 ```
-
-### Italics  ([Source](https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be))
-
-#### Tmux
-
-You need at least about version 2.5 (2.3 at least prevents backgrounds from working).
-Tmux is configured for italics. Strange things might happen if you don't run:
-
-```
-$ tic -x tmux-256color.terminfo
-$ tic -x xterm-256color-italic.terminfo
-```
-
-Add this to your ~/.tmux.conf:
-
-```
-set -g default-terminal 'tmux-256color'
-set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
-```
-
-Make sure italics are enabled for iTerm and you're using a font that supports
-them. (Fira, Dank Mono);
-
-#### iTerm
-
-1. Go to `Preferences > Profiles > Default`.
-2. Make sure `Text > Italic Text Allowed` is checked.
-3. Set `Terminal > Report Terminal Type` to `xterm-256color-italic`.
-
-This essentially sets the value of the environment variable `$TERM`, which you could also set in your ~/.zshrc etc, depending on how you want to store your settings.
+This script installs the following:
+- Homebrew with applications defined in the `Brewfile`
+  - Tmux
+  - Vim/Neovim
+  - Alcritty
+  - ...lots more
+- Also runs `.macos` which sets up plist configurations for MacOS
 
 Usage
 -----
@@ -66,4 +40,5 @@ Inspiration
 - [Nick Nisi](https://github.com/nicknisi/dotfiles)
 - [Chris Toomey](https://github.com/christoomey/dotfiles)
 - [Gabe Berke-Williams](https://github.com/gabebw/dotfiles)
-
+- [Greg Hurrell](https://github.com/wincent/wincent)
+- [Ahmed El Gabri](https://github.com/ahmedelgabri/dotfiles)
