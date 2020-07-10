@@ -18,3 +18,8 @@ jobs:
       run: |
         export HOMEBREW_BUNDLE_MAS_SKIP=$(brew bundle list --mas | paste -sd " " -)
         ./install
+    - name: Test Everything Post-Install
+      env: 
+        SHELL: /bin/zsh
+      run: bats ./tests/main.bats
+      
