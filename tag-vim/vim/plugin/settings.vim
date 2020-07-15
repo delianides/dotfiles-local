@@ -67,7 +67,7 @@ if exists('+relativenumber')
   set relativenumber                  " show relative numbers in gutter
 endif
 
-set shell=sh                          " shell to use for `!`, `:!`, `system()` etc.
+set shell=zsh                          " shell to use for `!`, `:!`, `system()` etc.
 set noshiftround                      " don't always indent by multiple of shiftwidth
 set shiftwidth=2                      " spaces per tab (when shifting)
 set shortmess+=A                      " ignore annoying swapfile messages
