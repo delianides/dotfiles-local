@@ -10,6 +10,7 @@ elif which brew >/dev/null &&
   BREW_DIR="$(dirname `which brew`)/.." &&
   [ -f "$BREW_DIR/opt/asdf/asdf.sh" ]; then
   . "$BREW_DIR/opt/asdf/asdf.sh"
+  . "$HOME/.asdf/plugins/java/set-java-home.zsh"
 fi
 
 # mkdir .git/safe in the root of repositories you trust
