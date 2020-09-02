@@ -14,6 +14,7 @@ tap "jesseduffield/lazygit"
 tap "osx-cross/avr"
 tap "px4/px4"
 tap "thoughtbot/formulae"
+tap "teamookla/speedtest"
 
 brew "ansifilter"
 brew "autoconf"
@@ -30,6 +31,7 @@ brew "autoenv"
 brew "avrdude"
 brew "awscli"
 brew "clipper", restart_service: true
+brew "speedtest", force: true
 brew "cmatrix"
 brew "colordiff"
 brew "ctags"
