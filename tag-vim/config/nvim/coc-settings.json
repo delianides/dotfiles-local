@@ -20,7 +20,7 @@
   ],
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
-  "diagnostic.virtualText": true,
+  "diagnostic.virtualText": false,
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.virtualTextPrefix": "■ ",
   "signature.enable": false,

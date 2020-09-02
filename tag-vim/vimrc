@@ -24,17 +24,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " make sure fzf is installed
 Plug 'junegunn/fzf.vim'                             " command t like behavior but can fill search with anything
 Plug 'tpope/vim-fugitive'                           " git commands in vim
-Plug 'tpope/vim-vinegar'                            " netrw play nicely
 Plug 'tpope/vim-sensible'                           " sensible vim defaults
 Plug 'tpope/vim-surround'                           " surround vim objects with a string
 Plug 'tpope/vim-commentary'                         " universal comment application
 Plug 'tpope/vim-eunuch'                             " smart file management
 Plug 'tpope/vim-repeat'                             " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired'                         " Moving around
-Plug 'wincent/pinnacle'                             " change colors
 Plug 'wincent/ferret'                               " front for Ag, Fd, and Rp
 Plug 'wincent/terminus'                             " vim interact with the terminal better
-Plug 'jiangmiao/auto-pairs'                         " match brackets, parens, quotes in pair
 Plug 'justinmk/vim-dirvish'
 Plug 'kristijanhusak/vim-dirvish-git'               " file explorer
 Plug 'RRethy/vim-illuminate'                        " highlight other instances of the word or symbol the cursor
@@ -45,19 +42,21 @@ Plug 'junegunn/vim-easy-align'                      " align text
 Plug 'jpalardy/vim-slime'                           " send commands to repl
 Plug 'wakatime/vim-wakatime'
 
-Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
+Plug 'honza/vim-snippets'
 
-Plug 'dense-analysis/ale'                           " linting and fixing
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-if has('nvim')
-  if has('nvim-0.5.0')
-    Plug 'neovim/nvim-lsp'
-    Plug 'nvim-lua/completion-nvim'
-    Plug 'nvim-lua/diagnostic-nvim'
-  endif
-  Plug 'norcalli/nvim-colorizer.lua'
-endif
+" Plug 'dense-analysis/ale'                           " linting and fixing
+
+" if has('nvim')
+"   if has('nvim-0.5.0')
+"     Plug 'neovim/nvim-lsp'
+"     Plug 'nvim-lua/completion-nvim'
+"     Plug 'nvim-lua/diagnostic-nvim'
+"   endif
+"   Plug 'norcalli/nvim-colorizer.lua'
+" endif
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go', 'golang'] }
 Plug 'hashivim/vim-terraform', { 'for': ['terraform'] }

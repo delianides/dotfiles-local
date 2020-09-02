@@ -50,12 +50,12 @@ local servers = {
   {
     name = 'tsserver',
     config = {
-      -- cmd = {
-      --   "typescript-language-server",
-      --   "--stdio",
-      --   "--tsserver-log-file",
-      --   "tslog"
-      -- }
+      cmd = {
+        "typescript-language-server",
+        "--stdio",
+        "--tsserver-log-file",
+        "tslog"
+      },
       -- See https://github.com/neovim/nvim-lsp/issues/237
       root_dir = nvim_lsp.util.root_pattern("tsconfig.json", ".git"),
     }

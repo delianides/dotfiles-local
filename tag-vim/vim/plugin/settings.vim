@@ -22,12 +22,29 @@ endif
 set noshowmode
 set signcolumn=yes                    " always show sign column
 set cursorline                        " highlight current line
+set diffopt+=foldcolumn:0             " don't show fold column in diff view
 
 if exists('$SUDO_USER')
   set noswapfile                      " don't create root-owned files
 else
   set directory=~/.vim/tmp/swap//     " keep swap files out of the way
   set directory+=.
+endif
+
+if has('folding')
+  if has('windows')
+    set fillchars=diff:∙               " BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
+    set fillchars+=fold:·              " MIDDLE DOT (U+00B7, UTF-8: C2 B7)
+    set fillchars+=vert:┃              " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
+  endif
+
+  if has('nvim-0.3.1')
+    set fillchars+=eob:\              " suppress ~ at EndOfBuffer
+  endif
+
+  set foldmethod=indent               " not as cool as syntax, but faster
+  set foldlevelstart=99               " start unfolded
+  set foldtext=utils#settings#foldtext()
 endif
 
 set nowrap
