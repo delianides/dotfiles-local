@@ -41,6 +41,8 @@
   prompt = false
 [push]
   default = current
+[pull]
+  rebase = false
 [include]
   path = .gitconfig.local
 [commit]

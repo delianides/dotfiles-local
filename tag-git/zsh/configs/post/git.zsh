@@ -24,6 +24,8 @@ function work_in_progress() {
 # (sorted alphabetically)
 #
 
+alias git='hub'
+
 alias g='git'
 
 alias ga='git add'
