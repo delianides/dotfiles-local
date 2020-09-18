@@ -6,6 +6,12 @@
 " (_)_/ |_|_| |_| |_|_|  \___|
 "
 "
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 " VIMPATH
 let $VIMPATH=expand('$HOME/.vim')
 " Leader key
@@ -25,42 +31,24 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " make sure fzf is installed
 Plug 'junegunn/fzf.vim'                             " command t like behavior but can fill search with anything
 Plug 'tpope/vim-fugitive'                           " git commands in vim
 Plug 'tpope/vim-sensible'                           " sensible vim defaults
-Plug 'tpope/vim-surround'                           " surround vim objects with a string
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'                         " universal comment application
-Plug 'tpope/vim-eunuch'                             " smart file management
 Plug 'tpope/vim-repeat'                             " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired'                         " Moving around
-Plug 'wincent/ferret'                               " front for Ag, Fd, and Rp
-Plug 'wincent/terminus'                             " vim interact with the terminal better
-Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'               " file explorer
+Plug 'tpope/vim-dadbod'                             " interacting with databases
+Plug 'kristijanhusak/vim-dadbod-ui'                 " simpleui for dadbod
 Plug 'RRethy/vim-illuminate'                        " highlight other instances of the word or symbol the cursor
 Plug 'wellle/tmux-complete.vim'                     " auto complete from adjacent tmux panes
 Plug 'christoomey/vim-tmux-navigator'               " navigating tmux panes and vim buffers alike
 Plug 'voldikss/vim-floaterm'                        " terminal in window
 Plug 'junegunn/vim-easy-align'                      " align text
-Plug 'jpalardy/vim-slime'                           " send commands to repl
-Plug 'wakatime/vim-wakatime'
 
 Plug 'mlaursen/vim-react-snippets'
 Plug 'honza/vim-snippets'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Plug 'dense-analysis/ale'                           " linting and fixing
-
-" if has('nvim')
-"   if has('nvim-0.5.0')
-"     Plug 'neovim/nvim-lsp'
-"     Plug 'nvim-lua/completion-nvim'
-"     Plug 'nvim-lua/diagnostic-nvim'
-"   endif
-"   Plug 'norcalli/nvim-colorizer.lua'
-" endif
-
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go', 'golang'] }
-Plug 'hashivim/vim-terraform', { 'for': ['terraform'] }
-" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
 Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
 Plug 'sheerun/vim-polyglot' " includes most language packs
@@ -74,3 +62,4 @@ Plug 'flazz/vim-colorschemes'
 call plug#end()
 colorscheme molokai
 set termguicolors
+

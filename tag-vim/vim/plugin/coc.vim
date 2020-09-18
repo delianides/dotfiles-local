@@ -3,17 +3,34 @@ if has_key(plugs, 'coc.nvim')
     \ 'coc-json',
     \ 'coc-jest',
     \ 'coc-git',
+    \ 'coc-gitignore',
+    \ 'coc-gist',
     \ 'coc-pairs',
+    \ 'coc-prisma',
     \ 'coc-yaml',
     \ 'coc-lists',
+    \ 'coc-explorer',
+    \ 'coc-marketplace',
+    \ 'coc-db',
+    \ 'coc-lua',
+    \ 'coc-css',
     \ 'coc-rls',
     \ 'coc-go',
     \ 'coc-highlight',
-    \ 'coc-snippets'
+    \ 'coc-snippets',
+    \ 'coc-vimlsp'
     \ ]
 
   if isdirectory('./node_modules') && isdirectory('./node_modules/typescript')
     let g:coc_global_extensions += ['coc-tsserver']
+  endif
+
+  if isdirectory('./node_modules') && isdirectory('./node_modules/styled-components')
+    let g:coc_global_extensions += ['coc-styled-components']
+  endif
+
+  if isdirectory('./node_modules') && isdirectory('./node_modules/rome')
+    let g:coc_global_extensions += ['coc-rome']
   endif
 
   if isdirectory('./node_modules') && isdirectory('./node_modules/flow-bin')
@@ -26,6 +43,10 @@ if has_key(plugs, 'coc.nvim')
 
   if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
     let g:coc_global_extensions += ['coc-eslint']
+  endif
+
+  if isdirectory('./node_modules') && isdirectory('./node_modules/deno')
+    let g:coc_global_extensions += ['coc-deno']
   endif
 
   nmap <silent> gd <Plug>(coc-definition)

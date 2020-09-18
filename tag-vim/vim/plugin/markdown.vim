@@ -1,88 +1,74 @@
-let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html', 'go', 'ruby']
-let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_fenced_languages = [
+      \'css',
+      \'erb=eruby',
+      \'javascript',
+      \'js=javascript',
+      \'jsx=javascript.jsx',
+      \'ts=typescript',
+      \'tsx=typescript.tsx',
+      \'json',
+      \'json5',
+      \'ruby',
+      \'sass',
+      \'scss=sass',
+      \'xml',
+      \'html',
+      \'py=python',
+      \'python',
+      \'clojure',
+      \'clj=clojure',
+      \'clojurescript',
+      \'cljs=clojurescript',
+      \'stylus=css',
+      \'less=css'
+      \]
 
-"
-" Goyo
-"
+let g:goyo_width = '120'
+let g:limelight_conceal_ctermfg=240
+let g:limelight_conceal_guifg = '#777777'
+nmap <Leader>g :Goyo<CR>
 
-let s:matchadd=v:null
-let s:settings={}
-
-function! s:goyo_enter()
-augroup WincentAutocmds
-  autocmd!
-augroup END
-augroup! WincentAutocmds
-
-augroup WincentAutocolor
-  autocmd!
-augroup END
-augroup! WincentAutocolor
-
-let s:settings = {
-	  \   'showbreak': &showbreak,
-	  \   'statusline': &statusline,
-	  \   'cursorline': &cursorline,
-	  \   'showmode': &showmode
-	  \ }
-
-set showbreak=
-set statusline=\ 
-set nocursorline
-set noshowmode
-
-if exists('$TMUX')
-  silent !tmux set status off
-endif
-
-let l:nbsp=' '
-let s:matchadd=matchadd('Error', l:nbsp)
-
-let b:quitting=0
-let b:quitting_bang=0
-if has('patch-7.3.544')
-  autocmd QuitPre <buffer> let b:quitting=1
-  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-endif
-
-if exists('$TMUX')
-  autocmd VimLeavePre * call s:EnsureTmux()
-endif
-endfunction
-
-function! s:EnsureTmux()
-silent !tmux set status on
-endfunction
-
-function! s:goyo_leave()
-let l:is_last_buffer=len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-if b:quitting && l:is_last_buffer
-  if b:quitting_bang
-	qa!
-  else
-	qa
+" https://github.com/junegunn/goyo.vim/wiki/Customization
+function! s:goyo_enter() abort
+  packadd limelight.vim
+  packadd goyo.vim
+  Limelight
+  if exists('$TMUX')
+    silent !tmux set -g status off
+    silent !tmux set -g pane-border-status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
   endif
-endif
-
-for [k, v] in items(s:settings)
-  execute 'let &' . k . '=' . string(v)
-endfor
-
-if exists('$TMUX')
-  silent !tmux set status on
-endif
-
-if type(s:matchadd) != type(v:null)
-  try
-	call matchdelete(s:matchadd)
-  catch /./
-	" Swallow.
-  endtry
-  let s:matchadd=v:null
-endif
-
-call s:WincentAutocmds()
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  augroup MyGoyoEnter
+    autocmd!
+    autocmd QuitPre <buffer> let b:quitting = 1
+  augroup END
+  cabbrev <buffer> q! let b:quitting_bang = 1 \| q!
 endfunction
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+function! s:goyo_leave() abort
+  Limelight!
+  if exists('$TMUX')
+    silent !tmux set -g status on
+    silent !tmux set -g pane-border-status top
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+      qa!
+    else
+      silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+      qa
+    endif
+  endif
+endfunction
+
+augroup MyMarkdownGoyo
+  autocmd!
+  autocmd User GoyoEnter call <SID>goyo_enter()
+  autocmd User GoyoLeave call <SID>goyo_leave()
+augroup END
+
