@@ -36,6 +36,8 @@ Plug 'tpope/vim-commentary'                         " universal comment applicat
 Plug 'tpope/vim-repeat'                             " allows . to repeat previous commands
 Plug 'tpope/vim-unimpaired'                         " Moving around
 Plug 'tpope/vim-dadbod'                             " interacting with databases
+Plug 'justinmk/vim-dirvish'
+Plug 'kristijanhusak/vim-dirvish-git'               " file explorer
 Plug 'kristijanhusak/vim-dadbod-ui'                 " simpleui for dadbod
 Plug 'RRethy/vim-illuminate'                        " highlight other instances of the word or symbol the cursor
 Plug 'wellle/tmux-complete.vim'                     " auto complete from adjacent tmux panes
