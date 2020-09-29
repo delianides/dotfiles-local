@@ -26,42 +26,136 @@ map q <Nop>
 cmap w!! w !sudo tee > /dev/null %
 
 call plug#begin('~/.vim/plugged')
+  Plug 'tpope/vim-sensible'                           " sensible vim defaults
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " make sure fzf is installed
-Plug 'junegunn/fzf.vim'                             " command t like behavior but can fill search with anything
-Plug 'tpope/vim-fugitive'                           " git commands in vim
-Plug 'tpope/vim-sensible'                           " sensible vim defaults
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'                         " universal comment application
-Plug 'tpope/vim-repeat'                             " allows . to repeat previous commands
-Plug 'tpope/vim-unimpaired'                         " Moving around
-Plug 'tpope/vim-dadbod'                             " interacting with databases
-Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'               " file explorer
-Plug 'kristijanhusak/vim-dadbod-ui'                 " simpleui for dadbod
-Plug 'RRethy/vim-illuminate'                        " highlight other instances of the word or symbol the cursor
-Plug 'wellle/tmux-complete.vim'                     " auto complete from adjacent tmux panes
-Plug 'christoomey/vim-tmux-navigator'               " navigating tmux panes and vim buffers alike
-Plug 'voldikss/vim-floaterm'                        " terminal in window
-Plug 'junegunn/vim-easy-align'                      " align text
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " make sure fzf is installed
+  Plug 'junegunn/fzf.vim'                             " command t like behavior but can fill search with anything
+  Plug 'tpope/vim-fugitive'                           " git commands in vim
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'                         " universal comment application
+  Plug 'tpope/vim-repeat'                             " allows . to repeat previous commands
+  Plug 'tpope/vim-unimpaired'                         " Moving around
+  Plug 'mbbill/undotree'
 
-Plug 'mlaursen/vim-react-snippets'
-Plug 'honza/vim-snippets'
+  Plug 'justinmk/vim-dirvish'
+  Plug 'kristijanhusak/vim-dirvish-git'               " file explorer
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'tpope/vim-dadbod'                             " interacting with databases
+  Plug 'kristijanhusak/vim-dadbod-ui'                 " simpleui for dadbod
 
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
-Plug 'sheerun/vim-polyglot' " includes most language packs
+  Plug 'RRethy/vim-illuminate'                        " highlight other instances of the word or symbol the cursor
+  Plug 'christoomey/vim-tmux-navigator'               " navigating tmux panes and vim buffers alike
+  Plug 'junegunn/vim-easy-align'                      " align text
 
-Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
-Plug 'fatih/molokai'
-Plug 'chriskempson/base16-vim'
-Plug 'flazz/vim-colorschemes'
+  Plug 'morhetz/gruvbox'
+
+  Plug 'dense-analysis/ale'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'nvim-lua/diagnostic-nvim'
+
+  " languages
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': ['typescript', 'javascript'] }
+  Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': ['go', 'golang'] }
+  Plug 'sheerun/vim-polyglot'
+  Plug 'junegunn/goyo.vim', { 'for': ['markdown']}
+  Plug 'junegunn/limelight.vim', { 'for': ['markdown']}
 
 call plug#end()
-colorscheme molokai
+colorscheme gruvbox
+
+" sensible defaults not in vim-sensible
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nu
+set nowrap
+set smartcase
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set colorcolumn=80
 set termguicolors
 
+noremap H ^
+noremap L g_
+noremap J 5j
+noremap K 5k
+
+vmap < <gv
+vmap > >gv
+
+" Disable useless arrow keys
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" Bubble single lines
+nmap <C-K> [e
+nmap <C-J> ]e
+" Bubble multiple lines
+vmap <C-K> [egv
+vmap <C-J> ]egv
+
+augroup GeneralAutocmds
+  autocmd!
+
+  autocmd BufNewFile,BufRead {Gemfile,Brewfile,Rakefile,Vagrantfile,Thorfile,Procfile,Guardfile,config.ru,*.rake} set filetype=ruby
+  autocmd BufNewFile,BufRead .{babel,eslint,stylelint,prettier,jshint}rc,.tern-* set filetype=json
+
+  autocmd TermOpen * set nonumber
+  autocmd TermLeave * set number
+
+  autocmd VimResized * execute "normal! \<c-w>="
+
+  " http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
+  autocmd VimEnter * autocmd WinEnter * let w:created=1
+  autocmd VimEnter * let w:created=1
+  autocmd VimResized * wincmd =
+  autocmd BufReadPost *
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+
+  " Disable paste mode on leaving insert mode.
+  autocmd InsertLeave * set nopaste
+
+  " Make current window more obvious by turning off/adjusting some features in non-current
+  " windows.
+  if exists('+winhighlight')
+    autocmd BufEnter,FocusGained,VimEnter,WinEnter * set winhighlight=
+    autocmd FocusLost,WinLeave * set winhighlight=CursorLineNr:LineNr,EndOfBuffer:ColorColumn,IncSearch:ColorColumn,Normal:ColorColumn,NormalNC:ColorColumn,SignColumn:ColorColumn
+  endif
+
+  autocmd BufWritePost */spell/*.add silent! :mkspell! %
+
+  if exists('##TextYankPost')
+    autocmd TextYankPost * silent! lua return (not vim.v.event.visual) and require'vim.highlight'.on_yank('Substitute', 200)
+  endif
+augroup END
+
+" FZF - https://github.com/junegunn/fzf.vim
+if exists(':FZF')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
+
+  " Bind "//" to a fzf-powered buffer search
+  nmap // :BLines!<CR>
+
+  " Bind "??" to a fzf-powered project search
+  nmap ?? :Rg!<CR>
+
+  " Bind "<leader>p" to a fzf-powered filename search
+  nmap <leader>p :Files!<CR>
+
+  " Bind "cc" to a fzf-powered command search
+  nmap cc :Commands!<CR>
+endif
