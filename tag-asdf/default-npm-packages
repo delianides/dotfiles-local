@@ -3,3 +3,8 @@ vercel
 serve
 npm-check-updates
 sql-lint
+eslint
+prettier
+typescript
+jest
+typescript-language-server

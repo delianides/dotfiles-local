@@ -1,9 +1,10 @@
 deno 1.0.0
 elixir 1.10.2
 golang 1.14.2
-nodejs 12.18.3
+nodejs 14.13.0
 python 2.7.18 3.8.2
 ruby 2.7.1
 rust 1.43.0
 yarn 1.22.4 
 java zulu-8.48.0.53
+lua 5.4.0
