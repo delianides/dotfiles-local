@@ -13,7 +13,6 @@ tap "homebrew/services"
 tap "jesseduffield/lazygit"
 tap "osx-cross/avr"
 tap "px4/px4"
-tap "thoughtbot/formulae"
 tap "teamookla/speedtest"
 
 brew "ansifilter"
@@ -29,6 +28,7 @@ brew "readline"
 brew "unixodbc"
 brew "asdf"
 brew "autoenv"
+brew "direnv"
 brew "avrdude"
 brew "awscli"
 brew "clipper", restart_service: true
@@ -70,6 +70,7 @@ brew "nomad"
 brew "packer"
 brew "pgformatter"
 brew "pre-commit"
+brew "rcm"
 brew "rename"
 brew "ripgrep"
 brew "rke"
@@ -96,7 +97,7 @@ brew "goreleaser/tap/goreleaser"
 brew "jesseduffield/lazygit/lazygit"
 brew "osx-cross/avr/avr-gcc@8", link: true
 brew "px4/px4/gcc-arm-none-eabi"
-brew "thoughtbot/formulae/rcm"
+brew 'basdf'
 
 cask "1password"
 cask "alacritty"
@@ -113,6 +114,7 @@ cask "font-jetbrains-mono"
 cask "font-roboto-mono"
 cask "font-source-code-pro"
 cask "font-space-mono"
+cask "font-sauce-code-pro-nerd-font"
 cask "google-chrome"
 cask "hyper"
 cask "imageoptim"
@@ -123,6 +125,7 @@ cask "keybase"
 cask "kitty"
 cask "macvim"
 cask "ngrok"
+cask "notion"
 cask "now"
 cask "permute"
 cask "pgadmin4"
@@ -138,7 +141,6 @@ cask "visual-studio-code"
 cask "vlc"
 
 mas "Calcbot", id: 931657367
-mas "Deliveries", id: 924726344
 mas "Reeder", id: 1449412482
 mas "Slack", id: 803453959
 mas "Spark", id: 1176895641

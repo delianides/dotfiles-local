@@ -1,9 +1,8 @@
-require 'nvim-colorizer'
-require 'lsp'
+RELOAD = require('plenary.reload').reload_module
 
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-}
+R = function(name)
+  RELOAD(name)
+  return require(name)
+end
+
+require("modules.statusline")

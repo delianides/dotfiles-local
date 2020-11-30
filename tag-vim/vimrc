@@ -7,206 +7,82 @@ scriptencoding utf-8
 " (_)_/ |_|_| |_| |_|_|  \___|
 "
 "
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-
-syntax enable
-
 " VIMPATH
 let $VIMPATH=expand('$HOME/.vim')
-" Leader key
+
+" leader key
 let mapleader = ' '
-" exit to normal mode with 'jj', so i don't always have to hit the escape key
+
+" leave mode quickly
 inoremap jj <ESC>
-" No need for ex mode
-nnoremap Q <nop>
-" recording macros is not my thing
-map q <Nop>
 
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+lua require('plugins')
 
-" With this, you can enter ":Config" in normal mode to open the Vim configuration.
-command! Config execute ":e $MYVIMRC"
-
-" Call ":Reload" to apply the latest .vimrc contents
-command! Reload execute "source ~/.vimrc"
-
-call plug#begin('~/.vim/plugged')
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " make sure fzf is installed
-  Plug 'junegunn/fzf.vim'                             " command t like behavior but can fill search with anything
-  Plug 'tpope/vim-fugitive'                           " git commands in vim
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-commentary'                         " universal comment application
-  Plug 'tpope/vim-repeat'                             " allows . to repeat previous commands
-  Plug 'tpope/vim-unimpaired'                         " Moving around
-  Plug 'mbbill/undotree'
-  Plug 'mkitt/tabline.vim'
-  Plug 'RRethy/vim-illuminate'                        " highlight other instances of the word or symbol the cursor
-  Plug 'christoomey/vim-tmux-navigator'               " navigating tmux panes and vim buffers alike
-  Plug 'junegunn/vim-easy-align'                      " align text
-  Plug 'Yggdroot/indentLine'
-
-  Plug 'tpope/vim-dadbod'                             " interacting with databases
-  Plug 'kristijanhusak/vim-dadbod-ui'                 " simpleui for dadbod
-
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-  " languages
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': ['typescript', 'javascript'] }
-  Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': ['go', 'golang'] }
-  Plug 'sheerun/vim-polyglot'
-  Plug 'junegunn/goyo.vim', { 'for': ['markdown']}
-  Plug 'junegunn/limelight.vim', { 'for': ['markdown']}
-
-  Plug 'gruvbox-community/gruvbox'
-
-call plug#end()
-colorscheme gruvbox
-
-" sensible defaults not in vim-sensible
+syntax enable
 set hidden
-set nowrap
-set pumheight=10
-set ruler
-set cmdheight=2
-set iskeyword+=-
-set mouse=a
-set splitbelow
-set splitright
-set conceallevel=0
+set mouse=n   " use mouse in normal mode
+set splitbelow " horizontal splits go on bottom
+set splitright " vertical splits go right
+
+" set width to 4 spaces
 set tabstop=2
 set shiftwidth=2
+set softtabstop=2
 set smarttab
 set expandtab
-set smartindent
 set smartcase
+
+" Make it so that long lines wrap smartly
+set breakindent
+let &showbreak=repeat(' ', 3)
+set linebreak
+
+set smartindent
 set autoindent
-set laststatus=0
-set number
-set cursorline
-set background=dark
-set showtabline=2
-set noshowmode
-set nobackup
-set nowritebackup
-set updatetime=300
-set timeoutlen=500
+
+set number " set line numbers
+set relativenumber " always count up and down from cursorline
+set noswapfile
+set cursorline " highline line with cursor
+set background=dark " dark background
+set noshowmode " dont show the mode in the status
+set nobackup " i dont backup and i test in production
+set nowritebackup " time machine for unix is off
+set updatetime=1000 " update faster
+set timeoutlen=500 " timeout stuff
 set clipboard=unnamedplus               " Copy paste between vim and everything else
-set shell=zsh
-set noerrorbells
-set belloff=all
-set nolist
-set modelines=5                       " scan this many lines looking for modeline
-set nojoinspaces                      " don't autoinsert two spaces after '.', '?', '!' for join command
-set undodir=~/.vim/undodir
-set undofile
+set shell=zsh " use zsh for the shell
+set noerrorbells " quiet this is a library
+set belloff=all " i said quiet
+set noundofile
 set incsearch
-set colorcolumn=80
-set termguicolors
-set signcolumn=yes
+set colorcolumn=80 " have a line
+set termguicolors " 24-bit colors in the TUI
+set signcolumn=yes " always show the sign column
 set shortmess+=c
-set formatoptions=cro
+set nowrap
+
+set formatoptions-=a    " Auto formatting is BAD.
+set formatoptions-=t    " Don't auto format my code. I got linters for that.
+set formatoptions+=c    " In general, I like it when comments respect textwidth
+set formatoptions+=q    " Allow formatting comments w/ gq
+set formatoptions-=o    " O and o, don't continue comments
+set formatoptions+=r    " But do continue when pressing enter.
+set formatoptions+=n    " Indent past the formatlistpat, not underneath it.
+set formatoptions+=j    " Auto-remove comments if possible.
+set formatoptions-=2    " I'm not in gradeschool anymore
+set nojoinspaces        " Two spaces and grade school, we're done
+
+set shada=!,'1000,<50,s10,h
 
 if has('linebreak')
   let &showbreak='↳ '                 " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
 endif
 
-if has('folding')
-  if has('windows')
-    set fillchars=diff:∙               " BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
-    set fillchars+=fold:·              " MIDDLE DOT (U+00B7, UTF-8: C2 B7)
-    set fillchars+=vert:┃              " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
-  endif
+" Folding
+set foldmethod=marker
+set foldlevel=0
+set modelines=1
 
-  if has('nvim-0.3.1')
-    set fillchars+=eob:\              " suppress ~ at EndOfBuffer
-  endif
-
-  set foldmethod=indent               " not as cool as syntax, but faster
-  set foldlevelstart=99               " start unfolded
-  set foldtext=utils#settings#foldtext()
-endif
-
-noremap H ^
-noremap L g_
-noremap J 5j
-noremap K 5k
-
-noremap <Tab> :tabn<CR>
-noremap <S-Tab> :tabp<CR>
-
-vmap < <gv
-vmap > >gv
-
-" Disable useless arrow keys
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
-" Bubble single lines
-nmap <C-K> [e
-nmap <C-J> ]e
-" Bubble multiple lines
-vmap <C-K> [egv
-vmap <C-J> ]egv
-
-augroup GeneralAutocmds
-  autocmd!
-
-  autocmd BufNewFile,BufRead {Gemfile,Brewfile,Rakefile,Vagrantfile,Thorfile,Procfile,Guardfile,config.ru,*.rake} set filetype=ruby
-  autocmd BufNewFile,BufRead .{babel,eslint,stylelint,prettier,jshint}rc,.tern-* set filetype=json
-
-  autocmd TermOpen * set nonumber norelativenumber
-  autocmd TermLeave * set number relativenumber
-
-  autocmd VimResized * execute "normal! \<c-w>="
-
-  " http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter
-  autocmd VimEnter * autocmd WinEnter * let w:created=1
-  autocmd VimEnter * let w:created=1
-  autocmd VimResized * wincmd =
-  autocmd BufReadPost *
-        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
-
-  " Disable paste mode on leaving insert mode.
-  autocmd InsertLeave * set nopaste
-  autocmd BufWritePost */spell/*.add silent! :mkspell! %
-augroup END
-
-"
-" FZF - https://github.com/junegunn/fzf.vim
-"
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
-let $FZF_DEFAULT_OPTS='--color=dark --height=30% --layout=reverse --margin=1,1 --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1'
-let g:fzf_layout = { 'down': '~30%' }
-let g:fzf_buffers_jump = 1
-let g:fzf_action = {
-  \ 'ctrl-l': 'vsplit',
-  \ 'ctrl-x': 'split',
-  \ 'enter': 'tab split',
-  \ }
-
-" Bind "//" to a fzf-powered buffer search
-nmap // :BLines!<CR>
-
-" Bind "??" to a fzf-powered project search
-nmap ?? :Rg!<CR>
-
-" Bind "<C-f>" to a fzf-powered filename search
-nmap <C-f> :GFiles!<CR>
-
-" Bind "cc" to a fzf-powered command search
-nmap cc :Commands!<CR>
+let g:nlua_keyword_program = 'Y'
 

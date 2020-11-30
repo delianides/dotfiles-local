@@ -43,4 +43,7 @@ _load_settings "$HOME/.zsh/configs"
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# direnv
+eval "$(direnv hook zsh)"
+
 
