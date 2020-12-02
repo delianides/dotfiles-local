@@ -100,6 +100,7 @@ brew "px4/px4/gcc-arm-none-eabi"
 brew 'basdf'
 
 cask "1password"
+cask "1password-cli"
 cask "alacritty"
 cask "alfred"
 cask "android-studio"
