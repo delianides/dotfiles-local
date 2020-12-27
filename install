@@ -13,6 +13,15 @@ quietly_brew_bundle(){
   stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -Ei "$regex" || true)
 }
 
+info "Checking for caffeinate..."
+if command_does_not_exist caffeinate; then
+  case "$OSTYPE" in
+    darwin*)  brew install caffeinate ;; 
+    linux*)   sudo apt-get install caffeinate -y ;;
+    *)        echo "unknown: $OSTYPE" ;;
+  esac
+fi
+
 info "Checking for command-line tools..."
 if command_does_not_exist xcodebuild; then
   stay_awake_while xcode-select --install

@@ -98,6 +98,8 @@ brew "jesseduffield/lazygit/lazygit"
 brew "osx-cross/avr/avr-gcc@8", link: true
 brew "px4/px4/gcc-arm-none-eabi"
 brew 'basdf'
+brew 'tree'
+brew 'atomicparsley'
 
 cask "1password"
 cask "1password-cli"

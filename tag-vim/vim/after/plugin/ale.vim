@@ -22,6 +22,8 @@ let g:ale_linter_aliases = {
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'typescript': ['tsserver','eslint'],
+      \ 'javascriptreact': ['eslint'],
+      \ 'typescriptreact': ['tsserver','eslint'],
       \ 'lua'       : ['luacheck'],
       \ 'sql'       : [],
       \}
@@ -32,6 +34,8 @@ let g:ale_fixers = {
       \   'markdown'  : ['prettier'],
       \   'javascript': ['eslint'],
       \   'typescript': ['eslint'],
+      \   'javascriptreact': ['eslint'],
+      \   'typescriptreact': ['eslint'],
       \   'css'       : ['prettier'],
       \   'json'      : ['prettier'],
       \   'scss'      : ['prettier'],

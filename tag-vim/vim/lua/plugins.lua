@@ -34,11 +34,7 @@ return require('packer').startup {
       end
     end
 
-
-    local_use {
-      'express_line.nvim',
-    }
-
+    use 'tjdevries/express_line.nvim'
     use {'wbthomason/packer.nvim', opt = true}
 
     use 'rhysd/git-messenger.vim'
@@ -64,6 +60,8 @@ return require('packer').startup {
     -- -- git
     use 'tpope/vim-fugitive'
     use 'mhinz/vim-signify'
+    use 'lambdalisue/gina.vim'
+    use 'kdheepak/lazygit.nvim'
 
     -- -- Pretty icons. Not necessarily required.
     use 'ryanoasis/vim-devicons'
@@ -100,29 +98,48 @@ return require('packer').startup {
       config = function()
         require("modules.lsp")
       end,
-      requires = {
-        'nvim-lua/completion-nvim',
-        'nvim-lua/diagnostic-nvim',
-        'nvim-lua/lsp-status.nvim',
-        'nvim-lua/completion-nvim',
-        'steelsojka/completion-buffers',
-        'tjdevries/lsp_extensions.nvim',
-        -- "norcalli/snippets.nvim",
-      },
     }
 
-    -- use 'tjdevries/nlua.nvim'
-    use 'nvim-treesitter/completion-treesitter'
+    use 'nvim-lua/diagnostic-nvim'
+    use 'nvim-lua/lsp-status.nvim'
+    use 'nvim-lua/completion-nvim'
+    use 'steelsojka/completion-buffers'
+    use 'tjdevries/lsp_extensions.nvim'
+    use 'albertoCaroM/completion-tmux'
+
+    use 'norcalli/snippets.nvim'
+    use 'norcalli/ui.nvim'
+
+    use 'brooth/far.vim'
+
+    use 'romainl/vim-qf'
+
+    use {
+      'glacambre/firenvim',
+      run = function()
+        vim.fn['firenvim#install'](0)
+      end
+    }
+
+    -- use 'tjdevries/nlua.nvim' cant use until figure out how to remap K
     use {
       'nvim-treesitter/nvim-treesitter',
-      -- commit = '19c9465a8c33d1362550b2c4385f594213848912',
-      config = function()
-        require("modules.treesitter").config()
-      end,
+      commit = '42ca4a4c075cae2ec480508d04f9b6d35b7bf382',
+      -- config = function()
+      --   require("modules.treesitter").config()
+      -- end,
+      run = ':TSUpdate',
+      requires = {
+        'nvim-treesitter/playground',
+      }
+    }
+
+    use {
+      'nvim-treesitter/completion-treesitter',
+      run = function() vim.cmd [[TSUpdate]] end
     }
 
     -- use 'itchyny/lightline.vim'
-
 
     -- languages
     use { 'styled-components/vim-styled-components', branch = 'main', ft = { 'typescript', 'javascript' }}
@@ -139,16 +156,18 @@ return require('packer').startup {
 
     use {
       'mkitt/tabline.vim',
-      config = function()
-      end,
     }
 
     use {
-      'nvim-lua/telescope.nvim',
-      config = function()
-        require("modules.telescope")
-      end,
+      'nvim-telescope/telescope.nvim',
     }
+
+    use{'nvim-telescope/telescope-fzy-native.nvim'}
+    use{'nvim-telescope/telescope-fzf-writer.nvim'}
+    use{'nvim-telescope/telescope-packer.nvim'}
+
+    use{'nvim-telescope/telescope-github.nvim'}
+    use{'nvim-telescope/telescope-symbols.nvim'}
 
     use {
       "gruvbox-community/gruvbox",

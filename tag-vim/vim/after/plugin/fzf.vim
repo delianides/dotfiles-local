@@ -19,9 +19,7 @@ nmap // :BLines!<CR>
 nmap ?? :Rg!<CR>
 
 " Bind "<C-f>" to a fzf-powered filename search
-nmap <C-f> :GFiles<CR>
+" nmap <C-f> :GFiles<CR>
 
 " Bind "cc" to a fzf-powered command search
 nmap cc :Commands!<CR>
-
-
