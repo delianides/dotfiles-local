@@ -1,5 +1,9 @@
 function! s:SetTSX()
-  noautocmd set filetype+=.tsx
+  noautocmd set filetype=typescriptreact
 endfunction
 
-autocmd BufNewFile,BufRead *.tsx call s:SetTSX()
+augroup tsxReact
+  au!
+  autocmd BufNewFile,BufRead *.tsx call s:SetTSX()
+augroup end
+

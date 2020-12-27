@@ -1,3 +1,4 @@
+scriptencoding utf-8
 "
 "        _
 " __   _(_)_ __ ___  _ __ ___
@@ -8,69 +9,80 @@
 "
 " VIMPATH
 let $VIMPATH=expand('$HOME/.vim')
-" Leader key
+
+" leader key
 let mapleader = ' '
-" exit to normal mode with 'jj', so i don't always have to hit the escape key
+
+" leave mode quickly
 inoremap jj <ESC>
-" No need for ex mode
-nnoremap Q <nop>
-" recording macros is not my thing
-map q <Nop>
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
 
-call plug#begin('~/.vim/plugged')
+lua require('plugins')
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " make sure fzf is installed
-Plug 'junegunn/fzf.vim'                             " command t like behavior but can fill search with anything
-Plug 'tpope/vim-fugitive'                           " git commands in vim
-Plug 'tpope/vim-sensible'                           " sensible vim defaults
-Plug 'tpope/vim-surround'                           " surround vim objects with a string
-Plug 'tpope/vim-commentary'                         " universal comment application
-Plug 'tpope/vim-eunuch'                             " smart file management
-Plug 'tpope/vim-repeat'                             " allows . to repeat previous commands
-Plug 'tpope/vim-unimpaired'                         " Moving around
-Plug 'wincent/ferret'                               " front for Ag, Fd, and Rp
-Plug 'wincent/terminus'                             " vim interact with the terminal better
-Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'               " file explorer
-Plug 'RRethy/vim-illuminate'                        " highlight other instances of the word or symbol the cursor
-Plug 'wellle/tmux-complete.vim'                     " auto complete from adjacent tmux panes
-Plug 'christoomey/vim-tmux-navigator'               " navigating tmux panes and vim buffers alike
-Plug 'voldikss/vim-floaterm'                        " terminal in window
-Plug 'junegunn/vim-easy-align'                      " align text
-Plug 'jpalardy/vim-slime'                           " send commands to repl
-Plug 'wakatime/vim-wakatime'
+syntax enable
+set hidden
+set mouse=n   " use mouse in normal mode
+set splitbelow " horizontal splits go on bottom
+set splitright " vertical splits go right
 
-Plug 'mlaursen/vim-react-snippets'
-Plug 'honza/vim-snippets'
+" set width to 4 spaces
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set smarttab
+set expandtab
+set smartcase
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Make it so that long lines wrap smartly
+set breakindent
+let &showbreak=repeat(' ', 3)
+set linebreak
 
-" Plug 'dense-analysis/ale'                           " linting and fixing
+set smartindent
+set autoindent
 
-" if has('nvim')
-"   if has('nvim-0.5.0')
-"     Plug 'neovim/nvim-lsp'
-"     Plug 'nvim-lua/completion-nvim'
-"     Plug 'nvim-lua/diagnostic-nvim'
-"   endif
-"   Plug 'norcalli/nvim-colorizer.lua'
-" endif
+set number " set line numbers
+set relativenumber " always count up and down from cursorline
+set noswapfile
+set cursorline " highline line with cursor
+set background=dark " dark background
+set noshowmode " dont show the mode in the status
+set nobackup " i dont backup and i test in production
+set nowritebackup " time machine for unix is off
+set updatetime=1000 " update faster
+set timeoutlen=500 " timeout stuff
+set clipboard=unnamedplus               " Copy paste between vim and everything else
+set shell=zsh " use zsh for the shell
+set noerrorbells " quiet this is a library
+set belloff=all " i said quiet
+set noundofile
+set incsearch
+set colorcolumn=80 " have a line
+set termguicolors " 24-bit colors in the TUI
+set signcolumn=yes " always show the sign column
+set shortmess+=c
+set nowrap
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go', 'golang'] }
-Plug 'hashivim/vim-terraform', { 'for': ['terraform'] }
-" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'tpope/vim-rails', { 'for': ['ruby']} " Ruby on Rails
-Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
-Plug 'sheerun/vim-polyglot' " includes most language packs
+set formatoptions-=a    " Auto formatting is BAD.
+set formatoptions-=t    " Don't auto format my code. I got linters for that.
+set formatoptions+=c    " In general, I like it when comments respect textwidth
+set formatoptions+=q    " Allow formatting comments w/ gq
+set formatoptions-=o    " O and o, don't continue comments
+set formatoptions+=r    " But do continue when pressing enter.
+set formatoptions+=n    " Indent past the formatlistpat, not underneath it.
+set formatoptions+=j    " Auto-remove comments if possible.
+set formatoptions-=2    " I'm not in gradeschool anymore
+set nojoinspaces        " Two spaces and grade school, we're done
 
-Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
-Plug 'fatih/molokai'
-Plug 'chriskempson/base16-vim'
-Plug 'flazz/vim-colorschemes'
+set shada=!,'1000,<50,s10,h
 
-call plug#end()
-colorscheme molokai
-set termguicolors
+if has('linebreak')
+  let &showbreak='↳ '                 " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
+endif
+
+" Folding
+set foldmethod=marker
+set foldlevel=0
+set modelines=1
+
+let g:nlua_keyword_program = 'Y'
+

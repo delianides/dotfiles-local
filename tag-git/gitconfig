@@ -2,8 +2,8 @@
   protocol = https
 [user]
 	name = delianides
-	email = github@delianides.com
-	signingkey = 176DA1CCB7283C28
+	email = github@drew.delianides.com
+  signingkey = 176DA1CCB7283C28
 [alias]
   co = checkout
   count   = !git shortlog -sn

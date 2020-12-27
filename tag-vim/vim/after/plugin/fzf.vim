@@ -1,69 +1,25 @@
-if !exists(':FZF')
-  finish
-endif
-
-if !empty(expand($FZF_CTRL_T_OPTS))
-  let g:fzf_files_options = $FZF_CTRL_T_OPTS
-endif
-
-if !empty(expand($VIM_FZF_LOG))
-  let g:fzf_commits_log_options = $VIM_FZF_LOG
-endif
-
-if !empty(expand($FZF_DEFAULT_OPTS))
-  let $FZF_DEFAULT_OPTS .= ' --margin=1,4'
-endif
-
-let g:fzf_layout = { 'window': utils#window#fzf_window() }
-let g:fzf_history_dir = expand('~/.fzf-history')
+"
+" FZF - https://github.com/junegunn/fzf.vim
+"
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
+let $FZF_DEFAULT_OPTS='--color=dark --height=30% --layout=reverse --margin=1,1 --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1'
+let g:fzf_preview_use_dev_icons = 1
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let g:fzf_buffers_jump = 1
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-l': 'vsplit',
   \ 'ctrl-x': 'split',
-  \ 'enter': 'vsplit',
+  \ 'enter': 'tab split',
   \ }
 
+" Bind "//" to a fzf-powered buffer search
+nmap // :BLines!<CR>
 
-function! s:fzf_statusline() abort
-  setlocal statusline=%4*\ fzf\ %6*V:\ ctrl-v,\ H:\ ctrl-x,\ Tab:\ ctrl-t
-endfunction
+" Bind "??" to a fzf-powered project search
+nmap ?? :Rg!<CR>
 
-augroup MyFZF
-  autocmd!
-  autocmd! User FzfStatusLine call <SID>fzf_statusline()
-augroup END
+" Bind "<C-f>" to a fzf-powered filename search
+" nmap <C-f> :GFiles<CR>
 
-function! FzfSpellSink(word)
-  exe 'normal! "_ciw'.a:word
-endfunction
-
-function! FzfSpell()
-  let suggestions = spellsuggest(expand('<cword>'))
-  return fzf#run({'source': suggestions, 'sink': function('FzfSpellSink'), 'down': 10 })
-endfunction
-
-nnoremap z= :call FzfSpell()<CR>
-
-" https://github.com/junegunn/fzf.vim/issues/907#issuecomment-554699400
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always -g "!*.lock" -g "!*lock.json" --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-nnoremap <leader>\ :RG<CR>
-
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-command! ProjectFiles execute 'Files' utils#git#find_root()
-
-nnoremap <silent> <C-f> :ProjectFiles<CR>
-nnoremap <silent> <leader><leader> :Files<CR>
-nnoremap <silent> <Leader>b :Buffers<cr>
-nnoremap <silent> <Leader>h :Helptags<cr>
+" Bind "cc" to a fzf-powered command search
+nmap cc :Commands!<CR>

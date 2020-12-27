@@ -2,3 +2,12 @@ neovim
 vercel
 serve
 npm-check-updates
+sql-lint
+jsonls
+vscode-json-languageserver
+vscode-json-languageservice
+eslint
+prettier
+typescript
+jest
+typescript-language-server

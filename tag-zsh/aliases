@@ -2,10 +2,23 @@
 #
 export GPG_TTY=$(tty)
 
+export NODEJS_CHECK_SIGNATURES=no
+
 alias e=$EDITOR
 
-alias npm="NEWT_SKIP_VPNCHECK=1 newt exec npm"
+# youtube-dl
+alias yt='youtube-dl --output "$PWD/%(extractor_key)s/%(uploader)s [%(channel_id)s]/%(title)s [%(id)s].%(ext)s"'
+alias ytp='youtube-dl --output "$PWD/%(extractor_key)s/%(uploader)s [%(channel_id)s]/%(playlist)s/%(playlist_index)s - %(title)s [%(id)s].%(ext)s"'
+alias udemy='youtube-dl --output "$PWD/%(extractor_key)s/%(playlist)s/%(chapter_number)s - %(chapter)s/%(title)s.%(ext)s"'
+alias audio='youtube-dl --ignore-config -f bestaudio --extract-audio --audio-format mp3 --embed-thumbnail --add-metadata --audio-quality 0 --output "$PWD/%(uploader)s - %(title)s.%(ext)s"'
+
+function ytinfo() {
+  youtube-dl --ignore-config --dump-json $1 | jq
+}
+
+# alias npm="NEWT_SKIP_VPNCHECK=1 newt exec npm"
 alias vim="nvim"
+alias vi="nvim"
 alias qq="cd . && source ~/.zshrc"
 alias ls="exa"
 alias rm="trash"
