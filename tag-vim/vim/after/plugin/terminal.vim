@@ -8,3 +8,9 @@ endfunction
 
 " ANKI: Make a small terminal at the bottom of the screen.
 nnoremap <leader>st :call <SID>small_terminal()<CR>
+
+nnoremap <C-t> :FloatermToggle<CR>
+nnoremap <C-g> :FloatermNew --height=0.75 --width=0.75 --wintype=floating --name=lazygit --autoclose=2 lazygit<CR>
+
+" vim-test floaterm
+let test#strategy = 'floaterm'

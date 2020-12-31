@@ -34,10 +34,12 @@ return require('packer').startup {
       end
     end
 
-    use 'tjdevries/express_line.nvim'
+    
     use {'wbthomason/packer.nvim', opt = true}
 
     use 'rhysd/git-messenger.vim'
+    use 'tjdevries/express_line.nvim'
+    use { 'kyazdani42/nvim-web-devicons', opt = true }
 
     use {"junegunn/fzf", run = ":call fzf#install()"}
     use 'junegunn/fzf.vim'
@@ -55,7 +57,7 @@ return require('packer').startup {
     use 'christoomey/vim-tmux-navigator'
     use 'junegunn/vim-easy-align'
     use 'jiangmiao/auto-pairs'
-    use 'dense-analysis/ale'
+    -- use 'dense-analysis/ale'
 
     -- -- git
     use 'tpope/vim-fugitive'
@@ -65,8 +67,6 @@ return require('packer').startup {
 
     -- -- Pretty icons. Not necessarily required.
     use 'ryanoasis/vim-devicons'
-
-    use 'kyazdani42/nvim-web-devicons'
     use 'kyazdani42/nvim-tree.lua'
     use 'justinmk/vim-dirvish'
 
@@ -124,13 +124,11 @@ return require('packer').startup {
     -- use 'tjdevries/nlua.nvim' cant use until figure out how to remap K
     use {
       'nvim-treesitter/nvim-treesitter',
-      commit = '42ca4a4c075cae2ec480508d04f9b6d35b7bf382',
-      -- config = function()
-      --   require("modules.treesitter").config()
-      -- end,
-      run = ':TSUpdate',
+      config = function()
+        require("modules.treesitter")
+      end,
       requires = {
-        'nvim-treesitter/playground',
+        'nvim-treesitter/playground'
       }
     }
 
@@ -177,9 +175,6 @@ return require('packer').startup {
         vim.cmd("colorscheme gruvbox")
       end,
     }
-
-    use 'ThePrimeagen/vim-apm'
-    use 'ThePrimeagen/vim-be-good'
   end,
   config = {
     display = {

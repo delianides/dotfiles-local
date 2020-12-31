@@ -15,6 +15,9 @@ end
 -- highlights
 vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+vim.cmd [[ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>" ]]
+vim.cmd [[ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>" ]]
+
 status.activate()
 
 local custom_attach = function(client)
@@ -167,6 +170,18 @@ lspconfig.tsserver.setup({
   on_attach = custom_attach,
   capabilities = status.capabilities
 })
+
+lspconfig.efm.setup{}
+-- {
+--  init_options = {documentFormatting = true},
+--  cmd = {
+--     "efm-langserver",
+--     "-c",
+--     [[ "$HOME/.config/efm-langserver/config.yaml" ]]
+--  },
+--  capabilities = status.capabilities
+-- })
+
 
 lspconfig.rust_analyzer.setup({
   cmd = {"rust-analyzer"},

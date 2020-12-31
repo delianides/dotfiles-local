@@ -11,3 +11,4 @@ prettier
 typescript
 jest
 typescript-language-server
+eslint_d
