@@ -16,9 +16,46 @@ let mapleader = ' '
 " leave mode quickly
 inoremap jj <ESC>
 
-lua require('plugins')
+call plug#begin('$VIMPATH/plugged')
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'voldikss/vim-floaterm'
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/completion-treesitter'
+
+Plug 'RRethy/vim-illuminate'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/vim-easy-align'
+
+Plug 'styled-components/vim-styled-components', { 'for': ['typescript', 'javascript'] }
+Plug 'tpope/vim-rails', { 'for': 'ruby' } 
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/goyo.vim', 
+Plug 'junegunn/limelight.vim'
+Plug 'itchyny/lightline.vim'
+
+Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'gruvbox-community/gruvbox'
+
+call plug#end()
 
 syntax enable
+
+colorscheme gruvbox
+
 set hidden
 set mouse=n   " use mouse in normal mode
 set splitbelow " horizontal splits go on bottom
