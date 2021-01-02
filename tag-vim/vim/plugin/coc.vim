@@ -26,7 +26,6 @@ if has_key(plugs, 'coc.nvim')
     \ 'coc-explorer',
     \ 'coc-python',
     \ 'coc-rust-analyzer',
-    \ 'coc-floatinput',
     \ 'coc-spell-checker',
     \ 'coc-go',
     \ 'coc-highlight',
