@@ -12,14 +12,14 @@ let g:fzf_action = {
   \ 'enter': 'tab split',
   \ }
 
-" Bind "//" to a fzf-powered buffer search
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+
 nmap // :BLines!<CR>
-
-" Bind "??" to a fzf-powered project search
 nmap ?? :Rg!<CR>
-
-" Bind "<C-f>" to a fzf-powered filename search
-" nmap <C-f> :GFiles<CR>
-
-" Bind "cc" to a fzf-powered command search
+nmap <C-f> :ProjectFiles<CR>
+nmap <C-d> :Files ~/.dotfiles<CR>
 nmap cc :Commands!<CR>

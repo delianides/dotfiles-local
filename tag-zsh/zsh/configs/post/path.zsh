@@ -14,6 +14,6 @@ elif which brew >/dev/null &&
 fi
 
 # mkdir .git/safe in the root of repositories you trust
-PATH=".git/safe/../../bin:/usr/local/opt/libpq/bin:$PATH"
+PATH=".git/safe/../../bin:/usr/local/opt/libpq/bin:$PATH:$GOBIN"
 
 export -U PATH

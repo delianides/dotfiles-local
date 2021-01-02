@@ -16,9 +16,100 @@ let mapleader = ' '
 " leave mode quickly
 inoremap jj <ESC>
 
-lua require('plugins')
+call plug#begin('$VIMPATH/plugged')
+
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-github-dashboard'
+  let g:github_dashboard = { 'username': 'delianides' }
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-fugitive'
+  nmap     <Leader>g :Gstatus<CR>gg<c-n>
+  nnoremap <Leader>d :Gdiff<CR>
+Plug 'rhysd/git-messenger.vim'
+  nmap <leader>cm <Plug>(git-messenger)
+
+Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
+  function! s:gv_expand()
+    let line = getline('.')
+    GV --name-status
+    call search('\V'.line, 'c')
+    normal! zz
+  endfunction
+  autocmd! FileType GV nnoremap <buffer> <silent> + :call <sid>gv_expand()<cr>
+
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+  nmap <Leader>l <Plug>(Limelight)
+  xmap <Leader>l <Plug>(Limelight)
+  nnoremap <Leader>ll :Limelight!<cr>
+
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+  let g:undotree_WindowLayout = 2
+  nnoremap U :UndotreeToggle<CR>
+Plug 'AndrewRadev/splitjoin.vim'
+  let g:splitjoin_split_mapping = ''
+  let g:splitjoin_join_mapping = ''
+  nnoremap gss :SplitjoinSplit<cr>
+  nnoremap gsj :SplitjoinJoin<cr>
+
+Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+  autocmd! User indentLine doautocmd indentLine Syntax
+  let g:indentLine_color_term = 239
+  let g:indentLine_color_gui = '#616161'
+
+Plug 'mhinz/vim-signify'
+  let g:signify_vcs_list = ['git']
+  let g:signify_sign_add          = '│'
+  let g:signify_sign_change       = '│'
+  let g:signify_sign_changedelete = '│'
+
+Plug 'voldikss/vim-floaterm'
+  nnoremap <C-t> :FloatermToggle<CR>
+  nnoremap <C-g> :FloatermNew --height=0.75 --width=0.75 --wintype=floating --name=lazygit --autoclose=2 lazygit<CR>
+
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'justinmk/vim-dirvish'
+
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/completion-treesitter'
+
+Plug 'RRethy/vim-illuminate'
+Plug 'christoomey/vim-tmux-navigator'
+  if !(empty($TMUX) && exists('g:loaded_tmux_navigator'))
+    let g:tmux_navigator_disable_when_zoomed = 1
+  endif
+
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'alvan/vim-closetag'
+  let g:closetag_filenames = '*.js,*.jsx,*.tsx,*.html'
+Plug 'junegunn/vim-easy-align'
+
+Plug 'styled-components/vim-styled-components', { 'for': ['typescript', 'javascript'] }
+Plug 'tpope/vim-rails', { 'for': 'ruby' } 
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'sheerun/vim-polyglot'
+
+Plug 'itchyny/lightline.vim'
+Plug 'morhetz/gruvbox'
+  let g:gruvbox_contrast_dark = 'soft'
+
+call plug#end()
 
 syntax enable
+colorscheme gruvbox
+
 set hidden
 set mouse=n   " use mouse in normal mode
 set splitbelow " horizontal splits go on bottom

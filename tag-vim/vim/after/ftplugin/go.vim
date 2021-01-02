@@ -65,7 +65,7 @@ function! GoText(...) abort
     let lines = getline(fold_start, fold_end)
 
     " TODO: Limit how many characters we see.
-    " Pick out only the stuff I want fro mcmoments
+    " Pick out only the stuff I want from moments
     return join(
           \ map(lines, { k, v -> substitute(v, '// ', '', '') }),
           \ " ")
