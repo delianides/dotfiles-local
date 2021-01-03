@@ -1,4 +1,4 @@
-dotfiles
+dotfiles ![Dotfiles](https://github.com/delianides/dotfiles/workflows/Dotfiles/badge.svg)
 ========
 
 Welcome to my dotfiles! The files here are a pretty minimal setup for easily running Docker, Tmux, and Vim. I'm currently using [RCM](https://github.com/thoughtbot/rcm) from thoughtbot to manage everything.
@@ -41,3 +41,5 @@ Inspiration
 - [Gabe Berke-Williams](https://github.com/gabebw/dotfiles)
 - [Greg Hurrell](https://github.com/wincent/wincent)
 - [Ahmed El Gabri](https://github.com/ahmedelgabri/dotfiles)
+- [Junegunn Choi](https://github.com/junegunn/dotfiles)
+- [TJ DeVries](https://github.com/tjdevries/config_manager)
