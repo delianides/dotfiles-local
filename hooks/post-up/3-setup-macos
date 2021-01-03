@@ -6,5 +6,7 @@ set -eo pipefail
 
 source ./bin/common
 
-info "Configuring MacOS..."
-stay_awake_while ./macos
+if ["$OSTYPE" = "darwin"] ; then
+  info "Configuring MacOS..."
+  stay_awake_while ./macos
+fi

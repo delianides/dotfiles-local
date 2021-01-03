@@ -12,6 +12,7 @@ quietly_brew_bundle(){
   local regex='(^Using|Installing|Skipping )|error|failed'
   if [ "$CI" = true ] ; then
     stay_awake_while brew bundle list --file="$brewfile"
+    stay_awake_while brew install rcm
   else
     stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -Ei "$regex" || true)
   fi

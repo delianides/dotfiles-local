@@ -6,9 +6,13 @@ set -eo pipefail
 
 source ./bin/common
 
-info "Installing ASDF version managing..."
-# Load asdf (before setup scripts) in case it's the first time installing it
-export NODEJS_CHECK_SIGNATURES=no
-source /usr/local/opt/asdf/asdf.sh
+if [ "$CI" = true ] ; then
+  info "Installing ASDF version managing..."
+  # Load asdf (before setup scripts) in case it's the first time installing it
+  export NODEJS_CHECK_SIGNATURES=no
+  source /usr/local/opt/asdf/asdf.sh
 
-stay_awake_while asdf install
+  stay_awake_while asdf install
+else
+  info "CI Detected: Not installing ASDF version managing..."
+fi
