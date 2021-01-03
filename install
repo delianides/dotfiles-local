@@ -10,7 +10,11 @@ quietly_brew_bundle(){
   local brewfile=$1
   shift
   local regex='(^Using|Installing|Skipping )|error|failed'
-  stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -Ei "$regex" || true)
+  if [ "$CI" = true ] ; then
+    stay_awake_while brew bundle list --file="$brewfile"
+  else
+    stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -Ei "$regex" || true)
+  fi
 }
 
 info "Checking for caffeinate..."
@@ -23,7 +27,7 @@ if command_does_not_exist caffeinate; then
 fi
 
 info "Checking for command-line tools..."
-if command_does_not_exist xcodebuild; then
+if [ command_does_not_exist xcodebuild ] && [ "$OSTYPE" = 'darwin']; then
   stay_awake_while xcode-select --install
 fi
 
