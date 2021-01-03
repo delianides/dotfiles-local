@@ -27,9 +27,17 @@ error(){
 }
 
 stay_awake_while(){
-  caffeinate -dims "$@"
+  if [ "$CI" = "true" ] ; then
+    yellow "CI MODE: $@"
+  else
+    caffeinate -dims "$@"
+  fi
 }
 
 command_does_not_exist(){
-  ! command -v "$1" > /dev/null
+  if [ "$CI" = "true" ] ; then
+    yellow "CI MODE: $1"
+  else
+    ! command -v "$1" > /dev/null
+  fi
 }

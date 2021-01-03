@@ -10,9 +10,8 @@ quietly_brew_bundle(){
   local brewfile=$1
   shift
   local regex='(^Using|Installing|Skipping )|error|failed'
-  if [ "$CI" = true ] ; then
-    stay_awake_while brew bundle list --file="$brewfile"
-    stay_awake_while brew install rcm
+  if [ "$CI" = "true" ] ; then
+    stay_awake_while brew bundle list --file="$brewfile" "$@"
   else
     stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -Ei "$regex" || true)
   fi
@@ -28,8 +27,12 @@ if command_does_not_exist caffeinate; then
 fi
 
 info "Checking for command-line tools..."
-if [ command_does_not_exist xcodebuild ] && [ "$OSTYPE" = 'darwin']; then
-  stay_awake_while xcode-select --install
+if command_does_not_exist xcodebuild; then
+  if [ "$OSTYPE" = "darwin*" ] ; then
+    stay_awake_while xcode-select --install
+  else
+    yellow "=== Not MacOS not installing xcode-cli-tools"
+  fi
 fi
 
 info "Installing Homebrew (if not already installed)..."
@@ -53,7 +56,7 @@ info "Linking dotfiles into ~..."
 export RCRC=rcrc
 stay_awake_while rcup -f -d .
 
-green "== Success!"
+green "=== Success!"
 
-yellow "== Post-install instructions =="
+yellow "=== Post-install instructions ==="
 yellow "1. Remap Caps Lock to Escape in the Keyboard prefpane"
