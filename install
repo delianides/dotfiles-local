@@ -21,8 +21,8 @@ quietly_brew_bundle(){
 info "Checking for caffeinate..."
 if command_does_not_exist caffeinate; then
   case "$OSTYPE" in
-    darwin*)  brew install caffeinate ;; 
-    linux*)   sudo apt-get install caffeinate -y ;;
+    darwin*)  brew install caffeine ;; 
+    linux*)   sudo apt-get install caffeine -y ;;
     *)        echo "unknown: $OSTYPE" ;;
   esac
 fi
