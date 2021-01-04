@@ -20,7 +20,7 @@ quietly_brew_bundle(){
 info "Checking for caffeinate..."
 if command_does_not_exist caffeinate; then
   case "$OSTYPE" in
-    darwin*)  brew install caffeine ;; 
+    darwin*)  brew install caffeine ;;
     linux*)   sudo apt-get install caffeine -y ;;
     *)        echo "unknown: $OSTYPE" ;;
   esac
@@ -37,7 +37,7 @@ fi
 
 info "Installing Homebrew (if not already installed)..."
 if command_does_not_exist brew; then
-  stay_awake_while /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 info "Installing Homebrew packages..."

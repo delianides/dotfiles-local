@@ -30,7 +30,11 @@ stay_awake_while(){
   if [ "$CI" = "true" ] ; then
     yellow "CI MODE: $@"
   else
-    caffeinate -dims "$@"
+    case "$OSTYPE" in
+    darwin*)  caffeinate -dims "$@" ;;
+    linux*)   "$@" ;;
+    *)        echo "unknown: $OSTYPE" ;;
+    esac
   fi
 }
 
