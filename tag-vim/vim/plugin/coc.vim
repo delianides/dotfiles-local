@@ -8,7 +8,7 @@ if has_key(plugs, 'coc.nvim')
     \ 'coc-pairs',
     \ 'coc-db',
     \ 'coc-styled-components',
-    \ 'coc-deno',
+    \ 'coc-react-refactor',
     \ 'coc-prisma',
     \ 'coc-yaml',
     \ 'coc-lists',
@@ -22,7 +22,6 @@ if has_key(plugs, 'coc.nvim')
     \ 'coc-emmet',
     \ 'coc-vimlsp',
     \ 'coc-actions',
-    \ 'coc-graphql',
     \ 'coc-explorer',
     \ 'coc-python',
     \ 'coc-rust-analyzer',
@@ -34,6 +33,7 @@ if has_key(plugs, 'coc.nvim')
     \ 'coc-sh',
     \ 'coc-floaterm',
     \ 'coc-marketplace',
+    \ 'coc-diagnostic'
     \ ]
 
   if isdirectory('./node_modules') && isdirectory('./node_modules/typescript')
@@ -50,6 +50,10 @@ if has_key(plugs, 'coc.nvim')
 
   if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
     let g:coc_global_extensions += ['coc-eslint']
+  endif
+
+  if isdirectory('./node_modules') && isdirectory('./node_modules/graphql') && filereadable('./.graphqlrc')
+    let g:coc_global_extensions += ['coc-graphql']
   endif
 
   nmap <silent> gd <Plug>(coc-definition)

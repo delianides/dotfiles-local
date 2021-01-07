@@ -45,3 +45,14 @@ command_does_not_exist(){
     ! command -v "$1" > /dev/null
   fi
 }
+
+quietly_brew_bundle(){
+  local brewfile=$1
+  shift
+  local regex='(^Using|Installing|Skipping )|error|failed'
+  if [ "$CI" = "true" ] ; then
+    stay_awake_while brew bundle list --file="$brewfile" "$@"
+  else
+    stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -Ei "$regex" || true)
+  fi
+}
