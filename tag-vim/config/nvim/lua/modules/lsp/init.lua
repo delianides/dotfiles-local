@@ -1,0 +1,5 @@
+require 'modules.lsp.completion'
+require 'modules.lsp.cosmetics'
+require 'modules.lsp.remaps'
+require 'modules.lsp.settings'
+require 'modules.lsp.events'
