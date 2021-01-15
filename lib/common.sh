@@ -19,16 +19,16 @@ green(){ color 2 "$*"; }
 yellow(){ color 3 "$*"; }
 
 info(){
-  green "=== $@"
+  green "=== $*"
 }
 
 error(){
-  red "!! $@"
+  red "!! $*"
 }
 
 stay_awake_while(){
   if [ "$CI" = "true" ] ; then
-    yellow "CI MODE: $@"
+    yellow "CI MODE: $*"
   else
     case "$OSTYPE" in
     darwin*)  caffeinate -dims "$@" ;;
@@ -42,7 +42,7 @@ command_does_not_exist(){
   if [ "$CI" = "true" ] ; then
     yellow "CI MODE: $1"
   else
-    ! command -v "$1" > /dev/null
+    command -v "$1" > /dev/null & exit 1
   fi
 }
 
