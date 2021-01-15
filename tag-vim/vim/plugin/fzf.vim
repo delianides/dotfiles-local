@@ -1,6 +1,3 @@
-"
-" FZF - https://github.com/junegunn/fzf.vim
-"
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
 let $FZF_DEFAULT_OPTS='--color=dark --height=30% --layout=reverse --margin=1,1 --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1'
 let g:fzf_preview_use_dev_icons = 1

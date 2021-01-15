@@ -10,171 +10,197 @@ scriptencoding utf-8
 " VIMPATH
 let $VIMPATH=expand('$HOME/.vim')
 
-" leader key
-let mapleader = ' '
-
-" leave mode quickly
-inoremap jj <ESC>
+if empty(glob("~/.config/nvim/autoload/plug.vim"))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+  \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('$VIMPATH/plugged')
+  " syntax highlighting
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/playground'
+  Plug 'nvim-treesitter/completion-treesitter'
 
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-github-dashboard'
-  let g:github_dashboard = { 'username': 'delianides' }
+  " lsp
+  Plug 'neoclide/coc.nvim'
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
-Plug 'antoinemadec/coc-fzf'
+  " file and other entity search
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-fugitive'
-  nmap     <Leader>g :Gstatus<CR>gg<c-n>
-  nnoremap <Leader>d :Gdiff<CR>
-Plug 'rhysd/git-messenger.vim'
-  nmap <leader>cm <Plug>(git-messenger)
+  " utilities
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-fugitive'
+    nmap     <Leader>gs :Gstatus<CR>gg<c-n>
 
-Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim'
-  function! s:gv_expand()
-    let line = getline('.')
-    GV --name-status
-    call search('\V'.line, 'c')
-    normal! zz
-  endfunction
-  autocmd! FileType GV nnoremap <buffer> <silent> + :call <sid>gv_expand()<cr>
+  Plug 'rhysd/git-messenger.vim'
+    nmap <leader>cm <Plug>(git-messenger)
 
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-  nmap <Leader>l <Plug>(Limelight)
-  xmap <Leader>l <Plug>(Limelight)
-  nnoremap <Leader>ll :Limelight!<cr>
+  Plug 'tpope/vim-rhubarb'
+  Plug 'junegunn/gv.vim'
+    function! s:gv_expand()
+      let line = getline('.')
+      GV --name-status
+      call search('\V'.line, 'c')
+      normal! zz
+    endfunction
+    autocmd! FileType GV nnoremap <buffer> <silent> + :call <sid>gv_expand()<cr>
 
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-  let g:undotree_WindowLayout = 2
-  nnoremap U :UndotreeToggle<CR>
-Plug 'AndrewRadev/splitjoin.vim'
-  let g:splitjoin_split_mapping = ''
-  let g:splitjoin_join_mapping = ''
-  nnoremap gss :SplitjoinSplit<cr>
-  nnoremap gsj :SplitjoinJoin<cr>
+  Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+    let g:undotree_WindowLayout = 2
+    nnoremap U :UndotreeToggle<CR>
 
-Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
-  autocmd! User indentLine doautocmd indentLine Syntax
-  let g:indentLine_color_term = 239
-  let g:indentLine_color_gui = '#616161'
+  Plug 'AndrewRadev/splitjoin.vim'
+    let g:splitjoin_split_mapping = ''
+    let g:splitjoin_join_mapping = ''
+    nnoremap gss :SplitjoinSplit<cr>
+    nnoremap gsj :SplitjoinJoin<cr>
 
-Plug 'mhinz/vim-signify'
-  let g:signify_vcs_list = ['git']
-  let g:signify_sign_add          = '│'
-  let g:signify_sign_change       = '│'
-  let g:signify_sign_changedelete = '│'
+  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+    autocmd! User indentLine doautocmd indentLine Syntax
+    let g:indentLine_color_term = 239
+    let g:indentLine_color_gui = '#616161'
 
-Plug 'voldikss/vim-floaterm'
-  nnoremap <C-t> :FloatermToggle<CR>
-  nnoremap <C-g> :FloatermNew --height=0.75 --width=0.75 --wintype=floating --name=lazygit --autoclose=2 lazygit<CR>
+  Plug 'mhinz/vim-signify'
+    let g:signify_vcs_list = ['git']
+    let g:signify_sign_add          = '│'
+    let g:signify_sign_change       = '│'
+    let g:signify_sign_changedelete = '│'
 
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
-Plug 'justinmk/vim-dirvish'
+  Plug 'justinmk/vim-dirvish'
+  Plug 'kristijanhusak/vim-dirvish-git'
+  Plug 'junegunn/vim-easy-align'
+    xmap ga <Plug>(EasyAlign)
+    nmap ga <Plug>(EasyAlign)
+  Plug 'alvan/vim-closetag'
+    let g:closetag_filenames = '*.js,*.jsx,*.tsx,*.html'
 
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/completion-treesitter'
+  Plug 'RRethy/vim-illuminate'
+  Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'RRethy/vim-illuminate'
-Plug 'christoomey/vim-tmux-navigator'
-  if !(empty($TMUX) && exists('g:loaded_tmux_navigator'))
-    let g:tmux_navigator_disable_when_zoomed = 1
-  endif
+  " language
+  Plug 'pangloss/vim-javascript'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'styled-components/vim-styled-components', { 'for': ['typescript', 'javascript'] }
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'golang' }
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'alvan/vim-closetag'
-  let g:closetag_filenames = '*.js,*.jsx,*.tsx,*.html'
-Plug 'junegunn/vim-easy-align'
-
-Plug 'styled-components/vim-styled-components', { 'for': ['typescript', 'javascript'] }
-Plug 'tpope/vim-rails', { 'for': 'ruby' } 
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'sheerun/vim-polyglot'
-
-Plug 'itchyny/lightline.vim'
-Plug 'morhetz/gruvbox'
-  let g:gruvbox_contrast_dark = 'soft'
-
+  " statusline and theme
+  Plug 'morhetz/gruvbox'
+  Plug 'itchyny/lightline.vim'
 call plug#end()
 
 syntax enable
-colorscheme gruvbox
 
+let mapleader = ' '
+set exrc
+set guicursor=
+set relativenumber
+set number
+set nohlsearch
 set hidden
-set mouse=n   " use mouse in normal mode
-set splitbelow " horizontal splits go on bottom
-set splitright " vertical splits go right
-
-" set width to 4 spaces
+set cursorline
+set noerrorbells
 set tabstop=2
-set shiftwidth=2
 set softtabstop=2
-set smarttab
+set shiftwidth=2
 set expandtab
-set smartcase
-
-" Make it so that long lines wrap smartly
-set breakindent
-let &showbreak=repeat(' ', 3)
-set linebreak
-
 set smartindent
 set autoindent
-
-set number " set line numbers
-set relativenumber " always count up and down from cursorline
-set noswapfile
-set cursorline " highline line with cursor
-set background=dark " dark background
-set noshowmode " dont show the mode in the status
-set nobackup " i dont backup and i test in production
-set nowritebackup " time machine for unix is off
-set updatetime=1000 " update faster
-set timeoutlen=500 " timeout stuff
-set clipboard=unnamedplus               " Copy paste between vim and everything else
-set shell=zsh " use zsh for the shell
-set noerrorbells " quiet this is a library
-set belloff=all " i said quiet
-set noundofile
-set incsearch
-set colorcolumn=80 " have a line
-set termguicolors " 24-bit colors in the TUI
-set signcolumn=yes " always show the sign column
-set shortmess+=c
 set nowrap
-
-set formatoptions-=a    " Auto formatting is BAD.
-set formatoptions-=t    " Don't auto format my code. I got linters for that.
-set formatoptions+=c    " In general, I like it when comments respect textwidth
-set formatoptions+=q    " Allow formatting comments w/ gq
-set formatoptions-=o    " O and o, don't continue comments
-set formatoptions+=r    " But do continue when pressing enter.
-set formatoptions+=n    " Indent past the formatlistpat, not underneath it.
-set formatoptions+=j    " Auto-remove comments if possible.
-set formatoptions-=2    " I'm not in gradeschool anymore
-set nojoinspaces        " Two spaces and grade school, we're done
-
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set termguicolors
+set scrolloff=8
+set shell=zsh
+set noshowmode
+set completeopt=menuone,noinsert,noselect
+set signcolumn=yes
+set splitbelow
+set splitright
+set cmdheight=1
+set updatetime=50
+set shortmess+=c
+set clipboard=unnamedplus               " Copy paste between vim and everything else
+set nojoinspaces
 set shada=!,'1000,<50,s10,h
+set foldmethod=marker
+set foldlevel=0
+set modelines=1
+
+"TODO I'm not sure about the following, will need to test
+" set formatoptions-=a    " Auto formatting is BAD.
+" set formatoptions-=t    " Don't auto format my code. I got linters for that.
+" set formatoptions+=c    " In general, I like it when comments respect textwidth
+" set formatoptions+=q    " Allow formatting comments w/ gq
+" set formatoptions-=o    " O and o, don't continue comments
+" set formatoptions+=r    " But do continue when pressing enter.
+" set formatoptions+=n    " Indent past the formatlistpat, not underneath it.
+" set formatoptions+=j    " Auto-remove comments if possible.
+" set formatoptions-=2    " I'm not in gradeschool anymore
 
 if has('linebreak')
   let &showbreak='↳ '                 " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
 endif
 
-" Folding
-set foldmethod=marker
-set foldlevel=0
-set modelines=1
+lua require('nvim-treesitter.configs').setup { highlight = { enable = true }, ensure_installed = "maintained" }
 
-let g:nlua_keyword_program = 'Y'
+colorscheme gruvbox
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+" map jj to <ESC> so I don't have to reach so far
+inoremap jj <ESC>
+
+augroup Whitespace
+  autocmd!
+  autocmd BufWritePre * %s/\s\+$//e
+augroup END
+
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+augroup END
+
+" Call ":Reload" to apply the latest .vimrc contents
+command! Reload execute "source ~/.vimrc"
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
+noremap H ^
+noremap L g_
+noremap J 5j
+noremap K 5k
+
+noremap <S-Tab> :tabp<CR>
+noremap <Tab> :tabn<CR>
+
+vmap < <gv
+vmap > >gv
+
+" Disable useless arrow keys
+inoremap <Down> <NOP>
+inoremap <Up> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 
