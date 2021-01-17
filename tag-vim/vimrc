@@ -20,7 +20,6 @@ call plug#begin('$VIMPATH/plugged')
   " syntax highlighting
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/playground'
-  Plug 'nvim-treesitter/completion-treesitter'
 
   " lsp
   Plug 'neoclide/coc.nvim'
@@ -81,12 +80,16 @@ call plug#begin('$VIMPATH/plugged')
     let g:closetag_filenames = '*.js,*.jsx,*.tsx,*.html'
 
   Plug 'RRethy/vim-illuminate'
+  Plug 'voldikss/vim-floaterm'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'wellle/tmux-complete.vim'
+  Plug 'puremourning/vimspector'
 
   " language
-  Plug 'pangloss/vim-javascript'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'pantharshit00/vim-prisma', { 'for': 'prisma' }
+  Plug 'pangloss/vim-javascript', { 'for': ['typescript', 'javascript']}
+  Plug 'leafgarland/typescript-vim', { 'for': ['typescript']}
+  Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript']}
   Plug 'styled-components/vim-styled-components', { 'for': ['typescript', 'javascript'] }
   Plug 'rust-lang/rust.vim', { 'for': 'rust' }
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'golang' }
@@ -202,5 +205,3 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-

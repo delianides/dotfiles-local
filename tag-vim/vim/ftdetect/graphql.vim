@@ -1,4 +1,4 @@
 augroup GraphQLDetect
   autocmd!
-  autocmd BufNewFile,BufRead *.prisma setfiletype graphql
+  autocmd BufNewFile,BufRead *.prisma setfiletype prisma
 augroup END

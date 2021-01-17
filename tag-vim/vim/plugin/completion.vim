@@ -8,8 +8,12 @@ let g:coc_global_extensions = [
   \ 'coc-lists',
   \ 'coc-rls',
   \ 'coc-go',
+  \ 'coc-sh',
+  \ 'coc-jest',
+  \ 'coc-inline-jest',
   \ 'coc-marketplace',
-  \ 'coc-highlight'
+  \ 'coc-highlight',
+  \ 'coc-vimlsp'
   \ ]
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/typescript')
