@@ -10,4 +10,6 @@ typescript
 jest
 typescript-language-server
 diagnostic-languageserver
+graphql-language-service-cli
+tree-sitter-cli
 eslint_d
