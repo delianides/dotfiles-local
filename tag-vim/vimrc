@@ -60,11 +60,12 @@ call plug#begin('$VIMPATH/plugged')
     nnoremap gss :SplitjoinSplit<cr>
     nnoremap gsj :SplitjoinJoin<cr>
 
-  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+  Plug 'Yggdroot/indentLine'
     autocmd! User indentLine doautocmd indentLine Syntax
+    let g:indentLine_char = '│'
     let g:indentLine_color_term = 239
-    let g:indentLine_color_gui = '#616161'
-
+    let g:indentLine_color_gui = '#333333'
+  Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'mhinz/vim-signify'
     let g:signify_vcs_list = ['git']
     let g:signify_sign_add          = '│'
@@ -101,18 +102,38 @@ call plug#begin('$VIMPATH/plugged')
   " statusline and theme
   Plug 'morhetz/gruvbox'
   Plug 'itchyny/lightline.vim'
+
     let g:lightline = {
     \ 'colorscheme': 'gruvbox',
+    \ 'mode_map': {
+    \ 'n' : 'N',
+    \ 'i' : 'I',
+    \ 'R' : 'R',
+    \ 'v' : 'V',
+    \ 'V' : 'VL',
+    \ "\<C-v>": 'VB',
+    \ 'c' : 'C',
+    \ 's' : 'S',
+    \ 'S' : 'SL',
+    \ "\<C-s>": 'SB',
+    \ 't': 'T',
+    \ },
     \ 'active': {
-    \    'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-    \   'right': [['cocstatus'], ['filetype']]
+    \    'left': [['mode','paste'],['gitbranch','readonly','filename','filetype','modified']],
+    \   'right': [['cocstatus']]
     \ },
     \ 'component_function': {
-    \   'gitbranch': 'fugitive#head',
-    \   'cocstatus': 'coc#status'
+    \   'gitbranch': 'fugitive#head'
     \ },
+    \ 'component_expand': {
+    \   'cocstatus': 'StatusDiagnostic'
+    \ },
+    \ 'component_type': {
+    \  'cocstatus': 'raw'
     \ }
+    \ }
+
+    autocmd User CocDiagnosticChange call lightline#update()
 
 call plug#end()
 
@@ -325,6 +346,9 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" To make <cr> select the first completion item and confirm the completion when no item has been selected:
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -386,6 +410,10 @@ hi CocWarningSign ctermbg=235 ctermfg=208 guibg=#282828 guifg=#fe8019
 hi CocInfoSign ctermbg=235 ctermfg=214 guibg=#282828 guifg=#fabd2f
 hi CocHintSign ctermbg=235 ctermfg=109 guibg=#282828 guifg=#83a598
 
+hi StatuslineOK ctermfg=white ctermbg=34 guifg=#ffffff guibg=#00af00
+hi StatuslineError ctermfg=white ctermbg=124 guifg=#ffffff guibg=#af0000
+hi StatuslineWarn ctermfg=235 ctermbg=172 guifg=#282828 guibg=#d78700
+
 " FZF
 
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
@@ -410,3 +438,31 @@ nmap ?? :Rg!<CR>
 nmap <C-f> :ProjectFiles<CR>
 nmap <C-d> :Files ~/.dotfiles<CR>
 nmap cc :Commands!<CR>
+
+function! MinExec(cmd)
+	redir @a
+	exec printf('silent %s',a:cmd)
+	redir END
+	return @a
+endfunction
+
+function! GetHighlightGroups()
+	let lines=MinExec('hi')
+	let lines=split(lines,'\n')
+	return lines
+endfunction
+
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  let total_errors = get(info, 'error', 0) + get(info, 'warning', 0)
+  if total_errors == 0 | return '%#StatuslineOK#'.' '.'OK'.' ' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, '%#StatuslineError#'.' '.'E'.info['error'] .' ')
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, '%#StatuslineWarn#'.' '.'W'.info['warning'].' ')
+  endif
+  return join(msgs, ' ')
+endfunction
+
